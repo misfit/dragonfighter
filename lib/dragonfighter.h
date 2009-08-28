@@ -104,4 +104,6 @@ void initialize_game (int colordepth);
 
 void setup_hero (void);
 
+int get_input (void);
+
 #endif

@@ -23,6 +23,7 @@
 
 
 int main (void) {
+  int gameover = 0;
   initialize_game(24);
   setup_hero();
   
@@ -37,7 +38,8 @@ int main (void) {
   destroy_bitmap(tiles);
 
   /**** main loop ****/
-  while (!key[KEY_ESC]){
+  while (!gameover) {
+    if (keypressed()) gameover = get_input();
     if (key[KEY_DOWN]){
       hero->facing = DOWN;
       hero->y += 1;
