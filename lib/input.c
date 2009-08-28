@@ -28,14 +28,17 @@ int get_input (void) {
     hero->facing = DOWN;
     hero->y += hero->yspeed;
   } else if (key[KEY_UP]){
+    hero->yspeed = 1;
     hero->facing = UP;
-    hero->y -= 1;
+    hero->y -= hero->yspeed;
   } else if (key[KEY_RIGHT]){
+    hero->xspeed = 1;
     hero->facing = RIGHT;
-    hero->x += 1;
+    hero->x += hero->xspeed;
   } else if (key[KEY_LEFT]){
+    hero->xspeed = 1;
     hero->facing = LEFT;
-    hero->x -= 1;
+    hero->x -= hero->xspeed;
   }
   return gameover;
 }
