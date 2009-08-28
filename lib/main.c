@@ -51,23 +51,3 @@ int main (void) {
   return 0;
 }
 END_OF_MAIN()
-
-
-BITMAP *grab_frame (BITMAP *source, int width, int height,
-		   int startx, int starty, int columns, int frame) {
-  BITMAP *tempbitmap = create_bitmap(width, height);
-  int x = startx + (frame % columns)*width;
-  int y = starty + (frame/columns)*height;
-  blit(source, tempbitmap, x, y, 0, 0, width, height);
-  return tempbitmap;
-}
-
-
-void draw_frame (BITMAP *source, BITMAP *dest, int x, int y, int width,
-		int height, int startx, int starty, int columns, int frame) {
-  /* Calculate frame position. */
-  int framex = startx + (frame%columns)*width;
-  int framey = starty + (frame/columns)*height;
-  /* Draw frame to destination bitmap. */
-  masked_blit(source,dest,framex,framey,x,y,width,height);
-}
