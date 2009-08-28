@@ -104,6 +104,11 @@ void initialize_game (int colordepth);
 
 void setup_hero (void);
 
+/* Input functions */
+
 int get_input (void);
+
+/* Hero functions */
+void animate_hero (void);
 
 #endif

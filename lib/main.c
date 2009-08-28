@@ -45,57 +45,29 @@ int main (void) {
     acquire_screen();
     blit(scroll, screen, hero->x, hero->y, 0, 0, WIDTH-1, HEIGHT-1);
     release_screen();
+    
+    animate_hero();
 
     switch (hero->facing) {
     case DOWN:
-      /**** Move the hero down on the screen ****/
-      
-      /**** draw the sprite at the new location. ****/
-      if (hero->framecount++ > hero->framedelay){
-	/* 
-	 * Increment the current animation frame, if it is greater than the
-	 * maximum frames for animation, then reset the current frame to 0.
-	 */
-	hero->framecount = 0;
-	hero->currentframe++;
-	if (hero->currentframe > hero->maxframe){ hero->currentframe = 0; }
-      }
       acquire_screen();
       stretch_sprite(screen, hero_down_images[hero->currentframe], hero->x, 
 		     hero->y, 32, 32);
       break;
 
     case UP:
-      /**** Move the hero up on the screen ****/
-      if (hero->framecount++ > hero->framedelay){
-	hero->framecount = 0;
-	hero->currentframe++;
-	if (hero->currentframe > hero->maxframe){ hero->currentframe = 0; }
-      }
       acquire_screen();
       stretch_sprite(screen, hero_up_images[hero->currentframe], hero->x, 
 		     hero->y, 32, 32);
       break;
 
     case RIGHT:
-      /**** Move the hero right on the screen ****/
-      if (hero->framecount++ > hero->framedelay){
-	hero->framecount = 0;
-	hero->currentframe++;
-	if (hero->currentframe > hero->maxframe){ hero->currentframe = 0; }
-      }
       acquire_screen();
       stretch_sprite(screen, hero_right_images[hero->currentframe], hero->x,
 		     hero->y, 32, 32);
       break;
 
     case LEFT:
-    /**** Move the hero left on the screen ****/
-      if (hero->framecount++ > hero->framedelay){
-        hero->framecount = 0;
-        hero->currentframe++;
-        if (hero->currentframe > hero->maxframe){ hero->currentframe = 0; }
-      }
       acquire_screen();
       stretch_sprite(screen, hero_left_images[hero->currentframe], hero->x, 
 		     hero->y, 32, 32);
