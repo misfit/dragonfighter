@@ -47,34 +47,7 @@ int main (void) {
     release_screen();
     
     animate_hero();
-
-    switch (hero->facing) {
-    case DOWN:
-      acquire_screen();
-      stretch_sprite(screen, hero_down_images[hero->currentframe], hero->x, 
-		     hero->y, 32, 32);
-      break;
-
-    case UP:
-      acquire_screen();
-      stretch_sprite(screen, hero_up_images[hero->currentframe], hero->x, 
-		     hero->y, 32, 32);
-      break;
-
-    case RIGHT:
-      acquire_screen();
-      stretch_sprite(screen, hero_right_images[hero->currentframe], hero->x,
-		     hero->y, 32, 32);
-      break;
-
-    case LEFT:
-      acquire_screen();
-      stretch_sprite(screen, hero_left_images[hero->currentframe], hero->x, 
-		     hero->y, 32, 32);
-      break;
-    }
-
-    release_screen();
+    move_hero();
     rest(10);
   }
   /**** Cleanup ****/

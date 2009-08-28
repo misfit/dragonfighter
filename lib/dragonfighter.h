@@ -109,6 +109,8 @@ void setup_hero (void);
 int get_input (void);
 
 /* Hero functions */
+
 void animate_hero (void);
+void move_hero (void);
 
 #endif
