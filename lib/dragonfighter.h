@@ -100,6 +100,10 @@ void draw_frame (BITMAP *source, BITMAP *dest, int x, int y, int width,
  ****/
 
 void cleanup (void);
+int is_inside (int x, int y, int left, int top, int right, int bottom);
+/****
+ * Collision detection function returns 1 if collision.
+ ****/
 
 /* Setup functions */
 

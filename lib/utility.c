@@ -48,3 +48,8 @@ void cleanup (void) {
   destroy_bitmap(scroll);
   allegro_exit();
 }
+
+int is_inside (int x, int y, int left, int top, int right, int bottom) {
+  if (x > left && x < right && y > top && y < bottom) return 1;
+  else return 0;
+}
