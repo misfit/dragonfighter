@@ -63,8 +63,12 @@ typedef struct SPRITE {
 
 /**** Character bitmaps and sprites ****/
 
+/* sprites */
+
 SPRITE thehero;
 SPRITE *hero;
+
+/* bitmaps */
 
 BITMAP *hero_left_images[2];
 BITMAP *hero_right_images[2];
