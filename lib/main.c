@@ -42,29 +42,30 @@ int main (void) {
     }
   }
   destroy_bitmap(tiles);
-
+  /*
   x = hero->x;
   y = hero->y;
+  */
 
   /**** main loop ****/
   while (!key[KEY_ESC]){
     if (key[KEY_DOWN]){
       facing = DOWN;
-      y += 1;
+      hero->y += 1;
     } else if (key[KEY_UP]){
       facing = UP;
-      y -= 1;
+      hero->y -= 1;
     } else if (key[KEY_RIGHT]){
       facing = RIGHT;
-      x += 1;
+      hero->x += 1;
     } else if (key[KEY_LEFT]){
       facing = LEFT;
-      x -= 1;
+      hero->x -= 1;
     }
 
     /* draw scroll window */
     acquire_screen();
-    blit(scroll, screen, x, y, 0, 0, WIDTH-1, HEIGHT-1);
+    blit(scroll, screen, hero->x, hero->y, 0, 0, WIDTH-1, HEIGHT-1);
     release_screen();
 
     switch (facing) {
@@ -82,7 +83,8 @@ int main (void) {
 	if (currentframe > maxframe){ currentframe = 0; }
       }
       acquire_screen();
-      stretch_sprite(screen, hero_down_images[currentframe], x, y, 32, 32);
+      stretch_sprite(screen, hero_down_images[currentframe], hero->x, hero->y,
+		     32, 32);
       break;
 
     case UP:
@@ -93,7 +95,8 @@ int main (void) {
 	if (currentframe > maxframe){ currentframe = 0; }
       }
       acquire_screen();
-      stretch_sprite(screen, hero_up_images[currentframe], x, y, 32, 32);
+      stretch_sprite(screen, hero_up_images[currentframe], hero->x, hero->y,
+		     32, 32);
       break;
 
     case RIGHT:
@@ -104,7 +107,8 @@ int main (void) {
 	if (currentframe > maxframe){ currentframe = 0; }
       }
       acquire_screen();
-      stretch_sprite(screen, hero_right_images[currentframe], x, y, 32, 32);
+      stretch_sprite(screen, hero_right_images[currentframe], hero->x,hero->y, 
+		     32, 32);
       break;
 
     case LEFT:
@@ -115,7 +119,8 @@ int main (void) {
         if (currentframe > maxframe){ currentframe = 0; }
       }
       acquire_screen();
-      stretch_sprite(screen, hero_left_images[currentframe], x, y, 32, 32);
+      stretch_sprite(screen, hero_left_images[currentframe], hero->x, hero->y,
+		     32, 32);
       break;
     }
 
