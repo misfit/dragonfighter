@@ -23,7 +23,6 @@
 
 
 int main (void) {
-  int facing = LEFT;
   int framecount = 0;
   int currentframe = 0;
   int framedelay = 15;
@@ -45,16 +44,16 @@ int main (void) {
   /**** main loop ****/
   while (!key[KEY_ESC]){
     if (key[KEY_DOWN]){
-      facing = DOWN;
+      hero->facing = DOWN;
       hero->y += 1;
     } else if (key[KEY_UP]){
-      facing = UP;
+      hero->facing = UP;
       hero->y -= 1;
     } else if (key[KEY_RIGHT]){
-      facing = RIGHT;
+      hero->facing = RIGHT;
       hero->x += 1;
     } else if (key[KEY_LEFT]){
-      facing = LEFT;
+      hero->facing = LEFT;
       hero->x -= 1;
     }
 
@@ -63,7 +62,7 @@ int main (void) {
     blit(scroll, screen, hero->x, hero->y, 0, 0, WIDTH-1, HEIGHT-1);
     release_screen();
 
-    switch (facing) {
+    switch (hero->facing) {
     case DOWN:
       /**** Move the hero down on the screen ****/
       

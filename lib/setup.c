@@ -47,7 +47,7 @@ void setup_hero (void) {
   }
   destroy_bitmap(tempbitmap);
   hero = &thehero;
-  hero->direction = LEFT;
+  hero->facing = LEFT;
   hero->x = 160;
   hero->y = 128;
 }
