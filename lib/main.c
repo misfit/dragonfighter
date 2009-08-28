@@ -23,7 +23,6 @@
 
 
 int main (void) {
-  int framedelay = 15;
   int maxframe = 1;
   
   initialize_game(24);
@@ -65,7 +64,7 @@ int main (void) {
       /**** Move the hero down on the screen ****/
       
       /**** draw the sprite at the new location. ****/
-      if (hero->framecount++ > framedelay){
+      if (hero->framecount++ > hero->framedelay){
 	/* 
 	 * Increment the current animation frame, if it is greater than the
 	 * maximum frames for animation, then reset the current frame to 0.
@@ -81,7 +80,7 @@ int main (void) {
 
     case UP:
       /**** Move the hero up on the screen ****/
-      if (hero->framecount++ > framedelay){
+      if (hero->framecount++ > hero->framedelay){
 	hero->framecount = 0;
 	hero->currentframe++;
 	if (hero->currentframe > maxframe){ hero->currentframe = 0; }
@@ -93,7 +92,7 @@ int main (void) {
 
     case RIGHT:
       /**** Move the hero right on the screen ****/
-      if (hero->framecount++ > framedelay){
+      if (hero->framecount++ > hero->framedelay){
 	hero->framecount = 0;
 	hero->currentframe++;
 	if (hero->currentframe > maxframe){ hero->currentframe = 0; }
@@ -105,7 +104,7 @@ int main (void) {
 
     case LEFT:
     /**** Move the hero left on the screen ****/
-      if (hero->framecount++ > framedelay){
+      if (hero->framecount++ > hero->framedelay){
         hero->framecount = 0;
         hero->currentframe++;
         if (hero->currentframe > maxframe){ hero->currentframe = 0; }
