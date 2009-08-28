@@ -99,6 +99,8 @@ void draw_frame (BITMAP *source, BITMAP *dest, int x, int y, int width,
  * Same as the grab frame function except it draws the bitmap directly.
  ****/
 
+void cleanup (void);
+
 /* Setup functions */
 
 void initialize_game (int colordepth);

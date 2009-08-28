@@ -39,15 +39,7 @@ int main (void) {
     move_hero();
     rest(10);
   }
-  /**** Cleanup ****/
-  for (n=0; n < 2; n++){
-    destroy_bitmap(hero_down_images[n]);
-    destroy_bitmap(hero_up_images[n]);
-    destroy_bitmap(hero_right_images[n]);
-    destroy_bitmap(hero_left_images[n]);
-  }
-  destroy_bitmap(scroll);
-  allegro_exit();
+  cleanup();
   return 0;
 }
 END_OF_MAIN()

@@ -37,3 +37,14 @@ void draw_frame (BITMAP *source, BITMAP *dest, int x, int y, int width,
   /* Draw frame to destination bitmap. */
   masked_blit(source,dest,framex,framey,x,y,width,height);
 }
+
+void cleanup (void) {
+  for (n=0; n < 2; n++){
+    destroy_bitmap(hero_down_images[n]);
+    destroy_bitmap(hero_up_images[n]);
+    destroy_bitmap(hero_right_images[n]);
+    destroy_bitmap(hero_left_images[n]);
+  }
+  destroy_bitmap(scroll);
+  allegro_exit();
+}
