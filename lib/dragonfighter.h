@@ -26,8 +26,6 @@
 #include <allegro.h>
 
 #define GAMENAME "Dragon Fighter"
-
-#define GAMENAME "Dragon Fighter"
 #define MODE GFX_AUTODETECT_WINDOWED
 #define WIDTH 512
 #define HEIGHT 480
