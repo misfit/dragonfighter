@@ -23,7 +23,6 @@
 
 
 int main (void) {
-  int currentframe = 0;
   int framedelay = 15;
   int maxframe = 1;
   
@@ -72,48 +71,48 @@ int main (void) {
 	 * maximum frames for animation, then reset the current frame to 0.
 	 */
 	hero->framecount = 0;
-	currentframe++;
-	if (currentframe > maxframe){ currentframe = 0; }
+	hero->currentframe++;
+	if (hero->currentframe > maxframe){ hero->currentframe = 0; }
       }
       acquire_screen();
-      stretch_sprite(screen, hero_down_images[currentframe], hero->x, hero->y,
-		     32, 32);
+      stretch_sprite(screen, hero_down_images[hero->currentframe], hero->x, 
+		     hero->y, 32, 32);
       break;
 
     case UP:
       /**** Move the hero up on the screen ****/
       if (hero->framecount++ > framedelay){
 	hero->framecount = 0;
-	currentframe++;
-	if (currentframe > maxframe){ currentframe = 0; }
+	hero->currentframe++;
+	if (hero->currentframe > maxframe){ hero->currentframe = 0; }
       }
       acquire_screen();
-      stretch_sprite(screen, hero_up_images[currentframe], hero->x, hero->y,
-		     32, 32);
+      stretch_sprite(screen, hero_up_images[hero->currentframe], hero->x, 
+		     hero->y, 32, 32);
       break;
 
     case RIGHT:
       /**** Move the hero right on the screen ****/
       if (hero->framecount++ > framedelay){
 	hero->framecount = 0;
-	currentframe++;
-	if (currentframe > maxframe){ currentframe = 0; }
+	hero->currentframe++;
+	if (hero->currentframe > maxframe){ hero->currentframe = 0; }
       }
       acquire_screen();
-      stretch_sprite(screen, hero_right_images[currentframe], hero->x,hero->y, 
-		     32, 32);
+      stretch_sprite(screen, hero_right_images[hero->currentframe], hero->x,
+		     hero->y, 32, 32);
       break;
 
     case LEFT:
     /**** Move the hero left on the screen ****/
       if (hero->framecount++ > framedelay){
         hero->framecount = 0;
-        currentframe++;
-        if (currentframe > maxframe){ currentframe = 0; }
+        hero->currentframe++;
+        if (hero->currentframe > maxframe){ hero->currentframe = 0; }
       }
       acquire_screen();
-      stretch_sprite(screen, hero_left_images[currentframe], hero->x, hero->y,
-		     32, 32);
+      stretch_sprite(screen, hero_left_images[hero->currentframe], hero->x, 
+		     hero->y, 32, 32);
       break;
     }
 

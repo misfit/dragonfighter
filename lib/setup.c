@@ -51,4 +51,5 @@ void setup_hero (void) {
   hero->x = 160;
   hero->y = 128;
   hero->framecount = 0;
+  hero->currentframe = 0;
 }
