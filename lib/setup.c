@@ -29,6 +29,7 @@ void initialize_game (int colordepth) {
   srand(time(NULL));
   scrollx = 160;
   scrolly = 128;
+  scroll = create_bitmap(MAPW, MAPH);
 }
 
 void setup_hero (void) {

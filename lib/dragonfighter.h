@@ -67,6 +67,8 @@ typedef struct SPRITE {
 
 SPRITE thehero;
 SPRITE *hero;
+SPRITE thethroneroomstones[36];
+SPRITE *throneroomstones[36];
 
 /* bitmaps */
 
@@ -77,6 +79,7 @@ BITMAP *hero_down_images[2];
 BITMAP *tempbitmap;
 BITMAP *scroll;
 BITMAP *tiles;
+BITMAP *stone_image;
 
 int n; /* Index variable for looping. */
 
