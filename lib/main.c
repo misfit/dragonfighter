@@ -37,6 +37,7 @@ int main (void) {
     
     animate_hero();
     move_hero();
+
     rest(10);
   }
   cleanup();
