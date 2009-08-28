@@ -31,12 +31,11 @@
 #define HEIGHT 480
 #define BLACK makecol(0,0,0)
 #define WHITE makecol(255,255,255)
-#define FWD 1
-#define BWD -1
 #define UP 0
 #define LEFT 1
 #define DOWN 2
 #define RIGHT 3
+
 /**** For map drawing ****/
 #define TILEW 32
 #define TILEH 32
