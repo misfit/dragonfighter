@@ -31,12 +31,14 @@ void animate_hero (void) {
 void move_hero (void) {
   switch (hero->facing) {
   case DOWN:
+    if (hero->y > scroll->h - HEIGHT) hero->y = scroll->h - HEIGHT;
     acquire_screen();
     stretch_sprite(screen, hero_down_images[hero->currentframe], hero->x, 
 		   hero->y, 32, 32);
     break;
     
   case UP:
+    if (hero->y < 0) hero->y = 0;
     acquire_screen();
     stretch_sprite(screen, hero_up_images[hero->currentframe], hero->x, 
 		   hero->y, 32, 32);
