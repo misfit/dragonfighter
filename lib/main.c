@@ -144,6 +144,7 @@ int main (void) {
     destroy_bitmap(hero_right_images[n]);
     destroy_bitmap(hero_left_images[n]);
   }
+  destroy_bitmap(scroll);
   allegro_exit();
   return 0;
 }
