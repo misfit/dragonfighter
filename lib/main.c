@@ -19,22 +19,12 @@
  ****/
 
 #include "dragonfighter.h"
-#include "maps.h"
 
 int main (void) {
   int gameover = 0;
   initialize_game(24);
   setup_hero();
-  
-  /**** Create virtual background ****/
-  scroll = create_bitmap(MAPW, MAPH);
-  tiles = load_bitmap("maptiles.bmp", NULL);
-  for (tiley = 0; tiley < scroll->h; tiley+=TILEH){
-    for (tilex = 0; tilex < scroll->w; tilex+=TILEW){
-      draw_frame(tiles,scroll,tilex,tiley,TILEW,TILEH,0,0,COLS,map[n++]);
-    }
-  }
-  destroy_bitmap(tiles);
+  draw_throneroom_map();
 
   /**** main loop ****/
   while (!gameover) {

@@ -117,4 +117,7 @@ int get_input (void);
 void animate_hero (void);
 void move_hero (void);
 
+/* map functions */
+void draw_throneroom_map (void);
+
 #endif
