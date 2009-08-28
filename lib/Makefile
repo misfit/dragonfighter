@@ -37,6 +37,5 @@ utility.o: utility.c dragonfighter.h
 	$(CC) $(CFLAGS) utility.c $(ALLEG)
 
 clean:
-	rm *.o
 	rm dragonfighter
 	rm *~
