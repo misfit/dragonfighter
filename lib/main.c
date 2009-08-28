@@ -23,8 +23,6 @@
 
 
 int main (void) {
-  int maxframe = 1;
-  
   initialize_game(24);
   setup_hero();
   
@@ -71,7 +69,7 @@ int main (void) {
 	 */
 	hero->framecount = 0;
 	hero->currentframe++;
-	if (hero->currentframe > maxframe){ hero->currentframe = 0; }
+	if (hero->currentframe > hero->maxframe){ hero->currentframe = 0; }
       }
       acquire_screen();
       stretch_sprite(screen, hero_down_images[hero->currentframe], hero->x, 
@@ -83,7 +81,7 @@ int main (void) {
       if (hero->framecount++ > hero->framedelay){
 	hero->framecount = 0;
 	hero->currentframe++;
-	if (hero->currentframe > maxframe){ hero->currentframe = 0; }
+	if (hero->currentframe > hero->maxframe){ hero->currentframe = 0; }
       }
       acquire_screen();
       stretch_sprite(screen, hero_up_images[hero->currentframe], hero->x, 
@@ -95,7 +93,7 @@ int main (void) {
       if (hero->framecount++ > hero->framedelay){
 	hero->framecount = 0;
 	hero->currentframe++;
-	if (hero->currentframe > maxframe){ hero->currentframe = 0; }
+	if (hero->currentframe > hero->maxframe){ hero->currentframe = 0; }
       }
       acquire_screen();
       stretch_sprite(screen, hero_right_images[hero->currentframe], hero->x,
@@ -107,7 +105,7 @@ int main (void) {
       if (hero->framecount++ > hero->framedelay){
         hero->framecount = 0;
         hero->currentframe++;
-        if (hero->currentframe > maxframe){ hero->currentframe = 0; }
+        if (hero->currentframe > hero->maxframe){ hero->currentframe = 0; }
       }
       acquire_screen();
       stretch_sprite(screen, hero_left_images[hero->currentframe], hero->x, 
