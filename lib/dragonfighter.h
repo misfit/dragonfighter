@@ -74,7 +74,7 @@ BITMAP *tiles;
 
 int n; /* Index variable for looping. */
 
-/* Position variables. */
+/* Position variables for laying tiles */
 int tilex, tiley;
 
 /**** Function prototypes ****/
