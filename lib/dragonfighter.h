@@ -116,7 +116,7 @@ void setup_hero (void);
 
 /* Input functions */
 
-int get_input (void);
+int get_input (int flag);
 
 /* Hero functions */
 

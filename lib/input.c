@@ -20,25 +20,38 @@
 
 #include "dragonfighter.h"
 
-int get_input (void) {
+int get_input (int flag) {
   int gameover = 0;
-  if (key[KEY_ESC]) gameover = 1;
-  if (key[KEY_DOWN]){
+  if (key[KEY_ESC]) return gameover = 1;
+  
+  if (flag == 0) {
     hero->yspeed = 1;
-    hero->facing = DOWN;
-    hero->y += hero->yspeed;
-  } else if (key[KEY_UP]){
-    hero->yspeed = 1;
-    hero->facing = UP;
-    hero->y -= hero->yspeed;
-  } else if (key[KEY_RIGHT]){
     hero->xspeed = 1;
-    hero->facing = RIGHT;
-    hero->x += hero->xspeed;
-  } else if (key[KEY_LEFT]){
-    hero->xspeed = 1;
-    hero->facing = LEFT;
-    hero->x -= hero->xspeed;
+    if (key[KEY_DOWN]){
+      hero->facing = DOWN;
+      hero->y += hero->yspeed;
+    } else if (key[KEY_UP]){
+      hero->facing = UP;
+      hero->y -= hero->yspeed;
+    } else if (key[KEY_RIGHT]){
+      hero->facing = RIGHT;
+      hero->x += hero->xspeed;
+    } else if (key[KEY_LEFT]){
+      hero->facing = LEFT;
+      hero->x -= hero->xspeed;
+    }
+  } else if (flag == 1) {
+    hero->xspeed = 0;
+    hero->yspeed = 0;
+    if (hero->facing == DOWN) {
+      hero->y += hero->yspeed;
+    } else if (hero->facing == UP) {
+      hero->y -= hero->yspeed;
+    } else if (hero->facing == RIGHT) {
+      hero->x += hero->xspeed;
+    } else if (hero->facing == LEFT) {
+      hero->x -= hero->xspeed;
+    }
   }
   return gameover;
 }
