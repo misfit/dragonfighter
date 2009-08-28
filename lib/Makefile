@@ -15,8 +15,8 @@ CFLAGS = -g -Wall -ansi -c
 # Release options
 # CFLAGS = -O -Wall -ansi
 
-dragonfighter: main.o setup.o input.o hero.o maps.o utility.o
-	$(CC) -o dragonfighter main.o setup.o input.o hero.o maps.o utility.o $(ALLEG)
+dragonfighter: main.o setup.o input.o hero.o maps.o utility.o mappyal.o
+	$(CC) -o dragonfighter main.o setup.o input.o hero.o maps.o utility.o mappyal.o $(ALLEG)
 
 main.o: main.c dragonfighter.h maps.h
 	$(CC) $(CFLAGS) main.c $(ALLEG)
@@ -36,6 +36,10 @@ maps.o: maps.c dragonfighter.h maps.h
 utility.o: utility.c dragonfighter.h
 	$(CC) $(CFLAGS) utility.c $(ALLEG)
 
+mappyal.o: mappyal.c mappyal.h
+	$(CC) mappyal.c -02 -Wall -c -o mappyal.o
+
 clean:
+	rm *.o
 	rm dragonfighter
 	rm *~
