@@ -21,7 +21,6 @@
 #include "dragonfighter.h"
 #include "maps.h"
 
-
 int main (void) {
   int gameover = 0;
   initialize_game(24);
