@@ -46,5 +46,7 @@ void setup_hero (void) {
     hero_left_images[i-6] = grab_frame(tempbitmap,16,16,0,0,16,i);
   }
   destroy_bitmap(tempbitmap);
-
+  hero = &thehero;
+  hero->x = 160;
+  hero->y = 128;
 }

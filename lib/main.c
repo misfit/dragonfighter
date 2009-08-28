@@ -43,8 +43,8 @@ int main (void) {
   }
   destroy_bitmap(tiles);
 
-  x = 160;
-  y = 128;
+  x = hero->x;
+  y = hero->y;
 
   /**** main loop ****/
   while (!key[KEY_ESC]){

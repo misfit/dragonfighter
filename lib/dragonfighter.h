@@ -64,6 +64,7 @@ typedef struct SPRITE {
 
 SPRITE thehero;
 SPRITE *hero;
+
 BITMAP *hero_left_images[2];
 BITMAP *hero_right_images[2];
 BITMAP *hero_up_images[2];
