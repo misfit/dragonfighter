@@ -55,4 +55,7 @@ void move_hero (void) {
     break;
   }
   release_screen();
+  
+  /* Keep hero in bounds */
+  
 }

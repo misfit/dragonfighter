@@ -24,17 +24,18 @@ int get_input (void) {
   int gameover = 0;
   if (key[KEY_ESC]) gameover = 1;
   if (key[KEY_DOWN]){
-      hero->facing = DOWN;
-      hero->y += 1;
-    } else if (key[KEY_UP]){
-      hero->facing = UP;
-      hero->y -= 1;
-    } else if (key[KEY_RIGHT]){
-      hero->facing = RIGHT;
-      hero->x += 1;
-    } else if (key[KEY_LEFT]){
-      hero->facing = LEFT;
-      hero->x -= 1;
-    }
+    hero->yspeed = 1;
+    hero->facing = DOWN;
+    hero->y += hero->yspeed;
+  } else if (key[KEY_UP]){
+    hero->facing = UP;
+    hero->y -= 1;
+  } else if (key[KEY_RIGHT]){
+    hero->facing = RIGHT;
+    hero->x += 1;
+  } else if (key[KEY_LEFT]){
+    hero->facing = LEFT;
+    hero->x -= 1;
+  }
   return gameover;
 }

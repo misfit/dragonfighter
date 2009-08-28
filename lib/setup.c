@@ -54,4 +54,6 @@ void setup_hero (void) {
   hero->currentframe = 0;
   hero->framedelay = 15;
   hero->maxframe = 1;
+  hero->xspeed = 0;
+  hero->yspeed = 0;
 }
