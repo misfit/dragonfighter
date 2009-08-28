@@ -40,19 +40,6 @@ int main (void) {
   /**** main loop ****/
   while (!gameover) {
     if (keypressed()) gameover = get_input();
-    if (key[KEY_DOWN]){
-      hero->facing = DOWN;
-      hero->y += 1;
-    } else if (key[KEY_UP]){
-      hero->facing = UP;
-      hero->y -= 1;
-    } else if (key[KEY_RIGHT]){
-      hero->facing = RIGHT;
-      hero->x += 1;
-    } else if (key[KEY_LEFT]){
-      hero->facing = LEFT;
-      hero->x -= 1;
-    }
 
     /* draw scroll window */
     acquire_screen();
