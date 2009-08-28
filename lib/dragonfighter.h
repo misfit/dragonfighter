@@ -45,7 +45,6 @@
 #define MAPW MAP_ACROSS*TILEW
 #define MAPH MAP_DOWN*TILEH
 
-
 /**** Global structs and variables ****/
 
 typedef struct SPRITE {
