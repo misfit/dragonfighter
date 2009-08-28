@@ -50,4 +50,5 @@ void setup_hero (void) {
   hero->facing = LEFT;
   hero->x = 160;
   hero->y = 128;
+  hero->framecount = 0;
 }
