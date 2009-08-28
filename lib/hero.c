@@ -43,19 +43,19 @@ void move_hero (void) {
     break;
     
   case RIGHT:
+    /* keep him in bounds. */
+    if (hero->x> scroll->w - WIDTH) hero->x = scroll->w - WIDTH;
     acquire_screen();
     stretch_sprite(screen, hero_right_images[hero->currentframe], hero->x,
 		   hero->y, 32, 32);
     break;
     
   case LEFT:
+    if (hero->x < 0) hero->x = 0;
     acquire_screen();
     stretch_sprite(screen, hero_left_images[hero->currentframe], hero->x, 
 		   hero->y, 32, 32);
     break;
   }
-  release_screen();
-  
-  /* Keep hero in bounds */
-  
+  release_screen();  
 }

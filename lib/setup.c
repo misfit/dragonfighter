@@ -27,6 +27,8 @@ void initialize_game (int colordepth) {
   set_color_depth(colordepth);
   set_gfx_mode(MODE, WIDTH, HEIGHT, 0, 0);
   srand(time(NULL));
+  scrollx = 160;
+  scrolly = 128;
 }
 
 void setup_hero (void) {

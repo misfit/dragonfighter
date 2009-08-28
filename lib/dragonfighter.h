@@ -82,6 +82,7 @@ int n; /* Index variable for looping. */
 
 /* Position variables for laying tiles */
 int tilex, tiley;
+int scrollx, scrolly;
 
 /**** Function prototypes ****/
 

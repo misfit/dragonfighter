@@ -30,7 +30,7 @@ int main (void) {
   while (!gameover) {
     if (keypressed()) gameover = get_input(0);
     else if (!keypressed()) get_input(1);
-
+    
     /* draw scroll window */
     acquire_screen();
     blit(scroll, screen, hero->x, hero->y, 0, 0, WIDTH-1, HEIGHT-1);
