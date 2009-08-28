@@ -79,6 +79,8 @@ int tilex, tiley;
 
 /**** Function prototypes ****/
 
+/* Utility functions. */
+
 BITMAP *grab_frame (BITMAP *source, int width, int height,
 		   int startx, int starty, int columns, int frame);
 /****
@@ -91,9 +93,13 @@ void draw_frame (BITMAP *source, BITMAP *dest, int x, int y, int width,
  * Same as the grab frame function except it draws the bitmap directly.
  ****/
 
-void initialize_game(int colordepth);
+/* Setup functions */
+
+void initialize_game (int colordepth);
 /****
  * Initializes allegro stuff.
  ****/
+
+void setup_hero (void);
 
 #endif
