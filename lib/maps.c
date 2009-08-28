@@ -27,7 +27,8 @@ void draw_throneroom_map (void) {
   tiles = load_bitmap("maptiles.bmp", NULL);
   for (tiley = 0; tiley < scroll->h; tiley+=TILEH){
     for (tilex = 0; tilex < scroll->w; tilex+=TILEW){
-      draw_frame(tiles,scroll,tilex,tiley,TILEW,TILEH,0,0,COLS,map[n++]);
+      draw_frame(tiles,scroll,tilex,tiley,TILEW,TILEH,0,0,COLS,
+		 throneroommap[n++]);
     }
   }
   destroy_bitmap(tiles);
