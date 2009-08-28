@@ -26,5 +26,5 @@ setup.o: setup.c dragonfighter.h
 
 clean:
 	rm *.o
-	rm dragonwarrior
+	rm dragonfighter
 	rm *~
