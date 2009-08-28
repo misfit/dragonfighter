@@ -23,7 +23,6 @@
 
 
 int main (void) {
-  int x, y, i;
   int facing = DOWN;
   int framecount = 0;
   int currentframe = 0;
@@ -42,10 +41,6 @@ int main (void) {
     }
   }
   destroy_bitmap(tiles);
-  /*
-  x = hero->x;
-  y = hero->y;
-  */
 
   /**** main loop ****/
   while (!key[KEY_ESC]){
