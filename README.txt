@@ -8,7 +8,8 @@ Linux/UNIX (preferrably Arch) computer with at least 1GHz processor. I will
 not create a makefile for or test this game on Windows. I'm sure Mac will work
 fine also.
 
-Required software: make, gcc, and the allegro libraries installed.
+Required software: make, gcc, and the allegro libraries installed. Allegro
+is available in the AUR if you use Arch. If you don't, you should switch.
 
 How to play
 ~~~~~~~~~~~
