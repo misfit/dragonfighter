@@ -23,7 +23,7 @@
 
 
 int main (void) {
-  int facing = DOWN;
+  int facing = LEFT;
   int framecount = 0;
   int currentframe = 0;
   int framedelay = 15;

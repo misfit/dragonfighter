@@ -58,6 +58,7 @@ typedef struct SPRITE {
   int animdirection;
   int framecount;
   int framedelay;
+  int facing;
 }SPRITE;
 
 /**** Character bitmaps and sprites ****/
