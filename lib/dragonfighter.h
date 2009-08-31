@@ -62,15 +62,20 @@ typedef struct SPRITE {
   int facing;
 }SPRITE;
 
+typedef struct BLOCK {
+  int left;
+  int top;
+  int right;
+  int bottom;
+}BLOCK;
 
 /**** Character bitmaps and sprites ****/
-
-/* sprites */
 
 SPRITE thehero;
 SPRITE *hero;
 
-/* bitmaps */
+BLOCK thelockeddoors[1];
+BLOCK lockeddoors[1];
 
 BITMAP *hero_left_images[2];
 BITMAP *hero_right_images[2];
