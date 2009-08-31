@@ -143,6 +143,8 @@ int get_input (void) {
 	hero->facing = DOWN;
 	hero->yspeed = 1;
 	hero->y += hero->yspeed;
+      } else if (key[KEY_RIGHT]){ hero->y = oldpy + 1;
+      } else if (key[KEY_LEFT]){ hero->y = oldpy + 1;
       }
     }
   } else {
