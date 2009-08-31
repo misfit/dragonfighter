@@ -116,8 +116,7 @@ int get_input (void) {
 	hero->facing = UP;
 	hero->yspeed = 1;
 	hero->y -= hero->yspeed;
-      } else if (key[KEY_RIGHT]){ hero->y = oldpy-1;
-      } else if (key[KEY_LEFT]){ hero->y = oldpy-1;
+      } else if (key[KEY_RIGHT] || key[KEY_RIGHT]){ hero->y = oldpy-1;
       }
     } 
     if (hero->facing == RIGHT){
@@ -125,6 +124,7 @@ int get_input (void) {
 	hero->facing = LEFT;
 	hero->xspeed = 1;
 	hero->x -= hero->xspeed;
+      } else if (key[KEY_UP] || key[KEY_DOWN]){ hero->x = oldpx-1;
       }
     }
     if (hero->facing == LEFT){
