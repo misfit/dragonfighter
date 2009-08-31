@@ -98,10 +98,10 @@ int is_inside (int x, int y, int left, int top, int right, int bottom) {
 
 int get_input (void) {
   int gameover = 0;
-  int flag;
 
   if (key[KEY_ESC]) return gameover = 1;
-  if (flag == 0) {
+
+  if (is_inside (hero->x*2, hero->y*2, 352-32, 448-32, 352+32, 448+32) == 0){
     hero->yspeed = 1;
     hero->xspeed = 1;
     if (key[KEY_DOWN]){
@@ -115,18 +115,6 @@ int get_input (void) {
       hero->x += hero->xspeed;
     } else if (key[KEY_LEFT]){
       hero->facing = LEFT;
-      hero->x -= hero->xspeed;
-    }
-  } else if (flag == 1) {
-    hero->xspeed = 0;
-    hero->yspeed = 0;
-    if (hero->facing == DOWN) {
-      hero->y += hero->yspeed;
-    } else if (hero->facing == UP) {
-      hero->y -= hero->yspeed;
-    } else if (hero->facing == RIGHT) {
-      hero->x += hero->xspeed;
-    } else if (hero->facing == LEFT) {
       hero->x -= hero->xspeed;
     }
   }
@@ -158,7 +146,6 @@ void move_hero (void) {
     break;
     
   case RIGHT:
-    /* keep him in bounds. */
     if (hero->x> scroll->w - WIDTH) hero->x = scroll->w - WIDTH;
     acquire_screen();
     stretch_sprite(screen, hero_right_images[hero->currentframe], hero->x,

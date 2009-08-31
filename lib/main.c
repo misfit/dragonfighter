@@ -33,7 +33,6 @@ int main (void) {
     /* draw scroll window */
     acquire_screen();
     blit(scroll, screen, hero->x, hero->y, 0, 0, WIDTH-1, HEIGHT-1);
-
     release_screen();
     
     animate_hero();
