@@ -87,8 +87,10 @@ void cleanup (void) {
     destroy_bitmap(hero_right_images[n]);
     destroy_bitmap(hero_left_images[n]);
   }
-  destroy_bitmap(scroll);
-  free(hero);
+  destroy_bitmap (scroll);
+  free (hero);
+  for (n=0; n < 1; n++)
+    free (lockeddoors[n]);
   allegro_exit();
 }
 
@@ -175,7 +177,7 @@ void draw_throneroom_map (void) {
   for (tiley = 0; tiley < scroll->h; tiley+=TILEH){
     for (tilex = 0; tilex < scroll->w; tilex+=TILEW){
       if (throneroommap[n] == DOOR){
-	lockeddoors[0] = &thelockeddoors[0];
+	lockeddoors[0] = malloc(sizeof(BLOCK));
 	lockeddoors[0]->height = 32;
 	lockeddoors[0]->width = 32;
 	lockeddoors[0]->left = tilex - lockeddoors[0]->width;
