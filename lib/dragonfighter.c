@@ -127,6 +127,7 @@ int get_input (void) {
 	hero->x -= hero->xspeed;
       } else if (key[KEY_UP] || key[KEY_DOWN]){ hero->x = oldpx-1;
       } else if (key[KEY_DOWN]){ hero->x = oldpx-1;
+      }
     }
     if (hero->facing == LEFT){
       if (key[KEY_RIGHT]){
