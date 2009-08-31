@@ -45,6 +45,7 @@
 #define MAPW MAP_ACROSS*TILEW
 #define MAPH MAP_DOWN*TILEH
 
+
 /**** Global structs and variables ****/
 
 typedef struct SPRITE {
@@ -60,6 +61,7 @@ typedef struct SPRITE {
   int framedelay;
   int facing;
 }SPRITE;
+
 
 /**** Character bitmaps and sprites ****/
 
@@ -84,47 +86,29 @@ int n; /* Index variable for looping. */
 int tilex, tiley;
 int scrollx, scrolly;
 
+
 /**** Function prototypes ****/
 
-/* Utility functions. */
-
-BITMAP *grab_frame (BITMAP *source, int width, int height,
-		   int startx, int starty, int columns, int frame);
-/****
- * Function to grab a single frame out of a spritesheet image.
- ****/
-
-void draw_frame (BITMAP *source, BITMAP *dest, int x, int y, int width,
-		int height, int startx, int starty, int columns, int frame);
-/****
- * Same as the grab frame function except it draws the bitmap directly.
- ****/
-
-void cleanup (void);
-int is_inside (int x, int y, int left, int top, int right, int bottom);
-/****
- * Collision detection function returns 1 if collision.
- ****/
-
-/* Setup functions */
-
 void initialize_game (int colordepth);
-/****
- * Initializes allegro stuff.
- ****/
 
 void setup_hero (void);
 
-/* Input functions */
+BITMAP *grab_frame (BITMAP *source, int width, int height,
+		   int startx, int starty, int columns, int frame);
+
+void draw_frame (BITMAP *source, BITMAP *dest, int x, int y, int width,
+		int height, int startx, int starty, int columns, int frame);
+
+void cleanup (void);
+
+int is_inside (int x, int y, int left, int top, int right, int bottom);
 
 int get_input (int flag);
 
-/* Hero functions */
-
 void animate_hero (void);
+
 void move_hero (void);
 
-/* map functions */
 void draw_throneroom_map (void);
 
 #endif
