@@ -105,7 +105,7 @@ int get_input (void) {
   int oldpy = hero->y;
 
   if (key[KEY_ESC]) return gameover = 1;
-
+  /* Check for collision. */
   if (is_inside (hero->x*2, hero->y*2, 
 		 lockeddoors[0]->left, lockeddoors[0]->top,
 		 lockeddoors[0]->right, lockeddoors[0]->bottom) == 1){
@@ -125,7 +125,7 @@ int get_input (void) {
 	hero->facing = LEFT;
 	hero->xspeed = 1;
 	hero->x -= hero->xspeed;
-      } else if (key[KEY_UP] || key[KEY_DOWN]){ hero->x = oldpx-1;
+      } else if (key[KEY_UP]){ hero->x = oldpx-1;
       } else if (key[KEY_DOWN]){ hero->x = oldpx-1;
       }
     }
@@ -134,6 +134,8 @@ int get_input (void) {
 	hero->facing = RIGHT;
 	hero->xspeed = 1;
 	hero->x += hero->xspeed;
+      } else if (key[KEY_UP]){ hero->x = oldpx+1; 
+      } else if (key[KEY_DOWN]){ hero->x = oldpx+1;
       }
     }
     if (hero->facing == UP){
