@@ -117,11 +117,19 @@ int get_input (void) {
 	hero->yspeed = 1;
 	hero->y -= hero->yspeed;
       }
-    } if (hero->facing == RIGHT){
+    } 
+    if (hero->facing == RIGHT){
       if (key[KEY_LEFT]){
 	hero->facing = LEFT;
 	hero->xspeed = 1;
 	hero->x -= hero->xspeed;
+      }
+    }
+    if (hero->facing == LEFT){
+      if (key[KEY_RIGHT]){
+	hero->facing = RIGHT;
+	hero->xspeed = 1;
+	hero->x += hero->xspeed;
       }
     }
   } else {
