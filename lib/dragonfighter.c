@@ -108,7 +108,17 @@ int get_input (void) {
 
   if (is_inside (hero->x*2, hero->y*2, 
 		 lockeddoors[0]->left, lockeddoors[0]->top,
-		 lockeddoors[0]->right, lockeddoors[0]->bottom) == 0){
+		 lockeddoors[0]->right, lockeddoors[0]->bottom) == 1){
+    hero->x = oldpx;
+    hero->y = oldpy;
+    if (hero->facing == DOWN){
+      if (key[KEY_UP]){
+	hero->facing = UP;
+	hero->yspeed = 1;
+	hero->y -= hero->yspeed;
+      }
+    }
+  } else {
     hero->yspeed = 1;
     hero->xspeed = 1;
     if (key[KEY_DOWN]){
@@ -124,9 +134,6 @@ int get_input (void) {
       hero->facing = LEFT;
       hero->x -= hero->xspeed;
     }
-  } else {
-    hero->x = oldpx;
-    hero->y = oldpy;
   }
   return gameover;
 }
