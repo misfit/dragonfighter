@@ -6,6 +6,9 @@ CC = gcc
 # Included files
 INCLUDE = .
 
+# Object files
+OBJ = main.o setup.o input.o hero.o maps.o utility.o mappyal.o
+
 # Allegro option
 ALLEG = -L/usr/lib -Wl,--export-dynamic -lalleg-4.2.2 -lalleg_unsharable
 
@@ -15,8 +18,8 @@ CFLAGS = -g -Wall -ansi -c
 # Release options
 # CFLAGS = -O -Wall -ansi
 
-dragonfighter: main.o setup.o input.o hero.o maps.o utility.o mappyal.o
-	$(CC) -o dragonfighter main.o setup.o input.o hero.o maps.o utility.o mappyal.o $(ALLEG)
+dragonfighter: $(OBJ)
+	$(CC) -o dragonfighter $(OBJ) $(ALLEG)
 
 main.o: main.c dragonfighter.h maps.h
 	$(CC) $(CFLAGS) main.c $(ALLEG)
