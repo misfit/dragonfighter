@@ -101,7 +101,8 @@ int get_input (void) {
 
   if (key[KEY_ESC]) return gameover = 1;
 
-  if (is_inside (hero->x*2, hero->y*2, 352-32, 448-32, 352+32, 448+32) == 0){
+  if (is_inside (hero->x*2, hero->y*2, 
+		 352-32, 448-32, 352+32, 448+32) == 0){
     hero->yspeed = 1;
     hero->xspeed = 1;
     if (key[KEY_DOWN]){
