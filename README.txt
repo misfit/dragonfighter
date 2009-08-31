@@ -10,6 +10,7 @@ not create a makefile for or test this game on Windows (How does it feel to not
 
 Required software: make, gcc, and the allegro libraries installed. Allegro
 is available in the AUR if you use Arch. If you don't, you should switch.
+http://archlinux.org
 
 How to play
 ~~~~~~~~~~~
