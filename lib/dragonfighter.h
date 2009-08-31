@@ -103,7 +103,7 @@ void cleanup (void);
 
 int is_inside (int x, int y, int left, int top, int right, int bottom);
 
-int get_input (int flag);
+int get_input (void);
 
 void animate_hero (void);
 

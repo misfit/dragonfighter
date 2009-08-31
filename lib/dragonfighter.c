@@ -96,10 +96,11 @@ int is_inside (int x, int y, int left, int top, int right, int bottom) {
   else return 0;
 }
 
-int get_input (int flag) {
+int get_input (void) {
   int gameover = 0;
+  int flag;
+
   if (key[KEY_ESC]) return gameover = 1;
-  
   if (flag == 0) {
     hero->yspeed = 1;
     hero->xspeed = 1;
