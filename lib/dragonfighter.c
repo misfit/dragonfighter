@@ -102,7 +102,8 @@ int get_input (void) {
   if (key[KEY_ESC]) return gameover = 1;
 
   if (is_inside (hero->x*2, hero->y*2, 
-		 352-32, 448-32, 352+32, 448+32) == 0){
+		 lockeddoors[0]->left, lockeddoors[0]->top,
+		 lockeddoors[0]->right, lockeddoors[0]->bottom) == 0){
     hero->yspeed = 1;
     hero->xspeed = 1;
     if (key[KEY_DOWN]){
@@ -169,6 +170,12 @@ void draw_throneroom_map (void) {
     for (tilex = 0; tilex < scroll->w; tilex+=TILEW){
       if (throneroommap[n] == DOOR){
 	lockeddoors[0] = &thelockeddoors[0];
+	lockeddoors[0]->height = 32;
+	lockeddoors[0]->width = 32;
+	lockeddoors[0]->left = tilex - lockeddoors[0]->width;
+	lockeddoors[0]->top = tiley - lockeddoors[0]->height;
+	lockeddoors[0]->right = tilex + lockeddoors[0]->width;
+	lockeddoors[0]->bottom = tiley + lockeddoors[0]->height;
       }
       draw_frame(tiles,scroll,tilex,tiley,TILEW,TILEH,0,0,COLS,
 		 throneroommap[n++]);

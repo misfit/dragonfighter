@@ -67,7 +67,7 @@ typedef struct BLOCK {
   int top;
   int right;
   int bottom;
-  int width, heigth;
+  int width, height;
 }BLOCK;
 
 /**** Character bitmaps and sprites ****/
