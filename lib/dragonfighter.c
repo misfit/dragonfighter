@@ -132,6 +132,13 @@ int get_input (void) {
 	hero->x += hero->xspeed;
       }
     }
+    if (hero->facing == UP){
+      if (key[KEY_DOWN]){
+	hero->facing = DOWN;
+	hero->yspeed = 1;
+	hero->y += hero->yspeed;
+      }
+    }
   } else {
     hero->yspeed = 1;
     hero->xspeed = 1;
