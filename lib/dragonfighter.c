@@ -50,7 +50,7 @@ void setup_hero (void) {
     hero_left_images[i-6] = grab_frame(tempbitmap,16,16,0,0,16,i);
   }
   destroy_bitmap(tempbitmap);
-  hero = &thehero;
+  hero = malloc(sizeof(SPRITE));
   hero->facing = LEFT;
   hero->x = 160;
   hero->y = 128;
@@ -88,6 +88,7 @@ void cleanup (void) {
     destroy_bitmap(hero_left_images[n]);
   }
   destroy_bitmap(scroll);
+  free(hero);
   allegro_exit();
 }
 
@@ -98,6 +99,8 @@ int is_inside (int x, int y, int left, int top, int right, int bottom) {
 
 int get_input (void) {
   int gameover = 0;
+  int oldpx = hero->x;
+  int oldpy = hero->y;
 
   if (key[KEY_ESC]) return gameover = 1;
 
@@ -119,6 +122,9 @@ int get_input (void) {
       hero->facing = LEFT;
       hero->x -= hero->xspeed;
     }
+  } else {
+    hero->x = oldpx;
+    hero->y = oldpy;
   }
   return gameover;
 }

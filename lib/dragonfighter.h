@@ -72,7 +72,6 @@ typedef struct BLOCK {
 
 /**** Character bitmaps and sprites ****/
 
-SPRITE thehero;
 SPRITE *hero;
 
 BLOCK thelockeddoors[1];
