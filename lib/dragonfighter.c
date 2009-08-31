@@ -167,6 +167,9 @@ void draw_throneroom_map (void) {
   tiles = load_bitmap("maptiles.bmp", NULL);
   for (tiley = 0; tiley < scroll->h; tiley+=TILEH){
     for (tilex = 0; tilex < scroll->w; tilex+=TILEW){
+      if (throneroommap[n] == DOOR){
+	lockeddoors[0] = &thelockeddoors[0];
+      }
       draw_frame(tiles,scroll,tilex,tiley,TILEW,TILEH,0,0,COLS,
 		 throneroommap[n++]);
      }

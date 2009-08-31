@@ -21,6 +21,13 @@
 #ifndef _MAPS_H
 #define _MAPS_H
 
+#define COUNTER 0
+#define BRICK 1
+#define STONE 2
+#define ROOF 4
+#define STAIRS 8
+#define DOOR 10
+
 int throneroommap[] = {
 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,

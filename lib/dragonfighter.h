@@ -76,7 +76,7 @@ SPRITE thehero;
 SPRITE *hero;
 
 BLOCK thelockeddoors[1];
-BLOCK lockeddoors[1];
+BLOCK *lockeddoors[1];
 
 BITMAP *hero_left_images[2];
 BITMAP *hero_right_images[2];
