@@ -89,7 +89,7 @@ void cleanup (void) {
   }
   destroy_bitmap (scroll);
   free (hero);
-  for (n=0; n < UNWALKABLES; n++)
+  for (n=0; n < UNLCK_TR_UNWALKABLES; n++)
     free (unwalkables[n]);
   allegro_exit();
 }
@@ -108,7 +108,7 @@ int get_input (void) {
 
   if (key[KEY_ESC]) return gameover = 1;
   /* Check for collision. */
-  for (i = 0; i < UNWALKABLES; i++){ 
+  for (i = 0; i < UNLCK_TR_UNWALKABLES; i++){ 
     is_collision = is_inside (hero->x*2, hero->y*2, 
 			      unwalkables[i]->left, unwalkables[i]->top,
 			      unwalkables[i]->right, unwalkables[i]->bottom);
