@@ -60,8 +60,11 @@ void setup_hero (void) {
   hero->maxframe = 1;
   hero->xspeed = 0;
   hero->yspeed = 0;
-  hero->keys = NULL;
+  hero->keyshead = NULL;
   hero->no_of_keys = 0;
+}
+
+void setup_tantagel_castle (void) {
   
 }
 
@@ -94,6 +97,11 @@ void cleanup (void) {
   free (hero);
   for (n=0; n < UNLCK_TR_UNWALKABLES; n++)
     free (unwalkables[n]);
+  if (hero->no_of_keys != 0){
+    for (n=0; n < hero->no_of_keys; n++){
+      pop_key();
+    }
+  }
   allegro_exit();
 }
 
@@ -217,9 +225,31 @@ void move_hero (void) {
   release_screen();  
 }
 
-void push_key (KEY key) {
-  if (hero->keys == NULL){
-    
+void add_key (void) {
+  if (hero->keyshead == NULL){
+    NODE *temp;
+    temp = (NODE*) malloc (sizeof (NODE));
+    temp->next = NULL;
+    hero->keyshead = temp;
+  } else if (hero->keyshead != NULL){
+    NODE *temp;
+    temp = (NODE*) malloc (sizeof (NODE));
+    temp->next = hero->keyshead;
+    hero->keyshead = temp;
+  }
+  hero->no_of_keys++;
+}
+
+void pop_key (void) {
+  if (hero->keyshead == NULL){
+    return;
+  } else {
+    NODE *temp;
+    temp = (NODE*) malloc (sizeof (NODE));
+    temp = hero->keyshead;
+    hero->keyshead = temp->next;
+    free (temp);
+    hero->no_of_keys--;
   }
 }
 
@@ -249,7 +279,7 @@ void draw_locked_throneroom_map (void) {
 void unlock_door (int door) {
   int i = 0;
   int j = 0;
-  int keycpy[hero->no_of_keys];
+  
 }
 
 void draw_throneroom (void) {
@@ -271,7 +301,7 @@ void draw_unlocked_throneroom_map (void) {
 	unwalkables[i]->right = tilex + unwalkables[i]->width;
 	unwalkables[i]->bottom = tiley + unwalkables[i]->height;
 	i++;
-      } else if (unlockedthroneroommap[n] == STAIRS){
+      } /*else if (unlockedthroneroommap[n] == STAIRS){
 	stairs = malloc(sizeof(BLOCK));
 	stairs->height = 32;
 	stairs->width = 32;
@@ -279,7 +309,7 @@ void draw_unlocked_throneroom_map (void) {
 	stairs->top = tiley - stairs->height;
 	stairs->right = tilex + stairs->width;
 	stairs->bottom = tiley + stairs->height;
-      }
+	}*/
       draw_frame(tiles,scroll,tilex,tiley,TILEW,TILEH,0,0,COLS,
 		 unlockedthroneroommap[n++]);
      }

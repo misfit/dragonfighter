@@ -56,10 +56,9 @@
 
 /**** Global structs and variables ****/
 
-typedef struct KEY{
-  int id;
-  struct KEY *next;
-}KEY;
+typedef struct {
+  struct NODE *next;
+}NODE;
 
 /*
  * Struct for the hero of the game. 
@@ -78,7 +77,7 @@ typedef struct {
   int framedelay;
   int facing;
   /* Attributes variables */
-  KEY *keys, *current, *head;
+  NODE *keyshead;
   int no_of_keys;
 }HERO;
 
@@ -105,12 +104,15 @@ typedef struct {
   int is_locked;
 }DOOR;
 
+typedef struct {
+  NODE *doors;
+  NODE *stairs;
+}LOCATION;
+
 /**** Character bitmaps and sprites ****/
 
 HERO *hero;
 BLOCK *unwalkables[UNLCK_TR_UNWALKABLES];
-BLOCK *stairs;
-BLOCK *doors;
 BITMAP *hero_left_images[2];
 BITMAP *hero_right_images[2];
 BITMAP *hero_up_images[2];
@@ -132,6 +134,8 @@ void initialize_game (int colordepth);
 
 void setup_hero (void);
 
+void setup_tantagel_castle (void);
+
 BITMAP *grab_frame (BITMAP *source, int width, int height,
 		   int startx, int starty, int columns, int frame);
 
@@ -148,7 +152,7 @@ void animate_hero (void);
 
 void move_hero (void);
 
-void push_key (KEY key);
+void add_key (void);
 
 void pop_key (void);
 
