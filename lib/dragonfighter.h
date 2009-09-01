@@ -102,12 +102,16 @@ typedef struct {
   int bottom;
   int width, height;
   int is_locked;
-}DOOR;
+  struct DOORNODE *next;
+}DOORNODE;
 
 typedef struct {
-  NODE *doors;
-  NODE *stairs;
-}LOCATION;
+  int map;
+}MAP;
+
+typedef struct {
+  DOORNODE *doorshead;
+}PLACE;
 
 /**** Character bitmaps and sprites ****/
 
@@ -120,7 +124,7 @@ BITMAP *hero_down_images[2];
 BITMAP *tempbitmap;
 BITMAP *scroll;
 BITMAP *tiles;
-
+PLACE *tantagelcastle;
 int n; 
 
 /* Position variables for laying tiles */
@@ -156,11 +160,11 @@ void add_key (void);
 
 void pop_key (void);
 
+void add_door (void);
+
 void unlock_door (int door);
 
 void draw_throneroom (void);
-
-void draw_locked_throneroom_map (void);
 
 void draw_unlocked_throneroom_map (void);
 

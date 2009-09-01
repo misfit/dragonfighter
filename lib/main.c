@@ -24,7 +24,7 @@ int main (void) {
   int gameover = 0;
   initialize_game(24);
   setup_hero();
-  draw_unlocked_throneroom_map();
+  setup_tantagel_castle();
 
   /**** main loop ****/
   while (!gameover) {
