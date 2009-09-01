@@ -236,3 +236,27 @@ void draw_locked_throneroom_map (void) {
   }
   destroy_bitmap(tiles);
 }
+
+void draw_unlocked_throneroom_map (void) {
+  tiles = load_bitmap("maptiles.bmp", NULL);
+  int i = 0;
+  for (tiley = 0; tiley < scroll->h; tiley+=TILEH){
+    for (tilex = 0; tilex < scroll->w; tilex+=TILEW){
+      if (unlockedthroneroommap[n] == STONE || 
+	  unlockedthroneroommap[n] == COUNTER){
+	unwalkables[i] = malloc(sizeof(BLOCK));
+	unwalkables[i]->height = 32;
+	unwalkables[i]->width = 32;
+	unwalkables[i]->left = tilex - unwalkables[i]->width;
+	unwalkables[i]->top = tiley - unwalkables[i]->height;
+	unwalkables[i]->right = tilex + unwalkables[i]->width;
+	unwalkables[i]->bottom = tiley + unwalkables[i]->height;
+	i++;
+      }
+      draw_frame(tiles,scroll,tilex,tiley,TILEW,TILEH,0,0,COLS,
+		 unlockedthroneroommap[n++]);
+     }
+  }
+  destroy_bitmap(tiles);
+
+}
