@@ -74,7 +74,8 @@ typedef struct BLOCK {
 
 SPRITE *hero;
 
-BLOCK *unwalkables[44];
+#define UNWALKABLES 54
+BLOCK *unwalkables[UNWALKABLES];
 
 BITMAP *hero_left_images[2];
 BITMAP *hero_right_images[2];

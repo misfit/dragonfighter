@@ -89,7 +89,7 @@ void cleanup (void) {
   }
   destroy_bitmap (scroll);
   free (hero);
-  for (n=0; n < 44; n++)
+  for (n=0; n < UNWALKABLES; n++)
     free (unwalkables[n]);
   allegro_exit();
 }
@@ -108,7 +108,7 @@ int get_input (void) {
 
   if (key[KEY_ESC]) return gameover = 1;
   /* Check for collision. */
-  for (i = 0; i < 44; i++){ 
+  for (i = 0; i < UNWALKABLES; i++){ 
     is_collision = is_inside (hero->x*2, hero->y*2, 
 			      unwalkables[i]->left, unwalkables[i]->top,
 			      unwalkables[i]->right, unwalkables[i]->bottom);
@@ -219,7 +219,8 @@ void draw_throneroom_map (void) {
   int i = 0;
   for (tiley = 0; tiley < scroll->h; tiley+=TILEH){
     for (tilex = 0; tilex < scroll->w; tilex+=TILEW){
-      if (throneroommap[n] == DOOR || throneroommap[n] == STONE){
+      if (throneroommap[n] == DOOR || throneroommap[n] == STONE ||
+	  throneroommap[n] == COUNTER){
 	unwalkables[i] = malloc(sizeof(BLOCK));
 	unwalkables[i]->height = 32;
 	unwalkables[i]->width = 32;
