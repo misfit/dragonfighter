@@ -258,9 +258,9 @@ void unlock_door (int door) {
 }
 
 void draw_throneroom (void) {
+  tiles = load_bitmap("maptiles.bmp", NULL);
+  int i = 0;
   if (hero->keyshead == NULL){
-    tiles = load_bitmap("maptiles.bmp", NULL);
-    int i = 0;
     for (tiley = 0; tiley < scroll->h; tiley+=TILEH){
       for (tilex = 0; tilex < scroll->w; tilex+=TILEW){
 	if (lockedthroneroommap[n] == DOOR ||
@@ -279,8 +279,8 @@ void draw_throneroom (void) {
 		   lockedthroneroommap[n++]);
       }
     }
-    destroy_bitmap(tiles); 
   }
+  destroy_bitmap(tiles); 
 }
 
 void draw_unlocked_throneroom_map (void) {
