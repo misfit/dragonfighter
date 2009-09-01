@@ -89,8 +89,8 @@ void cleanup (void) {
   }
   destroy_bitmap (scroll);
   free (hero);
-  for (n=0; n < 1; n++)
-    free (lockeddoors[n]);
+  for (n=0; n < 44; n++)
+    free (unwalkables[n]);
   allegro_exit();
 }
 
@@ -103,12 +103,18 @@ int get_input (void) {
   int gameover = 0;
   int oldpx = hero->x;
   int oldpy = hero->y;
+  int i;
+  int is_collision = 0;
 
   if (key[KEY_ESC]) return gameover = 1;
   /* Check for collision. */
-  if (is_inside (hero->x*2, hero->y*2, 
-		 lockeddoors[0]->left, lockeddoors[0]->top,
-		 lockeddoors[0]->right, lockeddoors[0]->bottom) == 1){
+  for (i = 0; i < 44; i++){ 
+    is_collision = is_inside (hero->x*2, hero->y*2, 
+			      unwalkables[i]->left, unwalkables[i]->top,
+			      unwalkables[i]->right, unwalkables[i]->bottom);
+    if (is_collision == 1) break;
+  }
+  if (is_collision == 1){
     hero->x = oldpx;
     hero->y = oldpy;
     if (hero->facing == DOWN){
@@ -210,16 +216,18 @@ void move_hero (void) {
 
 void draw_throneroom_map (void) {
   tiles = load_bitmap("maptiles.bmp", NULL);
+  int i = 0;
   for (tiley = 0; tiley < scroll->h; tiley+=TILEH){
     for (tilex = 0; tilex < scroll->w; tilex+=TILEW){
-      if (throneroommap[n] == DOOR){
-	lockeddoors[0] = malloc(sizeof(BLOCK));
-	lockeddoors[0]->height = 32;
-	lockeddoors[0]->width = 32;
-	lockeddoors[0]->left = tilex - lockeddoors[0]->width;
-	lockeddoors[0]->top = tiley - lockeddoors[0]->height;
-	lockeddoors[0]->right = tilex + lockeddoors[0]->width;
-	lockeddoors[0]->bottom = tiley + lockeddoors[0]->height;
+      if (throneroommap[n] == DOOR || throneroommap[n] == STONE){
+	unwalkables[i] = malloc(sizeof(BLOCK));
+	unwalkables[i]->height = 32;
+	unwalkables[i]->width = 32;
+	unwalkables[i]->left = tilex - unwalkables[i]->width;
+	unwalkables[i]->top = tiley - unwalkables[i]->height;
+	unwalkables[i]->right = tilex + unwalkables[i]->width;
+	unwalkables[i]->bottom = tiley + unwalkables[i]->height;
+	i++;
       }
       draw_frame(tiles,scroll,tilex,tiley,TILEW,TILEH,0,0,COLS,
 		 throneroommap[n++]);
