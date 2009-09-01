@@ -44,9 +44,26 @@
 #define MAP_DOWN 24
 #define MAPW MAP_ACROSS*TILEW
 #define MAPH MAP_DOWN*TILEH
+/**** Stairs and doors constants ****/
+#define UNLCK_TR_UNWALKABLES 53
+#define LCK_TR_UNWALKABLES 54
+#define TC_COURT_STAIRS 2
+#define D1 0
+#define D2 1
+#define D3 2
+#define S1 0
+#define S2 3
 
 /**** Global structs and variables ****/
 
+typedef struct KEY{
+  int id;
+  struct KEY *next;
+}KEY;
+
+/*
+ * Struct for the hero of the game. 
+ */
 typedef struct {
   /* Motion variables */
   int x, y;
@@ -61,9 +78,13 @@ typedef struct {
   int framedelay;
   int facing;
   /* Attributes variables */
-  int keys[3];
+  KEY *keys, *current, *head;
+  int no_of_keys;
 }HERO;
 
+/*
+ * Struct for tiles int the map.
+ */
 typedef struct {
   int left;
   int top;
@@ -72,17 +93,24 @@ typedef struct {
   int width, height;
 }BLOCK;
 
+/*
+ * Struct for doors.
+ */
+typedef struct {
+  int left;
+  int top;
+  int right;
+  int bottom;
+  int width, height;
+  int is_locked;
+}DOOR;
+
 /**** Character bitmaps and sprites ****/
 
 HERO *hero;
-
-#define UNLCK_TR_UNWALKABLES 53
-#define LCK_TR_UNWALKABLES 54
-#define TC_COURT_STAIRS 2
-#define KEYS 3
-
 BLOCK *unwalkables[UNLCK_TR_UNWALKABLES];
 BLOCK *stairs;
+BLOCK *doors;
 BITMAP *hero_left_images[2];
 BITMAP *hero_right_images[2];
 BITMAP *hero_up_images[2];
@@ -91,7 +119,7 @@ BITMAP *tempbitmap;
 BITMAP *scroll;
 BITMAP *tiles;
 
-int n; /* Index variable for looping. */
+int n; 
 
 /* Position variables for laying tiles */
 int tilex, tiley;
@@ -119,6 +147,12 @@ int get_input (void);
 void animate_hero (void);
 
 void move_hero (void);
+
+void push_key (KEY key);
+
+void pop_key (void);
+
+void unlock_door (int door);
 
 void draw_throneroom (void);
 

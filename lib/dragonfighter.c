@@ -60,8 +60,9 @@ void setup_hero (void) {
   hero->maxframe = 1;
   hero->xspeed = 0;
   hero->yspeed = 0;
-  for (i = 0; i < KEYS; i++){ hero->keys[i] = 0; }
-
+  hero->keys = NULL;
+  hero->no_of_keys = 0;
+  
 }
 
 BITMAP *grab_frame (BITMAP *source, int width, int height,
@@ -216,6 +217,12 @@ void move_hero (void) {
   release_screen();  
 }
 
+void push_key (KEY key) {
+  if (hero->keys == NULL){
+    
+  }
+}
+
 void draw_locked_throneroom_map (void) {
   tiles = load_bitmap("maptiles.bmp", NULL);
   int i = 0;
@@ -239,7 +246,17 @@ void draw_locked_throneroom_map (void) {
   destroy_bitmap(tiles);
 }
 
-void draw_throneroom (void)
+void unlock_door (int door) {
+  int i = 0;
+  int j = 0;
+  int keycpy[hero->no_of_keys];
+}
+
+void draw_throneroom (void) {
+  if (hero->keys[0] != 0) {
+    
+  }
+}
 
 void draw_unlocked_throneroom_map (void) {
   tiles = load_bitmap("maptiles.bmp", NULL);
