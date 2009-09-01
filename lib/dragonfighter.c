@@ -214,13 +214,13 @@ void move_hero (void) {
   release_screen();  
 }
 
-void draw_throneroom_map (void) {
+void draw_locked_throneroom_map (void) {
   tiles = load_bitmap("maptiles.bmp", NULL);
   int i = 0;
   for (tiley = 0; tiley < scroll->h; tiley+=TILEH){
     for (tilex = 0; tilex < scroll->w; tilex+=TILEW){
-      if (throneroommap[n] == DOOR || throneroommap[n] == STONE ||
-	  throneroommap[n] == COUNTER){
+      if (lockedthroneroommap[n] == DOOR || lockedthroneroommap[n] == STONE ||
+	  lockedthroneroommap[n] == COUNTER){
 	unwalkables[i] = malloc(sizeof(BLOCK));
 	unwalkables[i]->height = 32;
 	unwalkables[i]->width = 32;
@@ -231,7 +231,7 @@ void draw_throneroom_map (void) {
 	i++;
       }
       draw_frame(tiles,scroll,tilex,tiley,TILEW,TILEH,0,0,COLS,
-		 throneroommap[n++]);
+		 lockedthroneroommap[n++]);
      }
   }
   destroy_bitmap(tiles);

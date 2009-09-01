@@ -24,7 +24,7 @@ int main (void) {
   int gameover = 0;
   initialize_game(24);
   setup_hero();
-  draw_throneroom_map();
+  draw_locked_throneroom_map();
 
   /**** main loop ****/
   while (!gameover) {

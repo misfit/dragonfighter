@@ -114,6 +114,6 @@ void animate_hero (void);
 
 void move_hero (void);
 
-void draw_throneroom_map (void);
+void draw_locked_throneroom_map (void);
 
 #endif
