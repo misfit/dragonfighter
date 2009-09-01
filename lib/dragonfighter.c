@@ -252,6 +252,14 @@ void draw_unlocked_throneroom_map (void) {
 	unwalkables[i]->right = tilex + unwalkables[i]->width;
 	unwalkables[i]->bottom = tiley + unwalkables[i]->height;
 	i++;
+      } else if (unlockedthroneroommap[n] == STAIRS){
+	stairs = malloc(sizeof(BLOCK));
+	stairs->height = 32;
+	stairs->width = 32;
+	stairs->left = tilex - stairs->width;
+	stairs->top = tiley - stairs->height;
+	stairs->right = tilex + stairs->width;
+	stairs->bottom = tiley + stairs->height;
       }
       draw_frame(tiles,scroll,tilex,tiley,TILEW,TILEH,0,0,COLS,
 		 unlockedthroneroommap[n++]);

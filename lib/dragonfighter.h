@@ -45,7 +45,6 @@
 #define MAPW MAP_ACROSS*TILEW
 #define MAPH MAP_DOWN*TILEH
 
-
 /**** Global structs and variables ****/
 
 typedef struct SPRITE {
@@ -78,6 +77,7 @@ SPRITE *hero;
 #define LCK_TR_UNWALKABLES 54
 
 BLOCK *unwalkables[UNLCK_TR_UNWALKABLES];
+BLOCK *stairs;
 BITMAP *hero_left_images[2];
 BITMAP *hero_right_images[2];
 BITMAP *hero_up_images[2];
