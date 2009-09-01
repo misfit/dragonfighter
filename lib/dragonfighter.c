@@ -66,7 +66,7 @@ void setup_hero (void) {
 
 void setup_tantagel_castle (void) {
   tantagelcastle = (PLACE*) malloc (sizeof (PLACE));
-  draw_unlocked_throneroom_map();
+  draw_throneroom();
 }
 
 BITMAP *grab_frame (BITMAP *source, int width, int height,
@@ -280,25 +280,30 @@ void draw_throneroom (void) {
       }
     }
   }
+  else if (hero->keyshead != NULL){
+    for (tiley = 0; tiley < scroll->h; tiley+=TILEH){
+      for (tilex = 0; tilex < scroll->w; tilex+=TILEW){
+	if (unlockedthroneroommap[n] == STONE || 
+	    unlockedthroneroommap[n] == COUNTER){
+	  unwalkables[i] = malloc(sizeof(BLOCK));
+	  unwalkables[i]->height = 32;
+	  unwalkables[i]->width = 32;
+	  unwalkables[i]->left = tilex - unwalkables[i]->width;
+	  unwalkables[i]->top = tiley - unwalkables[i]->height;
+	  unwalkables[i]->right = tilex + unwalkables[i]->width;
+	  unwalkables[i]->bottom = tiley + unwalkables[i]->height;
+	  i++;
+	}
+	draw_frame(tiles,scroll,tilex,tiley,TILEW,TILEH,0,0,COLS,
+		   unlockedthroneroommap[n++]);
+      }
+    }
+  }
   destroy_bitmap(tiles); 
 }
 
 void draw_unlocked_throneroom_map (void) {
-  tiles = load_bitmap("maptiles.bmp", NULL);
-  int i = 0;
-  for (tiley = 0; tiley < scroll->h; tiley+=TILEH){
-    for (tilex = 0; tilex < scroll->w; tilex+=TILEW){
-      if (unlockedthroneroommap[n] == STONE || 
-	  unlockedthroneroommap[n] == COUNTER){
-	unwalkables[i] = malloc(sizeof(BLOCK));
-	unwalkables[i]->height = 32;
-	unwalkables[i]->width = 32;
-	unwalkables[i]->left = tilex - unwalkables[i]->width;
-	unwalkables[i]->top = tiley - unwalkables[i]->height;
-	unwalkables[i]->right = tilex + unwalkables[i]->width;
-	unwalkables[i]->bottom = tiley + unwalkables[i]->height;
-	i++;
-      } /*else if (unlockedthroneroommap[n] == STAIRS){
+   /*else if (unlockedthroneroommap[n] == STAIRS){
 	stairs = malloc(sizeof(BLOCK));
 	stairs->height = 32;
 	stairs->width = 32;
@@ -307,11 +312,6 @@ void draw_unlocked_throneroom_map (void) {
 	stairs->right = tilex + stairs->width;
 	stairs->bottom = tiley + stairs->height;
 	}*/
-      draw_frame(tiles,scroll,tilex,tiley,TILEW,TILEH,0,0,COLS,
-		 unlockedthroneroommap[n++]);
-     }
-  }
-  destroy_bitmap(tiles);
 }
 
 void draw_tantagel_courtyard (void) {

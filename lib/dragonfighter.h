@@ -116,7 +116,7 @@ typedef struct {
 /**** Character bitmaps and sprites ****/
 
 HERO *hero;
-BLOCK *unwalkables[UNLCK_TR_UNWALKABLES];
+BLOCK *unwalkables[LCK_TR_UNWALKABLES];
 BITMAP *hero_left_images[2];
 BITMAP *hero_right_images[2];
 BITMAP *hero_up_images[2];
