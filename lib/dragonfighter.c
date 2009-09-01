@@ -50,7 +50,7 @@ void setup_hero (void) {
     hero_left_images[i-6] = grab_frame(tempbitmap,16,16,0,0,16,i);
   }
   destroy_bitmap(tempbitmap);
-  hero = malloc(sizeof(SPRITE));
+  hero = malloc(sizeof(HERO));
   hero->facing = LEFT;
   hero->x = 160;
   hero->y = 128;
@@ -60,6 +60,8 @@ void setup_hero (void) {
   hero->maxframe = 1;
   hero->xspeed = 0;
   hero->yspeed = 0;
+  for (i = 0; i < KEYS; i++){ hero->keys[i] = 0; }
+
 }
 
 BITMAP *grab_frame (BITMAP *source, int width, int height,
@@ -266,5 +268,37 @@ void draw_unlocked_throneroom_map (void) {
      }
   }
   destroy_bitmap(tiles);
+}
 
+void draw_tantagel_courtyard (void) {
+  tiles = load_bitmap("maptiles.bmp", NULL);
+  int i = 0;
+  int j = 0;
+
+  for (tiley = 0; tiley < scroll->h; tiley+=TILEH){
+    for (tilex = 0; tilex < scroll->w; tilex+=TILEW){
+      if (unlockedthroneroommap[n] == STONE || 
+	  unlockedthroneroommap[n] == COUNTER){
+	unwalkables[i] = malloc(sizeof(BLOCK));
+	unwalkables[i]->height = 32;
+	unwalkables[i]->width = 32;
+	unwalkables[i]->left = tilex - unwalkables[i]->width;
+	unwalkables[i]->top = tiley - unwalkables[i]->height;
+	unwalkables[i]->right = tilex + unwalkables[i]->width;
+	unwalkables[i]->bottom = tiley + unwalkables[i]->height;
+	i++;
+      }
+      /*
+      else if (unlockedthroneroommap[n] == STAIRS){
+	stairs[j] = malloc (sizeof (BLOCK));
+	stairs[j]->height = 32;
+	stairs[j]->width = 32;
+	stairs[j]->left = tilex - stairs[j]->width;
+	stairs[j]->top = tiley - stairs[j]->height;
+	stairs[j]->right = tilex + stairs[j]->width;
+	stairs[j]->bottom = tiley + stairs[j]->height;
+	j++;
+	}*/
+    }
+  }
 }

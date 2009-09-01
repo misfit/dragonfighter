@@ -47,7 +47,8 @@
 
 /**** Global structs and variables ****/
 
-typedef struct SPRITE {
+typedef struct {
+  /* Motion variables */
   int x, y;
   int width, height;
   int xspeed, yspeed;
@@ -59,9 +60,11 @@ typedef struct SPRITE {
   int framecount;
   int framedelay;
   int facing;
-}SPRITE;
+  /* Attributes variables */
+  int keys[3];
+}HERO;
 
-typedef struct BLOCK {
+typedef struct {
   int left;
   int top;
   int right;
@@ -71,10 +74,12 @@ typedef struct BLOCK {
 
 /**** Character bitmaps and sprites ****/
 
-SPRITE *hero;
+HERO *hero;
 
 #define UNLCK_TR_UNWALKABLES 53
 #define LCK_TR_UNWALKABLES 54
+#define TC_COURT_STAIRS 2
+#define KEYS 3
 
 BLOCK *unwalkables[UNLCK_TR_UNWALKABLES];
 BLOCK *stairs;
@@ -115,8 +120,12 @@ void animate_hero (void);
 
 void move_hero (void);
 
+void draw_throneroom (void);
+
 void draw_locked_throneroom_map (void);
 
 void draw_unlocked_throneroom_map (void);
+
+void draw_tantagel_courtyard (void);
 
 #endif
