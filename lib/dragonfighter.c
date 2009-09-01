@@ -253,9 +253,7 @@ void unlock_door (int door) {
 }
 
 void draw_throneroom (void) {
-  if (hero->keys[0] != 0) {
-    
-  }
+  return;
 }
 
 void draw_unlocked_throneroom_map (void) {
