@@ -79,11 +79,7 @@ HERO *hero;
 #define UNLCK_TR_UNWALKABLES 53
 #define LCK_TR_UNWALKABLES 54
 #define TC_COURT_STAIRS 2
-/* Constants for total keys and hero's key indexes. */
 #define KEYS 3
-#define THRONE_RM_KEY = 0
-#define TANT_TREASURE_RM_KEY = 1
-#define TANT_NOTHING_KEY = 2
 
 BLOCK *unwalkables[UNLCK_TR_UNWALKABLES];
 BLOCK *stairs;
@@ -131,5 +127,6 @@ void draw_locked_throneroom_map (void);
 void draw_unlocked_throneroom_map (void);
 
 void draw_tantagel_courtyard (void);
+
 
 #endif

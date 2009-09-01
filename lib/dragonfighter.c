@@ -239,6 +239,8 @@ void draw_locked_throneroom_map (void) {
   destroy_bitmap(tiles);
 }
 
+void draw_throneroom (void)
+
 void draw_unlocked_throneroom_map (void) {
   tiles = load_bitmap("maptiles.bmp", NULL);
   int i = 0;
