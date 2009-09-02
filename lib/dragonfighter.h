@@ -44,9 +44,6 @@
 #define MAP_DOWN 24
 #define MAPW MAP_ACROSS*TILEW
 #define MAPH MAP_DOWN*TILEH
-/**** Stairs and doors constants ****/
-#define UNLCK_TR_UNWALKABLES 53
-#define LCK_TR_UNWALKABLES 54
 
 /**** Global structs and variables ****/
 
@@ -92,22 +89,10 @@ typedef struct {
 }BLOCKNODE;
 
 typedef struct {
+  int type;
   BLOCK *block;
   struct NOWALKNODE *next;
 }NOWALKNODE;
-
-/*
- * Struct for doors.
- */
-typedef struct {
-  int left;
-  int top;
-  int right;
-  int bottom;
-  int width, height;
-  int is_locked;
-  struct DOORNODE *next;
-}DOORNODE;
 
 typedef struct {
   int map;
@@ -116,7 +101,6 @@ typedef struct {
 typedef struct {
   BLOCK *nowalkshead;
   int no_of_nowalks;
-  DOORNODE *doorshead;
 }PLACE;
 
 /**** Character bitmaps and sprites ****/
@@ -165,13 +149,13 @@ int check_collision (PLACE *place);
 
 void add_nowalk (PLACE *place, NOWALKNODE *newnode);
 
+void unlock_door (PLACE *place, NOWALKNODE *remove);
+
 void add_key (void);
 
 void pop_key (void);
 
 void add_door (void);
-
-void unlock_door (int door);
 
 void draw_throneroom (void);
 

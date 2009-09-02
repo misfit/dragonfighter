@@ -68,7 +68,6 @@ void setup_tantagel_castle (void) {
   tantagelcastle = (PLACE*) malloc (sizeof (PLACE));
   tantagelcastle->nowalkshead = NULL;
   tantagelcastle->no_of_nowalks = 0;
-  tantagelcastle->doorshead = NULL;
   draw_throneroom();
 }
 
@@ -253,6 +252,26 @@ void add_nowalk (PLACE *place, NOWALKNODE *newnode) {
   }
 }
 
+void unlock_door (PLACE *place, NOWALKNODE *remove) {
+  NOWALKNODE *previous;
+  NOWALKNODE *current;
+
+  current = (NOWALKNODE*) malloc (sizeof (NOWALKNODE));
+  previous = (NOWALKNODE*) malloc (sizeof (NOWALKNODE));
+  current = place->nowalkshead;
+  previous = current;
+
+  while (current != NULL) {
+    previous = current;
+    if (current->type == DOOR){
+      previous->next = current->next;
+      free (current);
+      return;
+    }
+    current = current->next;
+  }
+}
+
 void add_key (void) {
   if (hero->keyshead == NULL){
     NODE *temp;
@@ -281,9 +300,6 @@ void pop_key (void) {
   }
 }
 
-void unlock_door (int door) {
-}
-
 void draw_throneroom (void) {
   tiles = load_bitmap("maptiles.bmp", NULL);
   int i = 0;
@@ -306,6 +322,7 @@ void draw_throneroom (void) {
 	  newblk->right = tilex + newblk->width;
 	  newblk->bottom = tiley + newblk->height;
 	  newnwn = (NOWALKNODE*) malloc (sizeof (NOWALKNODE));
+	  newnwn->type = DOOR;
 	  newnwn->block = newblk;
 	  add_nowalk (tantagelcastle, newnwn);
 	  /*
