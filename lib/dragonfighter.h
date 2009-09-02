@@ -45,6 +45,9 @@
 #define MAPW MAP_ACROSS*TILEW
 #define MAPH MAP_DOWN*TILEH
 
+#define THRONE_ROOM 0
+#define TANTAGEL_CASTLE_CYARD 1
+#define TANTAGEL_CASTLE_BASEMT 2
 #define TR0 0
 
 /**** Global structs and variables ****/
@@ -116,6 +119,8 @@ BITMAP *hero_down_images[2];
 BITMAP *tempbitmap;
 BITMAP *scroll;
 BITMAP *tiles;
+PLACE *throneroom;
+PLACE *tantbasement;
 PLACE *tantagelcastle;
 int n; 
 
@@ -142,7 +147,7 @@ void cleanup (void);
 
 int is_inside (int x, int y, int left, int top, int right, int bottom);
 
-int get_input (void);
+int get_input (PLACE *place);
 
 void animate_hero (void);
 
@@ -160,7 +165,7 @@ void pop_key (void);
 
 void add_door (void);
 
-void draw_throneroom (void);
+void draw_throneroom (int islocked);
 
 void draw_unlocked_throneroom_map (void);
 
