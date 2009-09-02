@@ -45,6 +45,8 @@
 #define MAPW MAP_ACROSS*TILEW
 #define MAPH MAP_DOWN*TILEH
 
+#define TR0 0
+
 /**** Global structs and variables ****/
 
 typedef struct {
@@ -90,6 +92,7 @@ typedef struct {
 
 typedef struct {
   int type;
+  int id;
   BLOCK *block;
   struct NOWALKNODE *next;
 }NOWALKNODE;
@@ -149,7 +152,7 @@ int check_collision (PLACE *place);
 
 void add_nowalk (PLACE *place, NOWALKNODE *newnode);
 
-void unlock_door (PLACE *place, NOWALKNODE *remove);
+void unlock_door (PLACE *place, int which);
 
 void add_key (void);
 

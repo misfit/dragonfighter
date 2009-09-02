@@ -252,7 +252,7 @@ void add_nowalk (PLACE *place, NOWALKNODE *newnode) {
   }
 }
 
-void unlock_door (PLACE *place, NOWALKNODE *remove) {
+void unlock_door (PLACE *place, int which) {
   NOWALKNODE *previous;
   NOWALKNODE *current;
 
@@ -306,12 +306,9 @@ void draw_throneroom (void) {
   if (hero->keyshead == NULL){
     for (tiley = 0; tiley < scroll->h; tiley+=TILEH){
       for (tilex = 0; tilex < scroll->w; tilex+=TILEW){
-	if (lockedthroneroommap[n] == DOOR){
-	/* Keep it simple for testing.
-	if (lockedthroneroommap[n] == DOOR ||
+	if (lockedthroneroommap[n] == DOOR || 
 	    lockedthroneroommap[n] == STONE ||
 	    lockedthroneroommap[n] == COUNTER){
-	*/
 	  BLOCK *newblk;
 	  NOWALKNODE *newnwn;
 	  newblk = (BLOCK*) malloc (sizeof (BLOCK));
@@ -322,24 +319,15 @@ void draw_throneroom (void) {
 	  newblk->right = tilex + newblk->width;
 	  newblk->bottom = tiley + newblk->height;
 	  newnwn = (NOWALKNODE*) malloc (sizeof (NOWALKNODE));
-	  newnwn->type = DOOR;
+	  if (lockedthroneroommap[n] == DOOR){
+	    newnwn->id = TR0;
+	    newnwn->type = DOOR;
+	  } else { newnwn->id = 0; }
+	  if (lockedthroneroommap[n] == STONE) newnwn->type = STONE;
+	  else if (lockedthroneroommap[n] == COUNTER) newnwn->type = COUNTER;
 	  newnwn->block = newblk;
 	  add_nowalk (tantagelcastle, newnwn);
-	  /*
-	  tantagelcastle->unwalkables[i] = malloc(sizeof(BLOCK));
-	  tantagelcastle->unwalkables[i]->height = 32;
-	  tantagelcastle->unwalkables[i]->width = 32;
-	  tantagelcastle->unwalkables[i]->left = \
-	    tilex - tantagelcastle->unwalkables[i]->width;
-	  tantagelcastle->unwalkables[i]->top = \
-	    tiley - tantagelcastle->unwalkables[i]->height;
-	  tantagelcastle->unwalkables[i]->right = \
-	    tilex + tantagelcastle->unwalkables[i]->width;
-	  tantagelcastle->unwalkables[i]->bottom = \
-	    tiley + tantagelcastle->unwalkables[i]->height;
-	    i++;*/
 	}
-	
 	draw_frame(tiles,scroll,tilex,tiley,TILEW,TILEH,0,0,COLS,
 		   lockedthroneroommap[n++]);
       }

@@ -24,9 +24,16 @@
 #define COUNTER 0
 #define BRICK 1
 #define STONE 2
+#define GRASS 3
 #define ROOF 4
-#define STAIRS 8
+#define BARRIER 5
+#define WATER 6
+#define STAIRSDOWNR 8
+#define CHEST 9
 #define DOOR 10
+#define STAIRSDOWNL 11
+#define STAIRSUPR 12
+#define STAIRSUPL 13
 
 int lockedthroneroommap[] = {
 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
