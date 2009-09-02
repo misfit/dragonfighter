@@ -28,9 +28,6 @@ void initialize_game (int colordepth) {
   set_color_depth(colordepth);
   set_gfx_mode(MODE, WIDTH, HEIGHT, 0, 0);
   srand(time(NULL));
-  scrollx = 160;
-  scrolly = 128;
-  scroll = create_bitmap(MAPW, MAPH);
 }
 
 void setup_hero (void) {
@@ -62,6 +59,7 @@ void setup_hero (void) {
   hero->yspeed = 0;
   hero->keyshead = NULL;
   hero->no_of_keys = 0;
+  hero->currentlocation = LTR;
 }
 
 void cleanup_hero (void) {
@@ -79,18 +77,37 @@ void cleanup_hero (void) {
   free (hero);
 }
 
-void setup_tantagel_castle (void) {
+void setup_locked_throneroom (void) {
   throneroom = (PLACE*) malloc (sizeof (PLACE));
   throneroom->nowalkshead = NULL;
-  throneroom->no_of_nowalks = 0;
   
+  scrollx = 160;
+  scrolly = 128;
+  scroll = create_bitmap(MAPW, MAPH);
+  
+  load_map (LTR);
+}
+
+void cleanup_locked_throneroom (void) {
+  if (throneroom->nowalkshead != NULL){
+    NOWALKNODE *temp;
+    temp = (NOWALKNODE*) malloc (sizeof (NOWALKNODE));
+    
+    while (temp->next != NULL) {
+      temp = throneroom->nowalkshead;
+      throneroom->nowalkshead = throneroom->nowalkshead->next;
+      free (temp->block);
+      free (temp);
+    }
+  }
+}
+
+void setup_tantagel_castle (void) {  
   tantbasement = (PLACE*) malloc (sizeof (PLACE));
   tantbasement->nowalkshead = NULL;
-  tantbasement->no_of_nowalks = 0;
   
   tantagelcastle = (PLACE*) malloc (sizeof (PLACE));
   tantagelcastle->nowalkshead = NULL;
-  tantagelcastle->no_of_nowalks = 0;
   load_map (UTR);
 }
 
@@ -267,11 +284,9 @@ void add_nowalk (PLACE *place, NOWALKNODE *newnode) {
   if (place->nowalkshead == NULL){
     newnode->next = NULL;
     place->nowalkshead = newnode;
-    place->no_of_nowalks++;
   } else if (place->nowalkshead != NULL){
     newnode->next = place->nowalkshead;
     place->nowalkshead = newnode;
-    place->no_of_nowalks++;
   }
 }
 
@@ -324,8 +339,6 @@ void pop_key (void) {
 }
 
 void load_map (const unsigned char map){
-  clear_bitmap(screen);
-  clear_bitmap(scroll);
   switch (map) {
   case LTR:
     draw_locked_throneroom();

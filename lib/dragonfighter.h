@@ -75,6 +75,7 @@ typedef struct {
   /* Attributes variables */
   NODE *keyshead;
   int no_of_keys;
+  int currentlocation;
 }HERO;
 
 /*
@@ -106,7 +107,6 @@ typedef struct {
 
 typedef struct {
   NOWALKNODE *nowalkshead;
-  int no_of_nowalks;
 }PLACE;
 
 /**** Character bitmaps and sprites ****/
@@ -136,6 +136,10 @@ void initialize_game (int colordepth);
 void setup_hero (void);
 
 void cleanup_hero (void);
+
+void setup_locked_throneroom (void);
+
+void cleanup_locked_thronerooom (void);
 
 void setup_tantagel_castle (void);
 
