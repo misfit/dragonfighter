@@ -169,8 +169,8 @@ void add_door (void);
 
 void load_map (const unsigned char map);
 
-void draw_throneroom (int islocked);
-
 void draw_locked_throneroom (void);
+
+void draw_unlocked_throneroom (void);
 
 #endif
