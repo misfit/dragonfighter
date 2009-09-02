@@ -29,7 +29,7 @@ int main (void) {
   /**** main loop ****/
   while (!gameover) {
     if (keypressed()) gameover = get_input();
-    
+
     /* draw scroll window */
     acquire_screen();
     blit(scroll, screen, hero->x, hero->y, 0, 0, WIDTH-1, HEIGHT-1);
@@ -37,7 +37,7 @@ int main (void) {
     
     animate_hero();
     move_hero();
-
+    
     rest(10);
   }
   cleanup();

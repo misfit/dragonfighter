@@ -47,12 +47,6 @@
 /**** Stairs and doors constants ****/
 #define UNLCK_TR_UNWALKABLES 53
 #define LCK_TR_UNWALKABLES 54
-#define TC_COURT_STAIRS 2
-#define D1 0
-#define D2 1
-#define D3 2
-#define S1 0
-#define S2 3
 
 /**** Global structs and variables ****/
 
@@ -92,6 +86,16 @@ typedef struct {
   int width, height;
 }BLOCK;
 
+typedef struct {
+  BLOCK *block;
+  struct BLOCKNODE *next;
+}BLOCKNODE;
+
+typedef struct {
+  BLOCK *block;
+  struct NOWALKNODE *next;
+}NOWALKNODE;
+
 /*
  * Struct for doors.
  */
@@ -110,13 +114,14 @@ typedef struct {
 }MAP;
 
 typedef struct {
+  BLOCK *nowalkshead;
+  int no_of_nowalks;
   DOORNODE *doorshead;
 }PLACE;
 
 /**** Character bitmaps and sprites ****/
 
 HERO *hero;
-BLOCK *unwalkables[LCK_TR_UNWALKABLES];
 BITMAP *hero_left_images[2];
 BITMAP *hero_right_images[2];
 BITMAP *hero_up_images[2];
@@ -155,6 +160,10 @@ int get_input (void);
 void animate_hero (void);
 
 void move_hero (void);
+
+int check_collision (PLACE *place);
+
+void add_nowalk (PLACE *place, NOWALKNODE *newnode);
 
 void add_key (void);
 
