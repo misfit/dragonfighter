@@ -269,7 +269,6 @@ int check_collision (PLACE *place) {
 				  temp->block->top, temp->block->right,
 				  temp->block->bottom) == 1){
       if (temp->type == DOOR){
-	printf ("door");
 	return 2;
       } else return 1;
     }

@@ -34,14 +34,13 @@ int main (void) {
   /**** main loop ****/
   while (1) {
     if (gamestate == ROAMING){
-      if (keypressed()) {
-	if (key[KEY_ESC]) gamestate = GAMEOVER;
-	
-	blit(scroll, screen, hero->x, hero->y, 0, 0, WIDTH-1, HEIGHT-1);
-	animate_hero();
-	move_hero();
-	rest(10);
-      }
+      if (get_input (throneroom) == 1) gamestate = GAMEOVER;
+      
+      else gamestate = ROAMING;
+      blit(scroll, screen, hero->x, hero->y, 0, 0, WIDTH-1, HEIGHT-1);
+      animate_hero();
+      move_hero();
+      rest(10);
       
     } else if (gamestate == GAMEOVER){
       cleanup_locked_throneroom();
