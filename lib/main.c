@@ -20,31 +20,48 @@
 
 #include "dragonfighter.h"
 
-int main (void) {
-  int gameover = 0;
-  gamestate = 0;
+#define GAMEOVER 0
+#define INTOWN 1
+#define TEST 2
 
+int main (void) {
+  gamestate = INTOWN;
   initialize_game(24);
   setup_hero();
   setup_tantagel_castle();
 
   /**** main loop ****/
-  while (!gameover) {
-    if (gamestate == 0){
+  while (1) {
+    /*
       if (keypressed()) gameover = get_input(throneroom);
+      }*/
+    if (gamestate == INTOWN){
+      if (keypressed()) {
+	if (key[KEY_ESC]) gamestate = GAMEOVER;
+	
+	if (key[KEY_X]) {
+	  gamestate = TEST;
+	}
+      }
+      blit(scroll, screen, hero->x, hero->y, 0, 0, WIDTH-1, HEIGHT-1);
+      animate_hero();
+      move_hero();
+      
+      rest(10);
+      
+      
+    } else if (gamestate == GAMEOVER){
+      cleanup_hero();
+      cleanup();
+      return 0;
+    
+    } else if (gamestate == TEST) {
+      clear_bitmap(screen);
+      cleanup_hero();
+      rest(1000);
+      setup_hero();
+      gamestate = INTOWN;
     }
-    /* draw scroll window */
-    acquire_screen();
-    blit(scroll, screen, hero->x, hero->y, 0, 0, WIDTH-1, HEIGHT-1);
-    release_screen();
-    
-    animate_hero();
-    move_hero();
-    
-    rest(10);
-  }
-  cleanup_hero();
-  cleanup();
-  return 0;
+  } /* end of while 1 */
 }
 END_OF_MAIN()
