@@ -22,14 +22,15 @@
 
 int main (void) {
   int gameover = 0;
-  int current_place = THRONE_ROOM;
+  gamestate = 0;
+
   initialize_game(24);
   setup_hero();
   setup_tantagel_castle();
 
   /**** main loop ****/
   while (!gameover) {
-    if (current_place == THRONE_ROOM){
+    if (gamestate == 0){
       if (keypressed()) gameover = get_input(throneroom);
     }
     /* draw scroll window */
@@ -42,6 +43,7 @@ int main (void) {
     
     rest(10);
   }
+  cleanup_hero();
   cleanup();
   return 0;
 }

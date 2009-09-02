@@ -105,7 +105,7 @@ typedef struct {
 }MAP;
 
 typedef struct {
-  BLOCK *nowalkshead;
+  NOWALKNODE *nowalkshead;
   int no_of_nowalks;
 }PLACE;
 
@@ -127,13 +127,15 @@ int n;
 /* Position variables for laying tiles */
 int tilex, tiley;
 int scrollx, scrolly;
-
+int gamestate;
 
 /**** Function prototypes ****/
 
 void initialize_game (int colordepth);
 
 void setup_hero (void);
+
+void cleanup_hero (void);
 
 void setup_tantagel_castle (void);
 
@@ -168,8 +170,5 @@ void add_door (void);
 void draw_throneroom (int islocked);
 
 void draw_unlocked_throneroom_map (void);
-
-void draw_tantagel_courtyard (void);
-
 
 #endif
