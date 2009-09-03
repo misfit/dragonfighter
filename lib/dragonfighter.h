@@ -175,8 +175,6 @@ int check_collision (PLACE *place);
 
 void add_nowalk (PLACE *place, NOWALKNODE *newnode);
 
-void add_exit (PLACE *place, NOWALKNODE *newnode);
-
 BLOCK *create_new_block (void);
 
 void draw_locked_throneroom (void);

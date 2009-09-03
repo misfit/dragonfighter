@@ -285,16 +285,6 @@ void add_nowalk (PLACE *place, NOWALKNODE *newnode) {
   }
 }
 
-void add_exit (PLACE *place, NOWALKNODE *newnode) {
-  if (place->exitshead == NULL){
-    newnode->next = NULL;
-    place->exitshead = newnode;
-  } else if (place->exitshead != NULL){
-    newnode->next = place->exitshead;
-    place->exitshead = newnode;
-  }
-}
-
 BLOCK *create_new_block (void) {
   BLOCK *newblk;
   newblk = (BLOCK*) malloc (sizeof (BLOCK));
