@@ -243,6 +243,7 @@ int throneroommap0[] = {
 #define UTR 1
 #define UTRACROSS 24
 #define UTRDOWN 24
+#define SD1 0
 int throneroommap[] = {
 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,

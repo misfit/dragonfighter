@@ -312,6 +312,7 @@ void draw_locked_throneroom (void) {
       if (throneroommap0[n] == DOOR || 
 	  throneroommap0[n] == STONE ||
 	  throneroommap0[n] == COUNTER){
+	
 	NOWALKNODE *newnwn;
 	newnwn = (NOWALKNODE*) malloc (sizeof (NOWALKNODE));
 	if (throneroommap0[n] == DOOR){
@@ -342,13 +343,17 @@ void draw_unlocked_throneroom (void) {
 	newnwn = (NOWALKNODE*) malloc (sizeof (NOWALKNODE));
 	if (throneroommap[n] == STONE) {newnwn->type = STONE;}
 	if (throneroommap[n] == COUNTER) {newnwn->type = COUNTER;}
-	if (throneroommap[n] == STAIRSDOWNL) {newnwn->type = STAIRSDOWNL;}
 	newnwn->block = create_new_block();
 	newnwn->id = 0;
 	add_nowalk (u0throneroom, newnwn);
       
       } else if (throneroommap[n] == STAIRSDOWNL) {
-	
+	NOWALKNODE *newexitn;
+	newexitn = (NOWALKNODE*) malloc (sizeof (NOWALKNODE));
+	newexitn->type = STAIRSDOWNL;
+	newexitn->id = SD1;
+	newexitn->block = create_new_block();
+	add_exit (u0throneroom, newexitn);
       }
       draw_frame(tiles,scroll,tilex,tiley,TILEW,TILEH,0,0,COLS,
 		 throneroommap[n++]);
