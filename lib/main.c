@@ -281,6 +281,22 @@ void add_nowalk (PLACE *place, NOWALKNODE *newnode) {
   }
 }
 
+BLOCK *create_new_block (void) {
+  BLOCK *newblk;
+  newblk = (BLOCK*) malloc (sizeof (BLOCK));
+  newblk->height = 32;
+  newblk->width = 32;
+  newblk->left = tilex - newblk->width;
+  newblk->top = tiley - newblk->height;
+  newblk->right = tilex + newblk->width;
+  newblk->bottom = tiley + newblk->height;
+  return newblk;
+}
+
+NOWALKNODE *create_new_nowalknode (void) {
+
+}
+
 void draw_locked_throneroom (void) {
   int n = 0;
   tiles = load_bitmap("maptiles.bmp", NULL);
@@ -291,15 +307,7 @@ void draw_locked_throneroom (void) {
 	  throneroommap0[n] == STONE ||
 	  throneroommap0[n] == COUNTER ||
 	  throneroommap0[n] == STAIRSDOWNL){
-	BLOCK *newblk;
 	NOWALKNODE *newnwn;
-	newblk = (BLOCK*) malloc (sizeof (BLOCK));
-	newblk->height = 32;
-	newblk->width = 32;
-	newblk->left = tilex - newblk->width;
-	newblk->top = tiley - newblk->height;
-	newblk->right = tilex + newblk->width;
-	newblk->bottom = tiley + newblk->height;
 	newnwn = (NOWALKNODE*) malloc (sizeof (NOWALKNODE));
 	if (throneroommap0[n] == DOOR){
 	  newnwn->id = LTR;
@@ -308,7 +316,7 @@ void draw_locked_throneroom (void) {
 	if (throneroommap0[n] == STONE) newnwn->type = STONE;
 	if (throneroommap0[n] == COUNTER) newnwn->type = COUNTER;
 	if (throneroommap0[n] == STAIRSDOWNL) newnwn->type = STAIRSDOWNL;
-	newnwn->block = newblk;
+	newnwn->block = create_new_block();
 	add_nowalk (l0throneroom, newnwn);
       }
       draw_frame(tiles,scroll,tilex,tiley,TILEW,TILEH,0,0,COLS,
@@ -361,6 +369,13 @@ void draw_tantagel_courtyard (void) {
   clear (scroll);
   for (tiley = 0; tiley < scroll->h; tiley+=TILEH){
     for (tilex = 0; tilex < scroll->w; tilex+=TILEW){
+      if (tantagelcourtyard12[n] == STONE ||
+	  tantagelcourtyard12[n] == COUNTER || 
+	  tantagelcourtyard12[n] == DOOR ||
+	  tantagelcourtyard12[n] == STAIRSUPL ||
+	  tantagelcourtyard12[n] == STAIRSDOWNL) {
+	
+      }
       draw_frame(tiles,scroll,tilex,tiley,TILEW,TILEH,0,0,COLS,
                  tantagelcourtyard12[n++]);
     }
@@ -432,7 +447,7 @@ int main (void) {
 
       case 3:
 	cleanup_unlocked_throneroom();
-	hero->x = (8*32)/2;
+	hero->x = (9*32)/2;
 	hero->y = (8*32)/2;
 	current = load_map (TCY);
 	break;
