@@ -262,12 +262,8 @@ int check_collision (PLACE *place) {
     if ((is_collision = is_inside (hero->x*2, hero->y*2, temp->block->left, 
 				  temp->block->top, temp->block->right,
 				   temp->block->bottom)) == 1){
-      if (place == l0throneroom) {
-	if (temp->type == DOOR) {return 2;}
-	
-      } else if (place == u0throneroom) {
-	if (temp->type == STAIRSDOWNL) {return 3;}
-      }
+      if (temp->type == DOOR) {return 2;}
+      else if (temp->type == STAIRSDOWNL) {return 3;}
       else {return 1;}
     }
     else {temp = temp->next;}
@@ -305,15 +301,17 @@ void draw_locked_throneroom (void) {
     for (tilex = 0; tilex < scroll->w; tilex+=TILEW){
       if (throneroommap0[n] == DOOR || 
 	  throneroommap0[n] == STONE ||
-	  throneroommap0[n] == COUNTER){
-	
+	  throneroommap0[n] == COUNTER ||
+	  throneroommap0[n] == STAIRSDOWNL){
 	NOWALKNODE *newnwn;
 	newnwn = (NOWALKNODE*) malloc (sizeof (NOWALKNODE));
 	if (throneroommap0[n] == DOOR){
 	  newnwn->id = DR1;
 	  newnwn->type = DOOR;
 	}
-	newnwn->type = 0;
+	if (throneroommap0[n] == STONE) {newnwn->type = STONE;}
+	if (throneroommap0[n] == COUNTER) {newnwn->type = COUNTER;}
+	if (throneroommap0[n] == STAIRSDOWNL) {newnwn->type = STAIRSDOWNL;}
 	newnwn->block = create_new_block();
 	add_nowalk (l0throneroom, newnwn);
       }
@@ -332,17 +330,15 @@ void draw_unlocked_throneroom (void) {
     for (tilex = 0; tilex < scroll->w; tilex+=TILEW){
       if (throneroommap[n] == STONE ||
 	  throneroommap[n] == COUNTER ||
-	  throneroommap[n] == STAIRSDOWNL) {
+	  throneroommap[n] == STAIRSDOWNL){
 	NOWALKNODE *newnwn;
 	newnwn = (NOWALKNODE*) malloc (sizeof (NOWALKNODE));
-	newnwn->type = 0;
+	if (throneroommap[n] == STONE) {newnwn->type = STONE;}
+	if (throneroommap[n] == COUNTER) {newnwn->type = COUNTER;}
+	if (throneroommap[n] == STAIRSDOWNL) {newnwn->type = STAIRSDOWNL;}
 	newnwn->block = create_new_block();
 	newnwn->id = 0;
 	add_nowalk (u0throneroom, newnwn);
-	if (throneroommap[n] == STAIRSDOWNL) {
-	  newnwn->type = STAIRSDOWNL;
-	  newnwn->id = SD1;
-	}
       }
       draw_frame(tiles,scroll,tilex,tiley,TILEW,TILEH,0,0,COLS,
 		 throneroommap[n++]);
