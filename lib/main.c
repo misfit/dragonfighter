@@ -122,14 +122,17 @@ int is_inside (int x, int y, int left, int top, int right, int bottom) {
   else return 0;
 }
 
-int get_input (PLACE *place) {
-  int gameover = 0;
+unsigned char get_input (PLACE *place) {
+  /****
+   * Returns 1 for game over.
+   * Returns 0 for keep going.
+   * Returns > 1 to indicate a new map is to be drawn.
+   ****/
   int oldpx = hero->x;
   int oldpy = hero->y;
-  int i;
   int is_collision = 0;
 
-  if (key[KEY_ESC]) return gameover = 1;
+  if (key[KEY_ESC]) return 1;
   
   is_collision = check_collision (place);
   if (is_collision == 1){
@@ -171,19 +174,17 @@ int get_input (PLACE *place) {
       } else if (key[KEY_LEFT]){ hero->y = oldpy + 1;
       }
     }
-    return gameover;
+    return 0;
     /* If the hero is at a door he can also open it. */
   } else if (is_collision == 2){
     if (key[KEY_ENTER]){
       unlock_door(place, TR0);
-      clear(screen);
       cleanup_locked_throneroom();
-      destroy_bitmap (scroll);
-      scroll = create_bitmap (MAPW, MAPH);
-      draw_unlocked_throneroom();
-      return gameover;
+      load_map (UTR);
+      if (place == l0throneroom) {return 2;}
+      if (place == u0throneroom) {return 3;}
     }
-
+  
   } else {
     hero->yspeed = 1;
     hero->xspeed = 1;
@@ -200,8 +201,8 @@ int get_input (PLACE *place) {
       hero->facing = LEFT;
       hero->x -= hero->xspeed;
     }
-    return gameover;
   }
+  return 0;
 }
 
 void animate_hero (void) {
@@ -246,7 +247,6 @@ void move_hero (void) {
 }
 
 int check_collision (PLACE *place) {
-  int i;
   int is_collision;
   NOWALKNODE *temp;
   temp = place->nowalkshead;
@@ -330,13 +330,16 @@ PLACE *load_map (const unsigned char curlocation) {
     l0throneroom->nowalkshead = NULL;
     draw_locked_throneroom();
     return l0throneroom;
-    break;
+
   case UTR:
-    /*draw_unlocked_throneroom();*/
-    break;
+    u0throneroom = (PLACE*) malloc (sizeof (PLACE));
+    u0throneroom->nowalkshead = NULL;
+    draw_unlocked_throneroom();
+    return u0throneroom;
+
   case TCY:
     /*draw_tantagel_courtyard();*/
-    break;
+    return 3;
   }
 }
 
@@ -374,14 +377,15 @@ void draw_locked_throneroom (void) {
   }
   destroy_bitmap(tiles);
 }
-/*
+
 void draw_unlocked_throneroom (void) {
+  int n = 0;
   tiles = load_bitmap("maptiles.bmp", NULL);
 
   for (tiley = 0; tiley < scroll->h; tiley+=TILEH){
     for (tilex = 0; tilex < scroll->w; tilex+=TILEW){
-      if (unlockedthroneroommap[n] == STONE ||
-	  unlockedthroneroommap[n] == COUNTER){
+      if (throneroommap[n] == STONE ||
+	  throneroommap[n] == COUNTER){
 	BLOCK *newblk;
 	NOWALKNODE *newnwn;
 	newblk = (BLOCK*) malloc (sizeof (BLOCK));
@@ -392,29 +396,27 @@ void draw_unlocked_throneroom (void) {
 	newblk->right = tilex + newblk->width;
 	newblk->bottom = tiley + newblk->height;
 	newnwn = (NOWALKNODE*) malloc (sizeof (NOWALKNODE));
-	if (unlockedthroneroommap[n] == STONE) newnwn->type = STONE;
-	if (unlockedthroneroommap[n] == COUNTER) newnwn->type = COUNTER;
+	if (throneroommap[n] == STONE) newnwn->type = STONE;
+	if (throneroommap[n] == COUNTER) newnwn->type = COUNTER;
 	newnwn->block = newblk;
 	newnwn->id = 0;
-	add_nowalk (throneroom, newnwn);
+	add_nowalk (u0throneroom, newnwn);
       }
       draw_frame(tiles,scroll,tilex,tiley,TILEW,TILEH,0,0,COLS,
-		 unlockedthroneroommap[n++]);
+		 throneroommap[n++]);
     }
   }
   destroy_bitmap (tiles); 
 }
-*/
 
 int main (void) {
   unsigned char current_location = LTR;
-  unsigned char gameover = 0;
   PLACE *current;
   gamestate = TEST;
   initialize_game(24);
   setup_hero();
-  
   current = load_map (current_location);
+
   /**** main loop ****/
   while (1) {
     if (gamestate == ROAMING){
@@ -434,8 +436,22 @@ int main (void) {
       return 0;
       
     } else if (gamestate == TEST) {
-      if (get_input (current) == 1) gamestate = GAMEOVER;
-      rest(1000);
+      switch (get_input (current)) {
+      case 0:
+	break;
+	
+      case 1:
+	gamestate = GAMEOVER;
+	break;
+	
+      case 2:
+	current = load_map (UTR);
+	break;
+      }
+      blit(scroll, screen, hero->x, hero->y, 0, 0, WIDTH-1, HEIGHT-1);
+      animate_hero();
+      move_hero();
+      rest(10);
     }
   } /* end of while 1 */
 }

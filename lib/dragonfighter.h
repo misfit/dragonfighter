@@ -165,7 +165,7 @@ void cleanup (void);
 
 int is_inside (int x, int y, int left, int top, int right, int bottom);
 
-int get_input (PLACE *place);
+unsigned char get_input (PLACE *place);
 
 void animate_hero (void);
 
@@ -213,8 +213,6 @@ void draw_unlocked_throneroom (void);
 #define LTRACROSS 24
 #define LTRDOWN 24
 #define DR1 0
-#ifndef __THRONEROOMMAP0
-#define __THRONEROOMMAP0
 int throneroommap0[] = {
 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
@@ -241,7 +239,6 @@ int throneroommap0[] = {
 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
 };
-#endif
 
 #define UTR 1
 #define UTRACROSS 24
