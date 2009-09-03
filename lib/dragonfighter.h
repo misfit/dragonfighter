@@ -185,6 +185,7 @@ void draw_tantagel_courtyard (void);
 
 PLACE *load_map (const unsigned char curlocation);
 
+#define EXIT 200
 #define COUNTER 0
 #define BRICK 1
 #define STONE 2
