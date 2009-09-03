@@ -432,6 +432,8 @@ int main (void) {
 
       case 3:
 	cleanup_unlocked_throneroom();
+	hero->x = (8*32)/2;
+	hero->y = (8*32)/2;
 	current = load_map (TCY);
 	break;
       }
