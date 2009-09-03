@@ -7,7 +7,7 @@ CC = gcc
 INCLUDE = .
 
 # Object files
-OBJ = main.o dragonfighter.o
+OBJ = main.o 
 
 # Allegro option
 ALLEG = -L/usr/lib -Wl,--export-dynamic -lalleg-4.2.2 -lalleg_unsharable
@@ -23,9 +23,6 @@ dragonfighter: $(OBJ)
 
 main.o: main.c dragonfighter.h
 	$(CC) $(CFLAGS) main.c $(ALLEG)
-
-dragonfighter.o: dragonfighter.c dragonfighter.h maps.h
-	$(CC) $(CFLAGS) dragonfighter.c $(ALLEG)
 
 clean:
 	rm *.o
