@@ -102,6 +102,23 @@ void cleanup_unlocked_throneroom (void) {
   free (u0throneroom);
 }
 
+void cleanup_l1l2tantagel_castle (void) {
+  if (l1l2tantagel_courtyard->nowalkshead != NULL){
+    NOWALKNODE *temp;
+    temp = (NOWALKNODE*) malloc (sizeof (NOWALKNODE));
+    
+    while (temp->next != NULL) {
+      temp = l1l2tantagel_courtyard->nowalkshead;
+      l1l2tantagel_courtyard->nowalkshead = \
+	l1l2tantagel_courtyard->nowalkshead->next;
+      free (temp->block);
+      free (temp);
+    }
+  }
+  free (l1l2tantagel_courtyard);
+
+}
+
 BITMAP *grab_frame (BITMAP *source, int width, int height,
 		   int startx, int starty, int columns, int frame) {
   BITMAP *tempbitmap = create_bitmap(width, height);
@@ -427,6 +444,7 @@ int main (void) {
     } else if (gamestate == GAMEOVER){
       if (current == l0throneroom) {cleanup_locked_throneroom();}
       else if (current = u0throneroom) {cleanup_unlocked_throneroom();}
+      else if (current = l1l2tantagel_courtyard) cleanup_l1l2tantagel_castle();
       cleanup_hero();
       destroy_bitmap (scroll);
       allegro_exit();

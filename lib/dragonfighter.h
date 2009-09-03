@@ -155,6 +155,8 @@ void cleanup_locked_thronerooom (void);
 
 void cleanup_unlocked_throneroom (void);
 
+void cleanup_l1l2tantagel_castle (void);
+
 BITMAP *grab_frame (BITMAP *source, int width, int height,
 		   int startx, int starty, int columns, int frame);
 
