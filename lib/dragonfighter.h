@@ -177,8 +177,6 @@ void add_nowalk (PLACE *place, NOWALKNODE *newnode);
 
 BLOCK *create_new_block (void);
 
-NOWALKNODE *create_new_nowalknode (void);
-
 void draw_locked_throneroom (void);
 
 void draw_unlocked_throneroom (void);

@@ -293,10 +293,6 @@ BLOCK *create_new_block (void) {
   return newblk;
 }
 
-NOWALKNODE *create_new_nowalknode (void) {
-
-}
-
 void draw_locked_throneroom (void) {
   int n = 0;
   tiles = load_bitmap("maptiles.bmp", NULL);
@@ -310,12 +306,12 @@ void draw_locked_throneroom (void) {
 	NOWALKNODE *newnwn;
 	newnwn = (NOWALKNODE*) malloc (sizeof (NOWALKNODE));
 	if (throneroommap0[n] == DOOR){
-	  newnwn->id = LTR;
+	  newnwn->id = DR1;
 	  newnwn->type = DOOR;
 	}
-	if (throneroommap0[n] == STONE) newnwn->type = STONE;
-	if (throneroommap0[n] == COUNTER) newnwn->type = COUNTER;
-	if (throneroommap0[n] == STAIRSDOWNL) newnwn->type = STAIRSDOWNL;
+	if (throneroommap0[n] == STONE) {newnwn->type = STONE;}
+	if (throneroommap0[n] == COUNTER) {newnwn->type = COUNTER;}
+	if (throneroommap0[n] == STAIRSDOWNL) {newnwn->type = STAIRSDOWNL;}
 	newnwn->block = create_new_block();
 	add_nowalk (l0throneroom, newnwn);
       }
@@ -335,20 +331,12 @@ void draw_unlocked_throneroom (void) {
       if (throneroommap[n] == STONE ||
 	  throneroommap[n] == COUNTER ||
 	  throneroommap[n] == STAIRSDOWNL){
-	BLOCK *newblk;
 	NOWALKNODE *newnwn;
-	newblk = (BLOCK*) malloc (sizeof (BLOCK));
-	newblk->height = 32;
-	newblk->width = 32;
-	newblk->left = tilex - newblk->width;
-	newblk->top = tiley - newblk->height;
-	newblk->right = tilex + newblk->width;
-	newblk->bottom = tiley + newblk->height;
 	newnwn = (NOWALKNODE*) malloc (sizeof (NOWALKNODE));
-	if (throneroommap[n] == STONE) newnwn->type = STONE;
-	if (throneroommap[n] == COUNTER) newnwn->type = COUNTER;
-	if (throneroommap[n] == STAIRSDOWNL) newnwn->type = STAIRSDOWNL;
-	newnwn->block = newblk;
+	if (throneroommap[n] == STONE) {newnwn->type = STONE;}
+	if (throneroommap[n] == COUNTER) {newnwn->type = COUNTER;}
+	if (throneroommap[n] == STAIRSDOWNL) {newnwn->type = STAIRSDOWNL;}
+	newnwn->block = create_new_block();
 	newnwn->id = 0;
 	add_nowalk (u0throneroom, newnwn);
       }
@@ -372,9 +360,22 @@ void draw_tantagel_courtyard (void) {
       if (tantagelcourtyard12[n] == STONE ||
 	  tantagelcourtyard12[n] == COUNTER || 
 	  tantagelcourtyard12[n] == DOOR ||
+	  tantagelcourtyard12[n] == WATER ||
 	  tantagelcourtyard12[n] == STAIRSUPL ||
 	  tantagelcourtyard12[n] == STAIRSDOWNL) {
-	
+	NOWALKNODE *newnwn;
+	newnwn = (NOWALKNODE*) malloc (sizeof (NOWALKNODE));
+	if (tantagelcourtyard12[n] == STONE) {newnwn->type = STONE;}
+	if (tantagelcourtyard12[n] == COUNTER) {newnwn->type = COUNTER;}
+	if (tantagelcourtyard12[n] == STAIRSUPL) {newnwn->type = STAIRSUPL;}
+	if (tantagelcourtyard12[n] == STAIRSDOWNL) newnwn->type = STAIRSDOWNL;
+	if (tantagelcourtyard12[n] == DOOR) {
+	  newnwn->type = DOOR;
+	  if (n == 244) newnwn->id = DR2;
+	  if (n == 454) newnwn->id = DR3;
+	}
+	newnwn->block = create_new_block();
+	add_nowalk (l1l2tantagel_courtyard, newnwn);
       }
       draw_frame(tiles,scroll,tilex,tiley,TILEW,TILEH,0,0,COLS,
                  tantagelcourtyard12[n++]);
