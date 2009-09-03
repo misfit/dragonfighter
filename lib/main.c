@@ -59,8 +59,6 @@ void setup_hero (void) {
   hero->maxframe = 1;
   hero->xspeed = 0;
   hero->yspeed = 0;
-  hero->keyshead = NULL;
-  hero->no_of_keys = 0;
   hero->currentlocation = LTR;
 }
 
@@ -70,11 +68,6 @@ void cleanup_hero (void) {
     destroy_bitmap(hero_up_images[n]);
     destroy_bitmap(hero_right_images[n]);
     destroy_bitmap(hero_left_images[n]);
-  }
-  if (hero->keyshead != NULL){
-    for (n=0; n < hero->no_of_keys; n++){
-      pop_key();
-    }
   }
   free (hero);
 }
@@ -178,9 +171,6 @@ unsigned char get_input (PLACE *place) {
     /* If the hero is at a door he can also open it. */
   } else if (is_collision == 2){
     if (key[KEY_ENTER]){
-      unlock_door(place, TR0);
-      cleanup_locked_throneroom();
-      load_map (UTR);
       if (place == l0throneroom) {return 2;}
       if (place == u0throneroom) {return 3;}
     }
@@ -254,13 +244,10 @@ int check_collision (PLACE *place) {
     if ((is_collision = is_inside (hero->x*2, hero->y*2, temp->block->left, 
 				  temp->block->top, temp->block->right,
 				   temp->block->bottom)) == 1){
-      if (temp->type == DOOR){
-	return 2;
-      } else return 1;
+      if (temp->type == DOOR) {return 2;}
+      else {return 1;}
     }
-    else {
-      temp = temp->next;
-    }
+    else {temp = temp->next;}
   }
   return 0;
 }
@@ -272,54 +259,6 @@ void add_nowalk (PLACE *place, NOWALKNODE *newnode) {
   } else if (place->nowalkshead != NULL){
     newnode->next = place->nowalkshead;
     place->nowalkshead = newnode;
-  }
-}
-
-void unlock_door (PLACE *place, int which) {
-  NOWALKNODE *previous;
-  NOWALKNODE *current;
-
-  current = (NOWALKNODE*) malloc (sizeof (NOWALKNODE));
-  previous = (NOWALKNODE*) malloc (sizeof (NOWALKNODE));
-  current = place->nowalkshead;
-  previous = current;
-
-  while (current != NULL) {
-    previous = current;
-    if (current->type == DOOR){
-      previous->next = current->next;
-      free (current);
-      return;
-    }
-    current = current->next;
-  }
-}
-
-void add_key (void) {
-  if (hero->keyshead == NULL){
-    NODE *temp;
-    temp = (NODE*) malloc (sizeof (NODE));
-    temp->next = NULL;
-    hero->keyshead = temp;
-  } else if (hero->keyshead != NULL){
-    NODE *temp;
-    temp = (NODE*) malloc (sizeof (NODE));
-    temp->next = hero->keyshead;
-    hero->keyshead = temp;
-  }
-  hero->no_of_keys++;
-}
-
-void pop_key (void) {
-  if (hero->keyshead == NULL){
-    return;
-  } else {
-    NODE *temp;
-    temp = (NODE*) malloc (sizeof (NODE));
-    temp = hero->keyshead;
-    hero->keyshead = temp->next;
-    free (temp);
-    hero->no_of_keys--;
   }
 }
 
@@ -445,7 +384,13 @@ int main (void) {
 	break;
 	
       case 2:
+	cleanup_locked_throneroom();
+	load_map (UTR);
 	current = load_map (UTR);
+	break;
+
+      case 3:
+
 	break;
       }
       blit(scroll, screen, hero->x, hero->y, 0, 0, WIDTH-1, HEIGHT-1);

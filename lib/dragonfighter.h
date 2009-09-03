@@ -77,8 +77,6 @@ typedef struct {
   int framedelay;
   int facing;
   /* Attributes variables */
-  NODE *keyshead;
-  int no_of_keys;
   int currentlocation;
 }HERO;
 
@@ -155,6 +153,8 @@ void cleanup_hero (void);
 
 void cleanup_locked_thronerooom (void);
 
+void cleanup (void);
+
 BITMAP *grab_frame (BITMAP *source, int width, int height,
 		   int startx, int starty, int columns, int frame);
 
@@ -176,12 +176,6 @@ int check_collision (PLACE *place);
 void add_nowalk (PLACE *place, NOWALKNODE *newnode);
 
 void unlock_door (PLACE *place, int which);
-
-void add_key (void);
-
-void pop_key (void);
-
-void add_door (void);
 
 PLACE *load_map (const unsigned char curlocation);
 
