@@ -119,15 +119,29 @@ BITMAP *hero_down_images[2];
 BITMAP *tempbitmap;
 BITMAP *scroll;
 BITMAP *tiles;
-PLACE *throneroom;
-PLACE *tantbasement;
-PLACE *tantagelcastle;
+
+/* PLACE definitions
+ * format is:
+ * l = locked
+ * u = unlocked
+ * # = door number
+ * full = [[l/u/][#]]...[name]
+ */
+PLACE *l0throneroom;
+PLACE *u0throneroom;
+PLACE *l1l2tantagel_courtyard;
+PLACE *u1l2tantagel_courtyard;
+PLACE *l1u2tantagel_courtyard;
+PLACE *u1u2tantagel_courtyard;
+
 int n; 
 
 /* Position variables for laying tiles */
 int tilex, tiley;
 int scrollx, scrolly;
 int gamestate;
+unsigned int mapw = LTRACROSS*TILEW;
+unsigned int maph = LTRDOWN*TILEH;
 
 /**** Function prototypes ****/
 
