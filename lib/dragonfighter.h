@@ -109,7 +109,6 @@ typedef struct {
 
 typedef struct {
   NOWALKNODE *nowalkshead;
-  NOWALKNODE *exitshead;
 }PLACE;
 
 /**** Character bitmaps and sprites ****/

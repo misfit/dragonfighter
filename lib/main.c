@@ -262,8 +262,12 @@ int check_collision (PLACE *place) {
     if ((is_collision = is_inside (hero->x*2, hero->y*2, temp->block->left, 
 				  temp->block->top, temp->block->right,
 				   temp->block->bottom)) == 1){
-      if (temp->type == DOOR) {return 2;}
-      else if (temp->type == STAIRSDOWNL) {return 3;}
+      if (place == l0throneroom) {
+	if (temp->type == DOOR) {return 2;}
+	
+      } else if (place == u0throneroom) {
+	if (temp->type == STAIRSDOWNL) {return 3;}
+      }
       else {return 1;}
     }
     else {temp = temp->next;}
