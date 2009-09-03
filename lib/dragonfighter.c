@@ -193,9 +193,12 @@ int get_input (PLACE *place) {
   } else if (is_collision == 2){
     if (key[KEY_ENTER]){
       unlock_door(place, TR0);
-      clear_bitmap (scroll);
-      draw_locked_throneroom();
-      return gameover;;
+      clear(screen);
+      cleanup_locked_throneroom();
+      destroy_bitmap (scroll);
+      scroll = create_bitmap (MAPW, MAPH);
+      draw_unlocked_throneroom();
+      return gameover;
     }
 
   } else {
@@ -265,9 +268,9 @@ int check_collision (PLACE *place) {
   NOWALKNODE *temp;
   temp = place->nowalkshead;
   while (temp != NULL && is_collision != 1){
-    if (is_collision = is_inside (hero->x*2, hero->y*2, temp->block->left, 
+    if ((is_collision = is_inside (hero->x*2, hero->y*2, temp->block->left, 
 				  temp->block->top, temp->block->right,
-				  temp->block->bottom) == 1){
+				   temp->block->bottom)) == 1){
       if (temp->type == DOOR){
 	return 2;
       } else return 1;
@@ -383,7 +386,7 @@ void draw_locked_throneroom (void) {
 		 lockedthroneroommap[n++]);
     }
   }
-  destroy_bitmap(tiles); 
+  destroy_bitmap(tiles);
 }
 
 void draw_unlocked_throneroom (void) {
