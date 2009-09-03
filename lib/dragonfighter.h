@@ -153,7 +153,7 @@ void cleanup_hero (void);
 
 void cleanup_locked_thronerooom (void);
 
-void cleanup (void);
+void cleanup_unlocked_throneroom (void);
 
 BITMAP *grab_frame (BITMAP *source, int width, int height,
 		   int startx, int starty, int columns, int frame);
@@ -177,11 +177,13 @@ void add_nowalk (PLACE *place, NOWALKNODE *newnode);
 
 void unlock_door (PLACE *place, int which);
 
-PLACE *load_map (const unsigned char curlocation);
-
 void draw_locked_throneroom (void);
 
 void draw_unlocked_throneroom (void);
+
+void draw_tantagel_courtyard (void);
+
+PLACE *load_map (const unsigned char curlocation);
 
 #define COUNTER 0
 #define BRICK 1

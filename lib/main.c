@@ -87,6 +87,21 @@ void cleanup_locked_throneroom (void) {
   free (l0throneroom);
 }
 
+void cleanup_unlocked_throneroom (void) {
+  if (u0throneroom->nowalkshead != NULL){
+    NOWALKNODE *temp;
+    temp = (NOWALKNODE*) malloc (sizeof (NOWALKNODE));
+    
+    while (temp->next != NULL) {
+      temp = u0throneroom->nowalkshead;
+      u0throneroom->nowalkshead = u0throneroom->nowalkshead->next;
+      free (temp->block);
+      free (temp);
+    }
+  }
+  free (u0throneroom);
+}
+
 BITMAP *grab_frame (BITMAP *source, int width, int height,
 		   int startx, int starty, int columns, int frame) {
   BITMAP *tempbitmap = create_bitmap(width, height);
@@ -170,12 +185,15 @@ unsigned char get_input (PLACE *place) {
     return 0;
     /* If the hero is at a door he can also open it. */
   } else if (is_collision == 2){
-    if (key[KEY_ENTER]){
+    if (key[KEY_X]){
       if (place == l0throneroom) {return 2;}
-      if (place == u0throneroom) {return 3;}
     }
   
-  } else {
+  } else if (is_collision == 3) {
+    if (key[KEY_X]){
+      if (place == u0throneroom) {return 3;}
+    }
+  }  else {
     hero->yspeed = 1;
     hero->xspeed = 1;
     if (key[KEY_DOWN]){
@@ -245,6 +263,7 @@ int check_collision (PLACE *place) {
 				  temp->block->top, temp->block->right,
 				   temp->block->bottom)) == 1){
       if (temp->type == DOOR) {return 2;}
+      else if (temp->type == STAIRSDOWNL) {return 3;}
       else {return 1;}
     }
     else {temp = temp->next;}
@@ -262,26 +281,6 @@ void add_nowalk (PLACE *place, NOWALKNODE *newnode) {
   }
 }
 
-PLACE *load_map (const unsigned char curlocation) {
-  switch (curlocation) {
-  case LTR:
-    l0throneroom = (PLACE*) malloc (sizeof (PLACE));
-    l0throneroom->nowalkshead = NULL;
-    draw_locked_throneroom();
-    return l0throneroom;
-
-  case UTR:
-    u0throneroom = (PLACE*) malloc (sizeof (PLACE));
-    u0throneroom->nowalkshead = NULL;
-    draw_unlocked_throneroom();
-    return u0throneroom;
-
-  case TCY:
-    /*draw_tantagel_courtyard();*/
-    return 3;
-  }
-}
-
 void draw_locked_throneroom (void) {
   int n = 0;
   tiles = load_bitmap("maptiles.bmp", NULL);
@@ -290,7 +289,8 @@ void draw_locked_throneroom (void) {
     for (tilex = 0; tilex < scroll->w; tilex+=TILEW){
       if (throneroommap0[n] == DOOR || 
 	  throneroommap0[n] == STONE ||
-	  throneroommap0[n] == COUNTER){
+	  throneroommap0[n] == COUNTER ||
+	  throneroommap0[n] == STAIRSDOWNL){
 	BLOCK *newblk;
 	NOWALKNODE *newnwn;
 	newblk = (BLOCK*) malloc (sizeof (BLOCK));
@@ -307,6 +307,7 @@ void draw_locked_throneroom (void) {
 	}
 	if (throneroommap0[n] == STONE) newnwn->type = STONE;
 	if (throneroommap0[n] == COUNTER) newnwn->type = COUNTER;
+	if (throneroommap0[n] == STAIRSDOWNL) newnwn->type = STAIRSDOWNL;
 	newnwn->block = newblk;
 	add_nowalk (l0throneroom, newnwn);
       }
@@ -324,7 +325,8 @@ void draw_unlocked_throneroom (void) {
   for (tiley = 0; tiley < scroll->h; tiley+=TILEH){
     for (tilex = 0; tilex < scroll->w; tilex+=TILEW){
       if (throneroommap[n] == STONE ||
-	  throneroommap[n] == COUNTER){
+	  throneroommap[n] == COUNTER ||
+	  throneroommap[n] == STAIRSDOWNL){
 	BLOCK *newblk;
 	NOWALKNODE *newnwn;
 	newblk = (BLOCK*) malloc (sizeof (BLOCK));
@@ -337,6 +339,7 @@ void draw_unlocked_throneroom (void) {
 	newnwn = (NOWALKNODE*) malloc (sizeof (NOWALKNODE));
 	if (throneroommap[n] == STONE) newnwn->type = STONE;
 	if (throneroommap[n] == COUNTER) newnwn->type = COUNTER;
+	if (throneroommap[n] == STAIRSDOWNL) newnwn->type = STAIRSDOWNL;
 	newnwn->block = newblk;
 	newnwn->id = 0;
 	add_nowalk (u0throneroom, newnwn);
@@ -348,13 +351,51 @@ void draw_unlocked_throneroom (void) {
   destroy_bitmap (tiles); 
 }
 
+void draw_tantagel_courtyard (void) {
+  int n = 0;
+  tiles = load_bitmap("maptiles.bmp", NULL);
+  destroy_bitmap (scroll);
+  mapw = TCYACROSS*TILEW;
+  maph = TCYDOWN*TILEH;
+  scroll = create_bitmap (mapw, maph);
+  clear (scroll);
+  for (tiley = 0; tiley < scroll->h; tiley+=TILEH){
+    for (tilex = 0; tilex < scroll->w; tilex+=TILEW){
+      draw_frame(tiles,scroll,tilex,tiley,TILEW,TILEH,0,0,COLS,
+                 tantagelcourtyard12[n++]);
+    }
+  }
+  destroy_bitmap (tiles);
+}
+
+PLACE *load_map (const unsigned char curlocation) {
+  switch (curlocation) {
+  case LTR:
+    l0throneroom = (PLACE*) malloc (sizeof (PLACE));
+    l0throneroom->nowalkshead = NULL;
+    draw_locked_throneroom();
+    return l0throneroom;
+
+  case UTR:
+    u0throneroom = (PLACE*) malloc (sizeof (PLACE));
+    u0throneroom->nowalkshead = NULL;
+    draw_unlocked_throneroom();
+    return u0throneroom;
+
+  case TCY:
+    l1l2tantagel_courtyard = (PLACE*) malloc (sizeof (PLACE));
+    l1l2tantagel_courtyard->nowalkshead = NULL;
+    draw_tantagel_courtyard();
+    return l1l2tantagel_courtyard;
+  }
+}
+
 int main (void) {
-  unsigned char current_location = LTR;
   PLACE *current;
   gamestate = TEST;
   initialize_game(24);
   setup_hero();
-  current = load_map (current_location);
+  current = load_map (LTR);
 
   /**** main loop ****/
   while (1) {
@@ -368,7 +409,8 @@ int main (void) {
       rest(10);
       
     } else if (gamestate == GAMEOVER){
-      cleanup_locked_throneroom();
+      if (current == l0throneroom) {cleanup_locked_throneroom();}
+      else if (current = u0throneroom) {cleanup_unlocked_throneroom();}
       cleanup_hero();
       destroy_bitmap (scroll);
       allegro_exit();
@@ -385,12 +427,12 @@ int main (void) {
 	
       case 2:
 	cleanup_locked_throneroom();
-	load_map (UTR);
 	current = load_map (UTR);
 	break;
 
       case 3:
-
+	cleanup_unlocked_throneroom();
+	current = load_map (TCY);
 	break;
       }
       blit(scroll, screen, hero->x, hero->y, 0, 0, WIDTH-1, HEIGHT-1);
