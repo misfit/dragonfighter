@@ -284,6 +284,7 @@ int check_collision (PLACE *place) {
       else if (temp->type == STAIRSUPL) return 4;
       else if (temp->type == STAIRSDOWNR) return 5;
       else if (temp->type == STAIRSUPR) return 6;
+      else return 1;
     }
     else {temp = temp->next;}
   }
