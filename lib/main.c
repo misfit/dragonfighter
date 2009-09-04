@@ -382,14 +382,21 @@ void draw_tantagel_courtyard (void) {
 	  tantagelcourtyard12[n] == STAIRSDOWNL) {
 	NOWALKNODE *newnwn;
 	newnwn = (NOWALKNODE*) malloc (sizeof (NOWALKNODE));
+	newnwn->id = 0;
 	if (tantagelcourtyard12[n] == STONE) {newnwn->type = STONE;}
 	if (tantagelcourtyard12[n] == COUNTER) {newnwn->type = COUNTER;}
-	if (tantagelcourtyard12[n] == STAIRSUPL) {newnwn->type = STAIRSUPL;}
-	if (tantagelcourtyard12[n] == STAIRSDOWNL) newnwn->type = STAIRSDOWNL;
 	if (tantagelcourtyard12[n] == DOOR) {
 	  newnwn->type = DOOR;
-	  if (n == 244) newnwn->id = DR2;
-	  if (n == 454) newnwn->id = DR3;
+	  if (n == 243) newnwn->id = DR2;
+	  if (n == 453) newnwn->id = DR3;
+	}
+	if (tantagelcourtyard12[n] == STAIRSUPL) {
+	  newnwn->type = STAIRSUPL;
+	  newnwn->id = SU1;
+	}
+	if (tantagelcourtyard12[n] == STAIRSDOWNL) {
+	  newnwn->type = STAIRSDOWNL;
+	  newnwn->id = SD2;
 	}
 	newnwn->block = create_new_block();
 	add_nowalk (l1l2tantagel_courtyard, newnwn);

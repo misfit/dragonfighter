@@ -211,7 +211,7 @@ PLACE *load_map (const unsigned char curlocation);
 #define LTR 0
 #define LTRACROSS 24
 #define LTRDOWN 24
-#define DR1 0
+#define DR1 1
 int throneroommap0[] = {
 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
@@ -243,7 +243,7 @@ int throneroommap0[] = {
 #define UTR 1
 #define UTRACROSS 24
 #define UTRDOWN 24
-#define SD1 0
+#define SD1 1
 int throneroommap[] = {
 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
@@ -274,8 +274,10 @@ int throneroommap[] = {
 #define TCY 2
 #define TCYACROSS 32
 #define TCYDOWN 34
-#define DR2 1
-#define DR3 2
+#define DR2 2
+#define DR3 3
+#define SD2 2
+#define SU1 1
 int tantagelcourtyard12[] = {
   3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
   3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
