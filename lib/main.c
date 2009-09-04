@@ -203,14 +203,20 @@ unsigned char get_input (PLACE *place) {
     /* If the hero is at a door he can also open it. */
   } else if (is_collision == 2){
     if (key[KEY_X]){
-      if (place == l0throneroom) {return 2;}
+      if (place == l0throneroom) return 2;
     }
   
   } else if (is_collision == 3) {
     if (key[KEY_X]){
-      if (place == u0throneroom) {return 3;}
+      if (place == u0throneroom) return 3;
     }
-  }  else {
+
+  } else if (is_collision == 4) {
+    if (key[KEY_X]) {
+      if (place == l1l2tantagel_courtyard) return 4;
+    }
+
+  } else {
     hero->yspeed = 1;
     hero->xspeed = 1;
     if (key[KEY_DOWN]){
@@ -477,9 +483,17 @@ int main (void) {
       case 3:
 	cleanup_unlocked_throneroom();
 	hero->x = (9*32)/2;
-	hero->y = (8*32)/2;
+	hero->y = (9*32)/2;
 	current = load_map (TCY);
 	break;
+
+      case 4:
+	cleanup_l1l2tantagel_castle();
+	destroy_bitmap (scroll);
+	scroll = create_bitmap (UTRACROSS*TILEW, UTRDOWN*TILEH);
+	hero->x = 224;
+	hero->y = 240;
+	current = load_map (UTR);
       }
       blit(scroll, screen, hero->x, hero->y, 0, 0, WIDTH-1, HEIGHT-1);
       animate_hero();
