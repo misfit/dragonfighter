@@ -115,7 +115,7 @@ void cleanup_l1l2tantagel_castle (void) {
 }
 
 BITMAP *grab_frame (BITMAP *source, int width, int height,
-		   int startx, int starty, int columns, int frame) {
+		    int startx, int starty, int columns, int frame) {
   BITMAP *tempbitmap = create_bitmap(width, height);
   int x = startx + (frame % columns)*width;
   int y = starty + (frame/columns)*height;
@@ -155,6 +155,8 @@ unsigned char get_input (PLACE *place) {
   if (key[KEY_ESC]) return 1;
   
   is_collision = check_collision (place);
+
+  /* if a collision is detected. */
   if (is_collision == 1){
     hero->x = oldpx;
     hero->y = oldpy;
@@ -228,6 +230,8 @@ unsigned char get_input (PLACE *place) {
       hero->x -= hero->xspeed;
     }
   }
+  /* keep hero in bounds */
+  
   return 0;
 }
 
@@ -239,7 +243,7 @@ void animate_hero (void) {
   }
 }
 
-void move_hero (void) {
+void draw_hero (void) {
   switch (hero->facing) {
   case DOWN:
     if (hero->y > scroll->h - HEIGHT) hero->y = scroll->h - HEIGHT;
@@ -256,7 +260,7 @@ void move_hero (void) {
     break;
     
   case RIGHT:
-    if (hero->x> scroll->w - WIDTH) hero->x = scroll->w - WIDTH;
+    if (hero->x > scroll->w - WIDTH) hero->x = scroll->w - WIDTH;
     acquire_screen();
     stretch_sprite(screen, hero_right_images[hero->currentframe], hero->x,
 		   hero->y, 32, 32);
@@ -449,7 +453,7 @@ int main (void) {
       else gamestate = ROAMING;
       blit(scroll, screen, hero->x, hero->y, 0, 0, WIDTH-1, HEIGHT-1);
       animate_hero();
-      move_hero();
+      draw_hero();
       rest(10);
       
     } else if (gamestate == GAMEOVER){
@@ -492,7 +496,7 @@ int main (void) {
       }
       blit(scroll, screen, hero->x, hero->y, 0, 0, WIDTH-1, HEIGHT-1);
       animate_hero();
-      move_hero();
+      draw_hero();
       rest(10);
     }
   } /* end of while 1 */

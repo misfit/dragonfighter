@@ -171,7 +171,7 @@ unsigned char get_input (PLACE *place);
 
 void animate_hero (void);
 
-void move_hero (void);
+void draw_hero (void);
 
 int check_collision (PLACE *place);
 
