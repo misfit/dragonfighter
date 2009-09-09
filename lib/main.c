@@ -36,17 +36,12 @@ void setup_hero (void) {
   int i;
   /**** load character bitmaps. ****/
   tempbitmap = load_bitmap("characters.bmp", NULL);
+  
   for (i = 0; i < 2; i++){
     hero_down_images[i] = grab_frame(tempbitmap,16,16,0,0,16,i);
-  }
-  for (i = 2; i < 4; i++){
-    hero_up_images[i-2] = grab_frame(tempbitmap,16,16,0,0,16,i);
-  }
-  for (i = 4; i < 6; i++){
-    hero_right_images[i-4] = grab_frame(tempbitmap,16,16,0,0,16,i);
-  }
-  for (i = 6; i < 8; i++){
-    hero_left_images[i-6] = grab_frame(tempbitmap,16,16,0,0,16,i);
+    hero_up_images[i] = grab_frame(tempbitmap,16,16,0,0,16,i+2);
+    hero_right_images[i] = grab_frame(tempbitmap,16,16,0,0,16,i+4);
+    hero_left_images[i] = grab_frame(tempbitmap,16,16,0,0,16,i+6);
   }
   destroy_bitmap(tempbitmap);
   hero = (HERO*) malloc (sizeof (HERO));
