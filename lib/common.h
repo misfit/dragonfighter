@@ -18,8 +18,8 @@
  * along with Dragon Fighter.  If not, see <http://www.gnu.org/licenses/>.
  ****/
 
-#ifndef _DRAGONFIGHTER_H
-#define _DRAGONFIGHTER_H
+#ifndef _COMMON_H
+#define _COMMON_H
 
 #include <stdlib.h>
 #include <stdio.h>

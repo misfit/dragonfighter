@@ -18,7 +18,7 @@
  * along with Dragon Fighter.  If not, see <http://www.gnu.org/licenses/>.
  ****/
 
-#include "dragonfighter.h"
+#include "common.h"
 
 void initialize_game (int colordepth) {
   allegro_init();
