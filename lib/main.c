@@ -1,6 +1,6 @@
 #include "common.h"
 
-int ttrl0[TTRL0W*TTRL0H] = {
+int ttrl0[] = {
 5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,
 5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,
 5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,
@@ -49,6 +49,7 @@ void setup_game (void) {
   set_gfx_mode (MODE, WIDTH, HEIGHT, 0, 0);
   scroll = create_bitmap (TTRL0W, TTRL0H);
   buffer = create_bitmap (WIDTH, HEIGHT);
+  clear (buffer);
 
   load_map (TTRL0);
 
