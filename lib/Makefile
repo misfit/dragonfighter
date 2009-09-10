@@ -21,7 +21,7 @@ CFLAGS = -g -Wall -ansi -c
 dragonfighter: $(OBJ)
 	$(CC) -o dragonfighter $(OBJ) $(ALLEG)
 
-main.o: main.c dragonfighter.h
+main.o: main.c common.h
 	$(CC) $(CFLAGS) main.c $(ALLEG)
 
 clean:
