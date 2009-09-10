@@ -120,6 +120,7 @@ BITMAP *hero_up_images[2];
 BITMAP *hero_down_images[2];
 BITMAP *tempbitmap;
 BITMAP *scroll;
+BITMAP *buffer;
 BITMAP *tiles;
 
 /* PLACE definitions
@@ -169,9 +170,19 @@ int is_inside (int x, int y, int left, int top, int right, int bottom);
 
 unsigned char get_input (PLACE *place);
 
+void move_hero_up (void);
+
+void move_hero_down (void);
+
+void move_hero_right (void);
+
+void move_hero_left (void);
+
 void animate_hero (void);
 
 void draw_hero (void);
+
+void move_hero (void);
 
 int check_collision (PLACE *place);
 

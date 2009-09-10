@@ -153,10 +153,13 @@ unsigned char get_input (PLACE *place) {
   int is_collision = 0;
 
   if (key[KEY_ESC]) return 1;
-  
+  if (key[KEY_LEFT]) move_hero_left();
+  if (key[KEY_RIGHT]) move_hero_right();
+  if (key[KEY_UP]) move_hero_up();
+  if (key[KEY_DOWN]) move_hero_down();
+  /*
   is_collision = check_collision (place);
 
-  /* if a collision is detected. */
   if (is_collision == 1){
     hero->x = oldpx;
     hero->y = oldpy;
@@ -198,6 +201,7 @@ unsigned char get_input (PLACE *place) {
     }
     return 0;
     /* If the hero is at a door he can also open it. */
+  /*
   } else if (is_collision == 2){
     if (key[KEY_X]){
       if (place == l0throneroom) return 2;
@@ -229,10 +233,24 @@ unsigned char get_input (PLACE *place) {
       hero->facing = LEFT;
       hero->x -= hero->xspeed;
     }
-  }
+  }*/
   /* keep hero in bounds */
   
   return 0;
+}
+
+void move_hero_up (void) {}
+
+void move_hero_down (void) {}
+
+void move_hero_right (void) {
+  hero->facing = RIGHT;
+  hero->xspeed = 4;
+}
+
+void move_hero_left (void) {
+  hero->facing = LEFT;
+  hero->xspeed = 4;
 }
 
 void animate_hero (void) {
@@ -246,34 +264,37 @@ void animate_hero (void) {
 void draw_hero (void) {
   switch (hero->facing) {
   case DOWN:
-    if (hero->y > scroll->h - HEIGHT) hero->y = scroll->h - HEIGHT;
     acquire_screen();
     stretch_sprite(screen, hero_down_images[hero->currentframe], hero->x, 
 		   hero->y, 32, 32);
     break;
     
   case UP:
-    if (hero->y < 0) hero->y = 0;
     acquire_screen();
     stretch_sprite(screen, hero_up_images[hero->currentframe], hero->x, 
 		   hero->y, 32, 32);
     break;
     
   case RIGHT:
-    if (hero->x > scroll->w - WIDTH) hero->x = scroll->w - WIDTH;
     acquire_screen();
     stretch_sprite(screen, hero_right_images[hero->currentframe], hero->x,
 		   hero->y, 32, 32);
     break;
     
   case LEFT:
-    if (hero->x < 0) hero->x = 0;
     acquire_screen();
     stretch_sprite(screen, hero_left_images[hero->currentframe], hero->x, 
 		   hero->y, 32, 32);
     break;
   }
   release_screen();  
+}
+
+void move_hero (void) {
+  if (hero->y > scroll->h - HEIGHT) hero->y = scroll->h - HEIGHT;
+  if (hero->y < 0) hero->y = 0;
+  if (hero->x > scroll->w - WIDTH) hero->x = scroll->w - WIDTH;
+  if (hero->x < 0) hero->x = 0;
 }
 
 int check_collision (PLACE *place) {
@@ -454,6 +475,7 @@ int main (void) {
       blit(scroll, screen, hero->x, hero->y, 0, 0, WIDTH-1, HEIGHT-1);
       animate_hero();
       draw_hero();
+      move_hero();
       rest(10);
       
     } else if (gamestate == GAMEOVER){
