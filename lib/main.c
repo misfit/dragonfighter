@@ -27,6 +27,13 @@ int ttrl0[TTRL0W*TTRL0H] = {
 
 int main (void) {
   setup_game();
+  while (gamestate != GAMEOVER) {
+    blit (scroll, buffer, scrollx, scrolly, startx, starty, WIDTH, HEIGHT);
+    acquire_screen();
+    blit (buffer, screen, 0, 0, 0, 0, WIDTH-1, HEIGHT-1);
+    release_screen();
+    rest (20);
+  }
   teardown_game();
   return 0;
 }
@@ -50,6 +57,8 @@ void setup_game (void) {
 
   startx = 0;
   starty = 0;
+
+  gamestate = TEST;
 }
 
 void teardown_game (void) {
