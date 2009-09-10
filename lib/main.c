@@ -239,9 +239,15 @@ unsigned char get_input (PLACE *place) {
   return 0;
 }
 
-void move_hero_up (void) {}
+void move_hero_up (void) {
+  hero->facing = UP;
+  hero->xspeed = 4;
+}
 
-void move_hero_down (void) {}
+void move_hero_down (void) {
+  hero->facing = DOWN;
+  hero->xspeed = 4;
+}
 
 void move_hero_right (void) {
   hero->facing = RIGHT;
