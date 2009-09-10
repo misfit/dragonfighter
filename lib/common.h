@@ -1,86 +1,62 @@
-/****
- * Copyright (C) Brian Moriya
- * brian.moriya@gmail.com
- * 
- * This file is part of Dragon Fighter. 
- * 
- * Dragon Fighter is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Dragon Fighter is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of 
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Dragon Fighter.  If not, see <http://www.gnu.org/licenses/>.
- ****/
-
 #ifndef _COMMON_H
 #define _COMMON_H
 
 #include <stdlib.h>
 #include <allegro.h>
 
-#define MODE GFX_AUTODETECT_WINDOWED /* for set_gfx_mode call */
-#define WIDTH 768 /* total width of the game window */
-#define HEIGHT 720 /* total height of the game window */
+#define MODE GFX_AUTODETECT_WINDOWED
+#define WIDTH 512
+#define HEIGHT 480
+#define MAXSPEED 4
+#define BULLETSPEED 10
+#define TILEW 32
+#define TILEH 32
+#define TILES 21
+#define COLS 10
+#define SCROLLW WIDTH
+#define SCROLLH HEIGHT
 
-/**** constants relating to the player character ****/
-#define MAXSPEED 4 /* Normal speed the player walks at */
-#define HILLSPEED 2 /* Speed over rough terrain */
-
-/**** map constants ****/
-#define TILEW 32 /* Width of the tiles used for the map */
-#define TILEH 32 /* Height of the tiles used for the map */
-#define TILES 13 /* How many tiles are on the spritesheet */
-#define COLS 10  /* How many columns of tiles are on the spritesheet */
-/* Correspond to position on the spritesheet and in the map array */
-#define COUNTER 0
-#define BRICK 1
-#define STONE 2
-#define GRASS 3
-#define ROOF 4
-#define BARRIER 5
-#define WATER 6
+#define COUNTER 1
+#define BRICK 2
+#define STONE 3
+#define GRASS 4
+#define ROOF 5
+#define BARRIER 6
+#define WATER 7
 #define STAIRSDOWNR 8
 #define CHEST 9
 #define DOOR 10
 #define STAIRSDOWNL 11
 #define STAIRSUPR 12
 #define STAIRSUPL 13
-/* specific maps */
-#define TTRL0 "tantthronerooml0.fmp"  /* First map in the game */
-#define TTRL0_ACROSS 24 /* Tiles across the first map spans */
-#define TTRL0_DOWN 22   /* Tiles down the first map spans */
-#define TTRL0W TTRL0_ACROSS*TILEW /* Pixels across the first map spans */
-#define TTRL0H TTRL0_DOWN*TILEH   /* Pixels down the first map spans */
 
-/**** game state constants ****/
-#define GAMEOVER 0
-#define ROAMING 1
-#define TEST 2
+#define TTRL0 0
+#define TTRU0 1
+#define TTR_ACROSS 24
+#define TTR_DOWN 22
+#define TTRW TTR_ACROSS * TILEW
+#define TTRH TTR_DOWN * TILEH
+#define TTRXOFFSET 0
+#define TTRWOFFSET -265
+#define TTRYOFFSET 0
+#define TTRHOFFSET -240
 
-/**** Global structs and variables ****/
-
-/* player character */
+/**** typedef structs ****/
+/*
+ * struct for game sprites.
+ */
 typedef struct {
-  int direction;
-  int x, y;
-  int width, height;
-  int speed;
-  int xdelay, ydelay;
-  int xcount, ycount;
-  int currentframe;
-  int maxframe;
-  int framecount;
-  int framedelay;
-}PLAYER;
-PLAYER *hero;
+  int dir, alive;
+  int x,y;
+  int width,height;
+  int xspeed,yspeed;
+  int xdelay,ydelay;
+  int xcount,ycount;
+  int curframe,maxframe,animdir;
+  int framecount,framedelay;
+}SPRITE;
+SPRITE *player;
 
-/* Struct for tiles in the map. */
 typedef struct {
   int left;
   int top;
@@ -89,76 +65,145 @@ typedef struct {
   int width, height;
 }BLOCK;
 
-/**** bitmaps ****/
-BITMAP *hero_left_bmps[2];
-BITMAP *hero_right_bmps[2];
-BITMAP *hero_up_bmps[2];
-BITMAP *hero_down_bmps[2];
-BITMAP *scroll; /* virtual background buffer */
-BITMAP *buffer; /* double buffer */
+typedef struct {
+  int type;
+  int id;
+  BLOCK *block;
+  struct NOWALKNODE *next;
+}NOWALKNODE;
 
-/* PLACE definitions
- * format is:
- * l = locked
- * u = unlocked
- * # = door number
- * full = [[l/u/][#]]...[name]
- 
-PLACE *l0throneroom;
-PLACE *u0throneroom;
-PLACE *l1l2tantagel_courtyard;
-PLACE *u1l2tantagel_courtyard;
-PLACE *l1u2tantagel_courtyard;
-PLACE *u1u2tantagel_courtyard;
-*/
+typedef struct {
+  NOWALKNODE *nowalkhead;
+}PLACE;
+PLACE *l0ttr;
 
 /**** global variables ****/
-int tilex, tiley;
+int gameover;
+int scores;
 int scrollx, scrolly;
 int startx, starty;
-int gamestate;
+int tilex, tiley;
+
 extern int ttrl0[];
 
-/**** Function prototypes ****/
+BITMAP *player_up_bmps[2];
+BITMAP *player_down_bmps[2];
+BITMAP *player_left_bmps[2];
+BITMAP *player_right_bmps[2];
+BITMAP *buffer;
+BITMAP *tiles;
+BITMAP *scroll;
+
+/**** function prototypes ****/
+void animate_player (void);
+/*
+ * Adjusts sprite variables for animation.
+ */
+
+void draw_player (void);
+/*
+ * Draws player to the buffer with call to blit.
+ */
+
+void move_player (int location);
+/*
+ * Moves the player in the scroll window.
+ */
+
+void player_up (void);
+/*
+ * Move the player towards the top of the screen.
+ */
+
+void player_down (void);
+/*
+ * Move the player towards the bottom of the screen.
+ */
+
+void player_left (void);
+/*
+ * Move the player towards the left side of the screen.
+ */
+
+void player_right (void);
+/*
+ * Move the player towards the right side of the screen.
+ */
+
+void get_input (void);
+/*
+ * Keyboard input hanler.
+ */
+
 void setup_game (void);
 /*
- * Does necessary initializations for starting the game.
+ * Sets up the game. Main only needs to call this function.
  */
 
 void setup_player (void);
 /*
- * Performs necessary initializations for setting up the player.
+ * Loads bitmaps for the player images and initializes all related variables.
  */
 
-void teardown_player (void);
+void setup_screen (void);
 /*
- * Tearsdown player.
+ * Sets up the screen and the first scene of the game.
  */
 
 void teardown_game (void);
 /*
- * Tearsdown the game.
+ * Undoes setup game.
  */
 
-BITMAP *grabframe (BITMAP *source, int width, int height,
-                  int startx, int starty, int columns, int frame);
+void teardown_player (void);
 /*
- * Extracts an image from a spritesheet.
+ * Undoes setup player.
+ */
+
+void teardown_screen (void);
+/*
+ * Undoes setup_screen.
+ */
+
+void teardown_ttrl0 (void);
+/*
+ * Undoes draw_ttrl0.
+ */
+
+int inside (int,int,int,int,int,int);
+/*
+ * Performs collision checking on 2 rectangular regions.
+ */
+
+BITMAP *grabframe(BITMAP *, int, int, int, int, int, int);
+/*
+ * Grabs a tile from a spritesheet.
+ */
+
+void scroll_ttr (void);
+/*
+ * Handles scrolling in the throneroom.
+ */
+
+void load_map (int location);
+/*
+ * Loads the map requested by location constant.
+ */
+
+void add_nowalk (PLACE *place, NOWALKNODE *newnode);
+/*
+ * Adds a block to the list of collidable tiles for a PLACE object.
+ */
+
+BLOCK *create_new_block (void);
+/*
+ * Returns a block object for the drawing functions.
  */
 
 void draw_ttrl0 (void);
 /*
- * Draws the throne room with the locked door.
- */
-
-void load_map (char *map);
-/*
- * Loads the given map.
- */
-
-int main (void);
-/*
- * Main function and game loop.
+ * Draws the throneroom with the door locked and builds the collidable tile
+ * list.
  */
 
 #endif
