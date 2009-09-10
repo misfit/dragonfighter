@@ -117,6 +117,7 @@ int tilex, tiley;
 int scrollx, scrolly;
 int startx, starty;
 int gamestate;
+extern int ttrl0[];
 
 /**** Function prototypes ****/
 void setup_game (void);
