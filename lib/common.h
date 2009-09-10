@@ -53,8 +53,8 @@
 #define STAIRSUPL 13
 /* specific maps */
 #define TTRL0 "tantthronerooml0.fmp"  /* First map in the game */
-#define TTRL0_ACROSS 40 /* Tiles across the first map spans */
-#define TTRL0_DOWN 40   /* Tiles down the first map spans */
+#define TTRL0_ACROSS 24 /* Tiles across the first map spans */
+#define TTRL0_DOWN 22   /* Tiles down the first map spans */
 #define TTRL0W TTRL0_ACROSS*TILEW /* Pixels across the first map spans */
 #define TTRL0H TTRL0_DOWN*TILEH   /* Pixels down the first map spans */
 
