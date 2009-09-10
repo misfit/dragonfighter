@@ -142,7 +142,6 @@ int n;
 /* Position variables for laying tiles */
 int tilex, tiley;
 int scrollx, scrolly;
-INT startx, starty;
 int gamestate;
 
 /**** Function prototypes ****/
