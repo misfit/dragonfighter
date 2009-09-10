@@ -27,6 +27,7 @@ int ttrl0[TTRL0W*TTRL0H] = {
 
 int main (void) {
   setup_game();
+  teardown_game();
   return 0;
 }
 END_OF_MAIN()
@@ -54,6 +55,7 @@ void setup_game (void) {
 void teardown_game (void) {
   destroy_bitmap (scroll);
   destroy_bitmap (buffer);
+  allegro_exit();
 }
 
 BITMAP *grabframe (BITMAP *source,
