@@ -1,5 +1,12 @@
 #include "common.h"
 
+void load_tiles (void) {
+  if ((tiles = load_bitmap("maptiles.bmp", NULL)) == NULL) {
+    set_gfx_mode (GFX_TEXT, 0, 0, 0, 0);
+    allegro_message ("Error loading maptiles.bmp file");
+  }
+}
+
 void load_map (int map, int entrance) {
 
   switch (map) {
@@ -11,7 +18,12 @@ void load_map (int map, int entrance) {
     teardown_ttrl0();
     draw_ttru0();
     break;
-  }
+
+  case TCYL1L2:
+    teardown_ttru0();
+    draw_tcyl1l2();
+    break;
+  } /* end switch */
 }
 
 int check_collisions (int map) {
@@ -37,7 +49,9 @@ int check_collisions (int map) {
       iscollision = inside (player->mapx, player->mapy, ttru0nowalks[i]->left,
 			    ttru0nowalks[i]->top, ttru0nowalks[i]->right,
 			    ttru0nowalks[i]->bottom);
-      if (iscollision == 1) 
+      if (iscollision == 1)
+	/* check to see if he wants to go down the stairs. */
+	if (ttru0nowalks[i]->type == STAIRSDOWNL) return 3;
 	return 1;
     }
     break;
@@ -63,11 +77,7 @@ void draw_ttrl0 (void) {
   int j = 0;
   int type;
   
-  if ((tiles = load_bitmap("maptiles.bmp", NULL)) == NULL) {
-    set_gfx_mode (GFX_TEXT, 0, 0, 0, 0);
-    allegro_message ("Error loading maptiles.bmp file");
-    return;
-  }
+  load_tiles();
   
   for (tiley = 0; tiley < scroll->h; tiley += TILEH) {
     for (tilex = 0; tilex < scroll->w; tilex += TILEW) {
@@ -93,11 +103,7 @@ void draw_ttru0 (void) {
   int j = 0;
   int type;
   
-  if ((tiles = load_bitmap("maptiles.bmp", NULL)) == NULL) {
-    set_gfx_mode (GFX_TEXT, 0, 0, 0, 0);
-    allegro_message ("Error loading maptiles.bmp file");
-    return;
-  }
+  load_tiles();
   
   for (tiley = 0; tiley < scroll->h; tiley += TILEH) {
     for (tilex = 0; tilex < scroll->w; tilex += TILEW) {
@@ -115,4 +121,35 @@ void draw_ttru0 (void) {
     }
   }
   destroy_bitmap(tiles);
+}
+
+void draw_tcyl1l2 (void) {
+  int i =0;
+  int j =0;
+  int type;
+
+  load_tiles();
+
+  for (tiley = 0; tiley < scroll->h; tiley += TILEH) {
+    for (tilex = 0; tilex < scroll->w; tilex += TILEW) {
+      if (tcyl1l2[i] == STONE || tcyl1l2[i] == COUNTER ||
+	  tcyl1l2[i] == STAIRSUPL || tcyl1l2[i] == STAIRSDOWNL ||
+	  tcyl1l2[i] == WATER || tcyl1l2[i] == DOOR ||
+	  tcyl1l2[i] == CHEST) {
+	if (tcyl1l2[i] == DOOR) type = DOOR;
+	else if (tcyl1l2[i] == STONE) type = STONE;
+	else if (tcyl1l2[i] == COUNTER) type = COUNTER;
+	else if (tcyl1l2[i] == STAIRSDOWNL) type = STAIRSDOWNL;
+	else if (tcyl1l2[i] == STAIRSUPL) type = STAIRSUPL;
+	else if (tcyl1l2[i] == WATER) type = WATER;
+	else if (tcyl1l2[i] == CHEST) type = CHEST;
+
+	tcyl1l2nowalks[j] = create_new_block (type);
+	j++;
+      }
+      blit (grabframe (tiles, TILEW, TILEH, 0, 0, COLS, tcyl1l2[i++]), 
+	    scroll, 0, 0, tilex, tiley, TILEW, TILEH);
+    }
+  }
+  destroy_bitmap (tiles);
 }

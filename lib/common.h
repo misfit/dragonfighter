@@ -49,6 +49,19 @@
 #define TTRHOFFSET -240
 #define TTRL0NW 54
 #define TTRU0NW 53
+#define TCYL1L2 2
+#define TCYL1U2 3
+#define TCYU1L2 4
+#define TCYU1U2 5
+#define TCY_ACROSS 32
+#define TCY_DOWN 32
+#define TCYW TCY_ACROSS*TILEW
+#define TCYH TCY_DOWN*TILEH
+#define TCYXOFFSET 0
+#define TCYWOFFSET 0
+#define TCYYOFFSET 0
+#define TCYHOFFSET 0
+
 
 /**** typedef structs ****/
 /*
@@ -80,6 +93,7 @@ typedef struct {
 /* unwalkable block arrays */
 BLOCK *ttrl0nowalks[TTRL0NW];
 BLOCK *ttru0nowalks[TTRU0NW];
+BLOCK *tcyl1l1nowalks[];
 
 /**** global variables ****/
 int gameover;
@@ -200,6 +214,11 @@ void scroll_ttr (void);
  * Handles scrolling in the throneroom.
  */
 
+void load_tiles (void);
+/*
+ * loads maptiles file
+ */
+
 void load_map (int map, int entrypoint);
 /*
  * Loads the map requested by location constant.
@@ -225,6 +244,11 @@ void draw_ttru0 (void);
 /*
  * Draws the throneroom with the door unlocked and builds the collidable tile
  * list.
+ */
+
+void draw_tcyl1l2 (void);
+/*
+ * Draws the courtyard with all doors locked.
  */
 
 #endif
