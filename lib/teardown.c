@@ -24,16 +24,5 @@ void teardown_screen (void) {
 }
 
 void teardown_ttrl0 (void) {
-  if (l0ttr->nowalkhead != NULL) {
-    NOWALKNODE *temp;
-    temp = (NOWALKNODE*) malloc (sizeof (NOWALKNODE));
-    
-    while (temp->next != NULL) {
-      temp = l0ttr->nowalkhead;
-      l0ttr->nowalkhead = l0ttr->nowalkhead->next;
-      free (temp->block);
-      free (temp);
-    }
-  }
   free (l0ttr);
 }
