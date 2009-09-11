@@ -36,15 +36,8 @@ int check_collisions (PLACE *place) {
   return 0;
 }
 
-void add_nowalk (PLACE *place, NOWALKNODE *newnode) {
-  if (place->nowalkhead == NULL){
-    newnode->next = NULL;
-    place->nowalkhead = newnode;
-    
-  } else if (place->nowalkhead != NULL){
-    newnode->next = place->nowalkhead;
-    place->nowalkhead = newnode;
-  }
+void add_nowalk (PLACE *place) {
+
 }
 
 BLOCK *create_new_block (void) {

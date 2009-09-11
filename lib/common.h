@@ -66,14 +66,7 @@ typedef struct {
 }BLOCK;
 
 typedef struct {
-  int type;
-  int id;
-  BLOCK *block;
-  struct NOWALKNODE *next;
-}NOWALKNODE;
-
-typedef struct {
-  NOWALKNODE *nowalkhead;
+  BLOCK *nowalks;
 }PLACE;
 PLACE *l0ttr;
 
@@ -195,7 +188,7 @@ int check_collisions (PLACE *place);
  * Goes through the list of nowalks and determines if the player has hit one.
  */
 
-void add_nowalk (PLACE *place, NOWALKNODE *newnode);
+void add_nowalk (PLACE *place);
 /*
  * Adds a block to the list of collidable tiles for a PLACE object.
  */
