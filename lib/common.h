@@ -47,8 +47,8 @@
 #define TTRWOFFSET -265
 #define TTRYOFFSET 0
 #define TTRHOFFSET -240
-#define TTRL0NW 54
-#define TTRU0NW 53
+#define TTRL0NW 480
+#define TTRU0NW 481
 #define TCYL1L2 2
 #define TCYL1U2 3
 #define TCYU1L2 4
@@ -61,7 +61,7 @@
 #define TCYWOFFSET 0
 #define TCYYOFFSET 0
 #define TCYHOFFSET 0
-
+#define TCYL1L2NW 348
 
 /**** typedef structs ****/
 /*
@@ -93,7 +93,7 @@ typedef struct {
 /* unwalkable block arrays */
 BLOCK *ttrl0nowalks[TTRL0NW];
 BLOCK *ttru0nowalks[TTRU0NW];
-BLOCK *tcyl1l1nowalks[];
+BLOCK *tcyl1l2nowalks[TCYL1L2NW];
 
 /**** global variables ****/
 int gameover;
@@ -104,6 +104,7 @@ int currentlocation;
 /**** maps ****/
 extern int ttrl0[];
 extern int ttru0[];
+extern int tcyl1l2[];
 
 BITMAP *player_up_bmps[2];
 BITMAP *player_down_bmps[2];
@@ -228,6 +229,8 @@ int check_collisions (int map);
 /*
  * Goes through the list of nowalks and determines if the player has hit one.
  */
+
+int add_nowalk (int tile);
 
 BLOCK *create_new_block (int type);
 /*

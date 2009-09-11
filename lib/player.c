@@ -79,7 +79,7 @@ int move_player (int location) {
       
       /* move to next map */
       if (collisiontype == 2) navigate_maps (0);
-      else if (collisiontype == 3); navigate_maps (1);
+      else if (collisiontype == 3) navigate_maps (1);
       else if (collisiontype == 4);
       else if (collisiontype == 5);
       else if (collisiontype == 6);

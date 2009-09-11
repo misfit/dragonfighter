@@ -59,6 +59,17 @@ int check_collisions (int map) {
   return 0;
 }
 
+int add_nowalk (int tile) {
+  int type;
+
+  if (tile == COUNTER || tile == STONE || tile == ROOF || tile == WATER ||
+      tile == STAIRSDOWNR || tile == CHEST || tile == DOOR || 
+      tile == STAIRSUPR || tile == STAIRSUPL || tile == WEAPONS ||
+      tile == ARMOR || tile == INN) {
+    return type = tile;
+  } else return 0;
+}
+
 BLOCK *create_new_block (int type) {
   BLOCK *newblk;
   newblk = (BLOCK*) malloc (sizeof (BLOCK));
@@ -81,14 +92,9 @@ void draw_ttrl0 (void) {
   
   for (tiley = 0; tiley < scroll->h; tiley += TILEH) {
     for (tilex = 0; tilex < scroll->w; tilex += TILEW) {
-      if (ttrl0[i] == DOOR || ttrl0[i] == STONE || ttrl0[i] == COUNTER ||
-	  ttrl0[i] == STAIRSDOWNL) {
-	if (ttrl0[i] == DOOR) type = DOOR;
-	else if (ttrl0[i] == STONE) type = STONE;
-	else if (ttrl0[i] == COUNTER) type = COUNTER;
-	else if (ttrl0[i] == STAIRSDOWNL) type = STAIRSDOWNL;
-
-	ttrl0nowalks[j] = create_new_block(type);
+      type = add_nowalk (ttru0[i]);
+      if (type != 0) {
+	ttrl0nowalks[j] = create_new_block (type);
 	j++;
       }
       blit (grabframe (tiles, TILEW, TILEH, 0, 0, COLS, ttrl0[i++]), 
@@ -107,12 +113,8 @@ void draw_ttru0 (void) {
   
   for (tiley = 0; tiley < scroll->h; tiley += TILEH) {
     for (tilex = 0; tilex < scroll->w; tilex += TILEW) {
-      if (ttru0[i] == STONE || ttru0[i] == COUNTER || 
-	  ttru0[i] == STAIRSDOWNL) {
-	if (ttru0[i] == STONE) type = STONE;
-	else if (ttru0[i] == COUNTER) type = COUNTER;
-	else if (ttru0[i] == STAIRSDOWNL) type = STAIRSDOWNL;
-
+      type = add_nowalk (ttru0[i]);
+      if (type != 0) {
 	ttru0nowalks[j] = create_new_block (type);
 	j++;
       }
@@ -132,19 +134,9 @@ void draw_tcyl1l2 (void) {
 
   for (tiley = 0; tiley < scroll->h; tiley += TILEH) {
     for (tilex = 0; tilex < scroll->w; tilex += TILEW) {
-      if (tcyl1l2[i] == STONE || tcyl1l2[i] == COUNTER ||
-	  tcyl1l2[i] == STAIRSUPL || tcyl1l2[i] == STAIRSDOWNL ||
-	  tcyl1l2[i] == WATER || tcyl1l2[i] == DOOR ||
-	  tcyl1l2[i] == CHEST) {
-	if (tcyl1l2[i] == DOOR) type = DOOR;
-	else if (tcyl1l2[i] == STONE) type = STONE;
-	else if (tcyl1l2[i] == COUNTER) type = COUNTER;
-	else if (tcyl1l2[i] == STAIRSDOWNL) type = STAIRSDOWNL;
-	else if (tcyl1l2[i] == STAIRSUPL) type = STAIRSUPL;
-	else if (tcyl1l2[i] == WATER) type = WATER;
-	else if (tcyl1l2[i] == CHEST) type = CHEST;
-
-	tcyl1l2nowalks[j] = create_new_block (type);
+      type = add_nowalk (tcyl1l2[i]);
+      if (type != 0) {
+ 	tcyl1l2nowalks[j] = create_new_block (type);
 	j++;
       }
       blit (grabframe (tiles, TILEW, TILEH, 0, 0, COLS, tcyl1l2[i++]), 
