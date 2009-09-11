@@ -74,6 +74,7 @@ typedef struct {
   int right;
   int bottom;
   int width, height;
+  int type;
 }BLOCK;
 
 /* unwalkable block arrays */
@@ -82,12 +83,13 @@ BLOCK *ttru0nowalks[TTRU0NW];
 
 /**** global variables ****/
 int gameover;
-int scores;
 int scrollx, scrolly;
 int startx, starty;
 int tilex, tiley;
-
+int currentlocation;
+/**** maps ****/
 extern int ttrl0[];
+extern int ttru0[];
 
 BITMAP *player_up_bmps[2];
 BITMAP *player_down_bmps[2];
@@ -111,6 +113,11 @@ void draw_player (void);
 int move_player (int location);
 /*
  * Moves the player in the scroll window. returns error code for collision.
+ */
+
+int navigate_maps (int entrypoint);
+/*
+ * Handles map changes as the player navigates through the game.
  */
 
 void player_up (int blocked);
@@ -173,6 +180,11 @@ void teardown_ttrl0 (void);
  * Undoes draw_ttrl0.
  */
 
+void teardown_ttru0 (void);
+/*
+ * Undoes draw_ttru0.
+ */
+
 int inside (int,int,int,int,int,int);
 /*
  * Performs collision checking on 2 rectangular regions.
@@ -188,7 +200,7 @@ void scroll_ttr (void);
  * Handles scrolling in the throneroom.
  */
 
-void load_map (int map, int entrance);
+void load_map (int map, int entrypoint);
 /*
  * Loads the map requested by location constant.
  */
@@ -198,7 +210,7 @@ int check_collisions (int map);
  * Goes through the list of nowalks and determines if the player has hit one.
  */
 
-BLOCK *create_new_block (void);
+BLOCK *create_new_block (int type);
 /*
  * Returns a block object for the drawing functions.
  */
@@ -206,6 +218,12 @@ BLOCK *create_new_block (void);
 void draw_ttrl0 (void);
 /*
  * Draws the throneroom with the door locked and builds the collidable tile
+ * list.
+ */
+
+void draw_ttru0 (void);
+/*
+ * Draws the throneroom with the door unlocked and builds the collidable tile
  * list.
  */
 

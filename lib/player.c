@@ -67,16 +67,40 @@ int move_player (int location) {
   switch (location) {
   case TTRL0:
     scroll_ttr();
+    
     collisiontype = check_collisions (TTRL0);
-    if (collisiontype == 1) {
+    if (collisiontype != 0) {
+      /* Stop player and avoid getting stuck. */
       player->mapx = oldpx;
       player->mapy = oldpy;
       scrollx = oldscrollx;
       scrolly = oldscrolly;
       player->xspeed = 0;
+
+      /* move to new map if required. */
+      if (collisiontype == 2);
+      else if (collisiontype == 3);
+      else if (collisiontype == 4);
+      else if (collisiontype == 5);
+      else if (collisiontype == 6);
       return 1;
     }
     break;
   }
   return 0;
+}
+
+int navigate_maps (int entrypoint) {
+
+  switch (entrypoint) {
+  case 0:
+    /* door to throneroom has been opened. */
+    load_map (TTRU0, 0);
+    break;
+
+  case 1:
+    /* player has returned up the stairs. */
+
+    break;
+  }
 }
