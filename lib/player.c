@@ -1,4 +1,5 @@
 #include "common.h"
+#include <stdio.h>
 
 void animate_player (void) {
   if (++player->framecount > player->framedelay) {
@@ -38,6 +39,7 @@ void draw_player (void) {
 void move_player (int location) {
   int dir = player->dir;
   int speed = player->xspeed;
+  int collisiontype;
   
   switch (dir) {
   case 0:
@@ -57,7 +59,10 @@ void move_player (int location) {
   switch (location) {
   case TTRL0:
     scroll_ttr();
-    check_collisions (l0ttr);
+    /*
+    collisiontype = check_collisions (l0ttr);
+    if (collisiontype == 1) allegro_message ("hit");
+    */
     break;
   }
 }

@@ -4,6 +4,7 @@ void load_map (int map) {
   switch (map) {
   case TTRL0:
     l0ttr = (PLACE*) malloc (sizeof (PLACE));
+    l0ttr->nowalkhead = NULL;
     draw_ttrl0();
     break;
   }
@@ -14,11 +15,12 @@ int check_collisions (PLACE *place) {
   NOWALKNODE *temp;
   
   temp = (NOWALKNODE*) malloc (sizeof (NOWALKNODE));
-  
+  temp = place->nowalkhead;
+
   while (temp != NULL && collisiontype != 1) {
     collisiontype = inside (player->x, player->y, 
-			       temp->block->left, temp->block->top, 
-			       temp->block->right, temp->block->bottom);
+			    temp->block->left, temp->block->top, 
+			    temp->block->right, temp->block->bottom);
     /* if collision is detected,determine the type */
     if (collisiontype == 1) {
       if (temp->type == DOOR) return 2;
@@ -27,9 +29,10 @@ int check_collisions (PLACE *place) {
       else if (temp->type == STAIRSDOWNR) return 5;
       else if (temp->type == STAIRSUPR) return 6;
       else return 1;
-    
+      
     } else temp = temp->next;
   }
+  free (temp);
   return 0;
 }
 
