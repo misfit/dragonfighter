@@ -29,6 +29,15 @@ int check_collisions (int map) {
 }
 
 BLOCK *create_new_block (void) {
+  BLOCK *newblk;
+  newblk = (BLOCK*) malloc (sizeof (BLOCK));
+  newblk->height = 32;
+  newblk->width = 32;
+  newblk->left = tilex - newblk->width;
+  newblk->top = tiley - newblk->height;
+  newblk->right = tilex + newblk->width;
+  newblk->bottom = tiley + newblk->height;
+  return newblk;
 }
 
 void draw_ttrl0 (void) {
@@ -43,18 +52,9 @@ void draw_ttrl0 (void) {
   
   for (tiley = 0; tiley < scroll->h; tiley += TILEH) {
     for (tilex = 0; tilex < scroll->w; tilex += TILEW) {
-
       if (ttrl0[i] == DOOR || ttrl0[i] == STONE || ttrl0[i] == COUNTER ||
       ttrl0[i] == STAIRSDOWNL) {
-	BLOCK *newblk;
-	newblk = (BLOCK*) malloc (sizeof (BLOCK));
-	newblk->height = 32;
-	newblk->width = 32;
-	newblk->left = tilex - newblk->width;
-	newblk->top = tiley - newblk->height;
-	newblk->right = tilex + newblk->width;
-	newblk->bottom = tiley + newblk->height;
-	ttrl0nowalks[j] = newblk;
+	ttrl0nowalks[j] = create_new_block();
 	j++;
       }
       blit (grabframe (tiles, TILEW, TILEH, 0, 0, COLS, ttrl0[i++]), 

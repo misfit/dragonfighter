@@ -24,5 +24,6 @@ void teardown_screen (void) {
 }
 
 void teardown_ttrl0 (void) {
-  
+  int i;
+  for (i = 0; i < TTRL0NW; i++) free (ttrl0nowalks[i]);
 }

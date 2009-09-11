@@ -66,6 +66,7 @@ typedef struct {
   int framecount,framedelay;
 }SPRITE;
 SPRITE *player;
+SPRITE *kinglorik;
 
 typedef struct {
   int left;
