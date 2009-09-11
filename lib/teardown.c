@@ -24,5 +24,5 @@ void teardown_screen (void) {
 }
 
 void teardown_ttrl0 (void) {
-  free (l0ttr);
+  
 }

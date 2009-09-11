@@ -65,10 +65,9 @@ typedef struct {
   int width, height;
 }BLOCK;
 
-typedef struct {
-  BLOCK *nowalks;
-}PLACE;
-PLACE *l0ttr;
+/* unwalkable block arrays */
+BLOCK *ttrl0[54];
+BLOCK *ttru0[53];
 
 /**** global variables ****/
 int gameover;
