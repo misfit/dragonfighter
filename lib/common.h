@@ -190,6 +190,11 @@ void load_map (int location);
  * Loads the map requested by location constant.
  */
 
+int check_collisions (PLACE *place);
+/*
+ * Goes through the list of nowalks and determines if the player has hit one.
+ */
+
 void add_nowalk (PLACE *place, NOWALKNODE *newnode);
 /*
  * Adds a block to the list of collidable tiles for a PLACE object.
