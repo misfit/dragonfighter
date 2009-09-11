@@ -16,8 +16,8 @@ void setup_player (void) {
   player = (SPRITE*) malloc (sizeof (SPRITE));
   player->x = 0;
   player->y = 0;
-  player->mapx = 0;
-  player->mapy = 0;
+  player->mapx = 352;
+  player->mapy = 224;
   player->xspeed = 0;
   player->dir = 3;
   player->curframe = 0;

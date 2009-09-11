@@ -26,10 +26,11 @@ int ttrl0[] = {
 };
 
 int main(void) {
+  int errorcode;
   setup_game();
   
   while(!gameover) {
-    move_player(TTRL0);
+    errorcode = move_player(TTRL0);
     animate_player();
     
     blit(scroll, buffer, scrollx, scrolly, startx, starty, SCROLLW, SCROLLH);
@@ -40,7 +41,7 @@ int main(void) {
     blit(buffer, screen, 0, 0, 0, 0, WIDTH-1, HEIGHT-1);
     release_screen();
     
-    if (keypressed()) get_input();
+    if (keypressed()) get_input(errorcode);
     
     rest (20);
   }

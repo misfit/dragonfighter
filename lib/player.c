@@ -36,7 +36,7 @@ void draw_player (void) {
   }
 }
 
-void move_player (int location) {
+int move_player (int location) {
   int dir = player->dir;
   int speed = player->xspeed;
   int collisiontype;
@@ -44,15 +44,19 @@ void move_player (int location) {
   switch (dir) {
   case 0:
     scrolly -= speed;
+    player->mapy -=speed;
     break;
   case 1:
     scrollx += speed;
+    player->mapx += speed;
     break;
   case 2:
-    scrolly += speed;    
+    scrolly += speed;
+    player->mapy += speed;
     break;
   case 3:
     scrollx -= speed;
+    player->mapx -= speed;
     break;
   }
   
@@ -60,7 +64,11 @@ void move_player (int location) {
   case TTRL0:
     scroll_ttr();
     collisiontype = check_collisions (TTRL0);
-    if (collisiontype == 1) printf ("hit");
+    if (collisiontype == 1) {
+      player->xspeed = 0;
+      return 1;
+    }
     break;
   }
+  return 0;
 }

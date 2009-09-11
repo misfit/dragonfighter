@@ -23,12 +23,19 @@
 #define ROOF 5
 #define BARRIER 6
 #define WATER 7
-#define STAIRSDOWNR 8
-#define CHEST 9
-#define DOOR 10
-#define STAIRSDOWNL 11
-#define STAIRSUPR 12
-#define STAIRSUPL 13
+#define TREE 8
+#define STAIRSDOWNR 9
+#define CHEST 10
+#define DOOR 11
+#define STAIRSDOWNL 12
+#define STAIRSUPR 13
+#define STAIRSUPL 14
+#define SAND 15
+#define WEAPONS 16
+#define ARMOR 17
+#define INN 18
+#define BRIDGEH 19
+#define BRIDGEV 20
 
 #define TTRL0 0
 #define TTRU0 1
@@ -40,6 +47,8 @@
 #define TTRWOFFSET -265
 #define TTRYOFFSET 0
 #define TTRHOFFSET -240
+#define TTRL0NW 1
+#define TTRU0NW 53
 
 /**** typedef structs ****/
 /*
@@ -67,8 +76,8 @@ typedef struct {
 }BLOCK;
 
 /* unwalkable block arrays */
-BLOCK *ttrl0nowalks[54];
-BLOCK *ttru0nowalks[53];
+BLOCK *ttrl0nowalks[TTRL0NW];
+BLOCK *ttru0nowalks[TTRU0NW];
 
 /**** global variables ****/
 int gameover;
@@ -98,32 +107,32 @@ void draw_player (void);
  * Draws player to the buffer with call to blit.
  */
 
-void move_player (int location);
+int move_player (int location);
 /*
- * Moves the player in the scroll window.
+ * Moves the player in the scroll window. returns error code for collision.
  */
 
-void player_up (void);
+void player_up (int blocked);
 /*
  * Move the player towards the top of the screen.
  */
 
-void player_down (void);
+void player_down (int blocked);
 /*
  * Move the player towards the bottom of the screen.
  */
 
-void player_left (void);
+void player_left (int blocked);
 /*
  * Move the player towards the left side of the screen.
  */
 
-void player_right (void);
+void player_right (int blocked);
 /*
  * Move the player towards the right side of the screen.
  */
 
-void get_input (void);
+void get_input (int blocked);
 /*
  * Keyboard input hanler.
  */
