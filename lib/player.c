@@ -40,6 +40,10 @@ int move_player (int location) {
   int dir = player->dir;
   int speed = player->xspeed;
   int collisiontype;
+  int oldpx = player->mapx;
+  int oldpy = player->mapy;
+  int oldscrollx = scrollx;
+  int oldscrolly = scrolly;
   
   switch (dir) {
   case 0:
@@ -65,6 +69,10 @@ int move_player (int location) {
     scroll_ttr();
     collisiontype = check_collisions (TTRL0);
     if (collisiontype == 1) {
+      player->mapx = oldpx;
+      player->mapy = oldpy;
+      scrollx = oldscrollx;
+      scrolly = oldscrolly;
       player->xspeed = 0;
       return 1;
     }
