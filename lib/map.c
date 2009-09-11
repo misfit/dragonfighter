@@ -11,22 +11,24 @@ void load_map (int map) {
 int check_collisions (int map) {
   int collisiontype, iscollision;
   int i;
-  /*
+
   switch (map) {
   case TTRL0:
     for (i = 0; i < 54; i++) {
-      iscollision = inside (
+      iscollision = inside (scrollx, scrolly, ttrl0nowalks[i]->left,
+			    ttrl0nowalks[i]->top, ttrl0nowalks[i]->right,
+			    ttrl0nowalks[i]->bottom);
+      if (iscollision == 1) return 1;
     }
-    break;
-    }*/
-  if (collisiontype == 1) {
-    /*
-    if (temp->type == DOOR) return 2;
-    else if (temp->type == STAIRSDOWNL) return 3;
-    else if (temp->type == STAIRSUPL) return 4;
+    if (collisiontype == 1)
+      /*
+	if (temp->type == DOOR) return 2;
+	else if (temp->type == STAIRSDOWNL) return 3;
+	else if (temp->type == STAIRSUPL) return 4;
     else if (temp->type == STAIRSDOWNR) return 5;
-    else if (temp->type == STAIRSUPR) return 6;
-    else return 1; */
+    else if (temp->type == STAIRSUPR) return 6;*/
+      return 1;
+    break;
   }
   return 0;
 }

@@ -59,10 +59,8 @@ void move_player (int location) {
   switch (location) {
   case TTRL0:
     scroll_ttr();
-    /*
-    collisiontype = check_collisions (l0ttr);
-    if (collisiontype == 1) allegro_message ("hit");
-    */
+    collisiontype = check_collisions (TTRL0);
+    if (collisiontype == 1) printf ("hit");
     break;
   }
 }
