@@ -24,8 +24,11 @@ int check_collisions (int map) {
       iscollision = inside (player->mapx, player->mapy, ttrl0nowalks[i]->left,
 			    ttrl0nowalks[i]->top, ttrl0nowalks[i]->right,
 			    ttrl0nowalks[i]->bottom);
-      if (iscollision == 1)
-	return 1;
+      if (iscollision == 1) {
+	/* check to see what he hit */
+	if (ttrl0nowalks[i]->type == DOOR) return 2;
+	else return 1;
+      }
     }
     break;
 

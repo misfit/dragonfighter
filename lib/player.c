@@ -76,9 +76,12 @@ int move_player (int location) {
       scrollx = oldscrollx;
       scrolly = oldscrolly;
       player->xspeed = 0;
-
+      
       /* move to new map if required. */
-      if (collisiontype == 2);
+      if (collisiontype == 2) {
+	load_map (TTRU0, 0);
+	scrollx = 110;
+      }
       else if (collisiontype == 3);
       else if (collisiontype == 4);
       else if (collisiontype == 5);
