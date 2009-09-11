@@ -188,7 +188,7 @@ void scroll_ttr (void);
  * Handles scrolling in the throneroom.
  */
 
-void load_map (int location);
+void load_map (int map, int entrance);
 /*
  * Loads the map requested by location constant.
  */

@@ -63,7 +63,7 @@ void setup_screen (void) {
     return;
   }
   
-  load_map (TTRL0);
+  load_map (TTRL0, 0);
 
   /* position player. */
   scrollx = 110;

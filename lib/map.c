@@ -1,11 +1,18 @@
 #include "common.h"
 
-void load_map (int map) {
-  int i;
+void load_map (int map, int entrance) {
 
   switch (map) {
-  case TTRL0:    
+  case TTRL0:
+    if (entrance == 1) {
+      player->mapx = 448;
+      player->mapy = 128;
+    }
     draw_ttrl0();
+    break;
+    
+  case TTRU0:
+    
     break;
   }
 }
@@ -13,7 +20,7 @@ void load_map (int map) {
 int check_collisions (int map) {
   int collisiontype, iscollision;
   int i;
-  
+
   switch (map) {
   case TTRL0:
     for (i = 0; i < TTRL0NW; i++) {
