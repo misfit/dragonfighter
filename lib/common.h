@@ -48,6 +48,7 @@
 typedef struct {
   int dir, alive;
   int x,y;
+  int mapx, mapy;
   int width,height;
   int xspeed,yspeed;
   int xdelay,ydelay;
@@ -66,8 +67,8 @@ typedef struct {
 }BLOCK;
 
 /* unwalkable block arrays */
-BLOCK *ttrl0[54];
-BLOCK *ttru0[53];
+BLOCK *ttrl0nowalks[54];
+BLOCK *ttru0nowalks[53];
 
 /**** global variables ****/
 int gameover;
@@ -182,14 +183,9 @@ void load_map (int location);
  * Loads the map requested by location constant.
  */
 
-int check_collisions (PLACE *place);
+int check_collisions (int map);
 /*
  * Goes through the list of nowalks and determines if the player has hit one.
- */
-
-void add_nowalk (PLACE *place);
-/*
- * Adds a block to the list of collidable tiles for a PLACE object.
  */
 
 BLOCK *create_new_block (void);

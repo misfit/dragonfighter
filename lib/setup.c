@@ -16,6 +16,8 @@ void setup_player (void) {
   player = (SPRITE*) malloc (sizeof (SPRITE));
   player->x = 0;
   player->y = 0;
+  player->mapx = 0;
+  player->mapy = 0;
   player->xspeed = 0;
   player->dir = 3;
   player->curframe = 0;
@@ -64,7 +66,7 @@ void setup_screen (void) {
   load_map (TTRL0);
 
   /* position player. */
-  scrollx = 0;
+  scrollx = 110;
   scrolly = 0;
   
   /* position the scroll window */

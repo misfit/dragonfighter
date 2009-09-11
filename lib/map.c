@@ -2,27 +2,31 @@
 
 void load_map (int map) {
   switch (map) {
-  case TTRL0:
-    
+  case TTRL0:    
     draw_ttrl0();
     break;
   }
 }
 
-int check_collisions (PLACE *place) {
-  int collisiontype;
-  
-  collisiontype = inside (player->x, player->y, 
-			  temp->block->left, temp->block->top, 
-			  temp->block->right, temp->block->bottom);
-  /* if collision is detected,determine the type */
+int check_collisions (int map) {
+  int collisiontype, iscollision;
+  int i;
+  /*
+  switch (map) {
+  case TTRL0:
+    for (i = 0; i < 54; i++) {
+      iscollision = inside (
+    }
+    break;
+    }*/
   if (collisiontype == 1) {
+    /*
     if (temp->type == DOOR) return 2;
     else if (temp->type == STAIRSDOWNL) return 3;
     else if (temp->type == STAIRSUPL) return 4;
     else if (temp->type == STAIRSDOWNR) return 5;
     else if (temp->type == STAIRSUPR) return 6;
-    else return 1; 
+    else return 1; */
   }
   return 0;
 }
@@ -41,6 +45,7 @@ BLOCK *create_new_block (void) {
 
 void draw_ttrl0 (void) {
   int i = 0;
+  int j = 0;
   
   if ((tiles = load_bitmap("maptiles.bmp", NULL)) == NULL) {
     set_gfx_mode (GFX_TEXT, 0, 0, 0, 0);
@@ -52,7 +57,8 @@ void draw_ttrl0 (void) {
     for (tilex = 0; tilex < scroll->w; tilex += TILEW) {
       if (ttrl0[i] == DOOR || ttrl0[i] == STONE || ttrl0[i] == COUNTER ||
 	  ttrl0[i] == STAIRSDOWNL) {
-	
+	ttrl0nowalks[j] = create_new_block();
+	j++;
       }
       blit (grabframe (tiles, TILEW, TILEH, 0, 0, COLS, ttrl0[i++]), 
 	    scroll, 0, 0, tilex, tiley, TILEW, TILEH);
