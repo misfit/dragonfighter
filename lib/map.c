@@ -43,10 +43,9 @@ void draw_ttrl0 (void) {
   
   for (tiley = 0; tiley < scroll->h; tiley += TILEH) {
     for (tilex = 0; tilex < scroll->w; tilex += TILEW) {
-      /*
+
       if (ttrl0[i] == DOOR || ttrl0[i] == STONE || ttrl0[i] == COUNTER ||
-      ttrl0[i] == STAIRSDOWNL) {*/
-      if (ttrl0[i] == DOOR) {
+      ttrl0[i] == STAIRSDOWNL) {
 	BLOCK *newblk;
 	newblk = (BLOCK*) malloc (sizeof (BLOCK));
 	newblk->height = 32;

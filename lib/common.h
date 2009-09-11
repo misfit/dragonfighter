@@ -47,7 +47,7 @@
 #define TTRWOFFSET -265
 #define TTRYOFFSET 0
 #define TTRHOFFSET -240
-#define TTRL0NW 1
+#define TTRL0NW 54
 #define TTRU0NW 53
 
 /**** typedef structs ****/
