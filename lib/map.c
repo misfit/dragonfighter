@@ -92,7 +92,7 @@ void draw_ttrl0 (void) {
   
   for (tiley = 0; tiley < scroll->h; tiley += TILEH) {
     for (tilex = 0; tilex < scroll->w; tilex += TILEW) {
-      type = add_nowalk (ttru0[i]);
+      type = add_nowalk (ttrl0[i]);
       if (type != 0) {
 	ttrl0nowalks[j] = create_new_block (type);
 	j++;

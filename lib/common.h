@@ -47,7 +47,7 @@
 #define TTRWOFFSET -265
 #define TTRYOFFSET 0
 #define TTRHOFFSET -240
-#define TTRL0NW 480
+#define TTRL0NW 482
 #define TTRU0NW 481
 #define TCYL1L2 2
 #define TCYL1U2 3
