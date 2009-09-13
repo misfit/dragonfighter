@@ -78,8 +78,8 @@ int move_player (int location) {
       player->xspeed = 0;
       
       /* move to next map */
-      if (collisiontype == 2) navigate_maps (0);
-      else if (collisiontype == 3) navigate_maps (1);
+      if (collisiontype == 2) load_map (TTRU0, 0);
+      else if (collisiontype == 3);
       else if (collisiontype == 4);
       else if (collisiontype == 5);
       else if (collisiontype == 6);
@@ -88,21 +88,4 @@ int move_player (int location) {
     break;
   }
   return 0;
-}
-
-int navigate_maps (int entrypoint) {
-
-  switch (entrypoint) {
-  case 0:
-    /* door to throneroom has been opened, load unlocked map. */
-    load_map (TTRU0, 0);
-    /* Correct some crazy values that are making their way into scrollx */
-    scrollx = 110;
-    break;
-    
-  case 1:
-    /* player has entered the courtyard from the unlocked throneroom */
-    load_map (TCYL1L2, 0);
-    break;
-  }
 }

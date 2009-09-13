@@ -130,11 +130,6 @@ int move_player (int location);
  * Moves the player in the scroll window. returns error code for collision.
  */
 
-int navigate_maps (int entrypoint);
-/*
- * Handles map changes as the player navigates through the game.
- */
-
 void player_up (int blocked);
 /*
  * Move the player towards the top of the screen.
