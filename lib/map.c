@@ -12,7 +12,6 @@ void load_map (int map, int entrance) {
   switch (map) {
   case TTRL0:
     draw_ttrl0();
-    scrollx = 110;
     break;
     
   case TTRU0:
