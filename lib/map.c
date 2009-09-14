@@ -17,6 +17,7 @@ void load_map (int map, int entrance) {
   case TTRU0:
     teardown_ttrl0();
     draw_ttru0();
+    scrollx = 110;
     break;
 
   case TCYL1L2:
@@ -65,7 +66,7 @@ int add_nowalk (int tile) {
   if (tile == COUNTER || tile == STONE || tile == ROOF || tile == WATER ||
       tile == STAIRSDOWNR || tile == CHEST || tile == DOOR || 
       tile == STAIRSUPR || tile == STAIRSUPL || tile == WEAPONS ||
-      tile == ARMOR || tile == INN) {
+      tile == ARMOR || tile == INN || tile == STAIRSDOWNL) {
     return type = tile;
   } else return 0;
 }
