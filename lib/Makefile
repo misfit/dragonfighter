@@ -53,3 +53,4 @@ clean:
 	-rm *.o
 	-rm play
 	-rm *~
+	-rm *.BAK
