@@ -12,7 +12,8 @@ int main (void) {
   setup_bmps();
   scrollx = 0;
   scrolly = 0;
-
+  
+  draw_TCBLALB();
   while (!key[KEY_ESC]) {
     blit (scrollbmp, bufferbmp, scrollx, scrolly, 0, 0, WIDTH-1, HEIGHT-1);
     
