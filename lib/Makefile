@@ -10,7 +10,11 @@ INCLUDE = .
 OBJ = main.o input.o setup.o player.o teardown.o util.o scroller.o map.o
 
 # Allegro option
-ALLEG = -L/usr/lib -Wl,--export-dynamic -lalleg-4.2.2 -lalleg_unsharable
+# Arch Linux
+#ALLEG = -L/usr/lib -Wl,--export-dynamic -lalleg-4.2.2 -lalleg_unsharable
+
+# Ubuntu Linux
+ALLEG = -L/usr/lib -Wl,--export-dynamic -lalleg -lm -lXxf86vm -lXcursor -lXpm -lXext -lX11 -lpthread -ldl
 
 # Development options
 CFLAGS = -g -Wall -c
