@@ -4,3 +4,10 @@
  * See LICENSE and COPYING for licence information.
  ****/
 
+#ifndef _COMMON_H
+#define _COMMON_H
+
+#include <allegro.h>
+
+
+#endif
