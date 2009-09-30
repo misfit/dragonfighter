@@ -14,7 +14,16 @@ int main (void) {
   scrolly = 0;
   
   draw_TCBLALB();
+
   while (!key[KEY_ESC]) {
+    /* Testing scrolling input */
+    if (key[KEY_RIGHT])
+      if ((scrollx+=1) > scrollbmp->w-WIDTH) scrollx = scrollbmp->w - WIDTH;
+    if (key[KEY_LEFT]) if ((scrollx-=1) < 0) scrollx = 0;
+    if (key[KEY_DOWN])
+      if ((scrolly+=1) > scrollbmp->h-HEIGHT) scrolly = scrollbmp->h - HEIGHT;
+    if (key[KEY_UP]) if ((scrolly-=1) < 0) scrolly = 0;
+    /* end of test code. */
     blit (scrollbmp, bufferbmp, scrollx, scrolly, 0, 0, WIDTH-1, HEIGHT-1);
     
     acquire_screen();
