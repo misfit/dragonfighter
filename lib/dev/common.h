@@ -14,9 +14,6 @@
 #define WIDTH 640
 #define HEIGHT 480
 
-/* scrolling constants */
-#define SCROLL_STEP 8
-
 /* map constants */
 #define TILEW 32
 #define TILEH 32
