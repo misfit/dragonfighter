@@ -74,6 +74,11 @@ void draw_frame (BITMAP *source, BITMAP *destination, int x, int y, int width,
 /*
  * Taken from Game Programming All in One 3rd ed.
  */
+BITMAP *grab_frame (BITMAP *source, int width, int height, int startx, 
+		    int starty, int columns, int frame);
+/*
+ * Taken from Game Programming All in One 3rd ed.
+ */
 void draw_TCBLALB (void);
 
 #endif

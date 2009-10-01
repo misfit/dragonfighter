@@ -81,6 +81,15 @@ void draw_frame (BITMAP *source, BITMAP *destination, int x, int y, int width,
   masked_blit (source, destination, framex, framey, x, y, width, height);
 }
 
+BITMAP *grab_frame (BITMAP *source, int width, int height, int startx,
+		    int starty, int columns, int frame) {
+  BITMAP *tempbmp = create_bitmap (width, height);
+  int x = startx + (frame%columns)*width;
+  int y = starty + (frame/columns)*height;
+  blit (source, tempbmp, x, y, 0, 0, width, height);
+  return;
+}
+
 void draw_TCBLALB (void) {
   int i = 0;
   for (tiley = 0; tiley < scrollbmp->h; tiley += TILEH) {
