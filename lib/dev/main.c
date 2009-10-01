@@ -13,6 +13,8 @@ int main (void) {
   setup_player();
   scrollx = 0;
   scrolly = 0;
+  scrollbottom = scrolly + HEIGHT;
+  scrollright = scrollx + WIDTH;
   
   draw_TCBLALB();
 
@@ -175,77 +177,87 @@ void animate_player (void) {
 void move_player (void) {
   switch (player->direction) {
   case DOWN:
-    if (player->y+16 < HEIGHT) player->y += player->yspeed;
+    /* Case where window does not scroll. */
+    if (player->y < (scrolly+scrollbottom)/2) player->y += player->yspeed;
     break;
 
   case UP:
+    /* Case where window does not scroll. */
     if (player->y-16 > scrolly) player->y += player->yspeed;
     break;
 
   case LEFT:
+    /* Case where window does not scroll. */
     if (player->x-16 > scrollx) player->x += player->xspeed;
     break;
 
   case RIGHT:
-    if (player->x+16 < WIDTH) player->x += player->xspeed;
+    /* Case where window does not scroll. */
+    if (player->x-16 < (scrollx+scrollright)/2) player->x += player->xspeed;
     break;
   }
 }
 
 void scroll_window (void) {
+  
+  /*
   switch (player->direction) {
   case RIGHT:
-    /* limits the bounds of the scroll window to the current map. */
+    /* limits the bounds of the scroll window to the current map. *
     scrollx += player->xspeed;
     if (scrollx > scrollbmp->w-WIDTH) scrollx = scrollbmp->w - WIDTH;
     break;
 
   case LEFT:
-    /* limits the bounds of the scroll window to the current map. */
+    /* limits the bounds of the scroll window to the current map. *
     scrollx += player->xspeed;
     if (scrollx < 0) scrollx = 0;
     break;
 
   case UP:
     scrolly += player->yspeed;
-    /* limits the bounds of the scroll window to the current map. */
+    /* limits the bounds of the scroll window to the current map. *
     if (scrolly < 0) scrolly = 0;
     break;
 
   case DOWN:
-    scrolly += player->yspeed;
-    /* limits the bounds of the scroll window to the current map. */
-    if (scrolly > scrollbmp->h-HEIGHT) scrolly = scrollbmp->h - HEIGHT;
+    if (player->y > scrolly + HEIGHT/2) {
+      scrolly += player->yspeed;
+      /* limits the bounds of the scroll window to the current map. *
+      if (scrolly > scrollbmp->h-HEIGHT) scrolly = scrollbmp->h - HEIGHT;
+    }
     break;
-  }
+  }*/
 }
 
 void print_scroll_debug_messages (void) {
-  textprintf_ex (bufferbmp, font, 0, 0, makecol (0,0,0), -1,
+  textprintf_ex (bufferbmp, font, 0, 0, makecol (255,255,255), -1,
 		 "Scroll Window Position:");
-  textprintf_ex (bufferbmp, font, 0, 10, makecol (0,0,0), -1,
+  textprintf_ex (bufferbmp, font, 0, 10, makecol (255,255,255), -1,
 		 "tl = (%d,%d)", scrollx, scrolly);
-  textprintf_ex (bufferbmp, font, 0, 20, makecol (0,0,0), -1,
+  textprintf_ex (bufferbmp, font, 0, 20, makecol (255,255,255), -1,
 		 "tr = (%d,%d)", scrollx+WIDTH, scrolly);
-  textprintf_ex (bufferbmp, font, 0, 30, makecol (0,0,0), -1,
+  textprintf_ex (bufferbmp, font, 0, 30, makecol (255,255,255), -1,
 		 "bl = (%d,%d)", scrollx, scrolly+HEIGHT);
-  textprintf_ex (bufferbmp, font, 0, 40, makecol (0,0,0), -1,
+  textprintf_ex (bufferbmp, font, 0, 40, makecol (255,255,255), -1,
 		 "br = (%d,%d)", scrollx+WIDTH, scrolly+HEIGHT);
-  textprintf_ex (bufferbmp, font, 0, 50, makecol (0,0,0), -1,
+  textprintf_ex (bufferbmp, font, 0, 50, makecol (255,255,255), -1,
 		 "center = (%d,%d)", scrollx+WIDTH/2, scrolly+HEIGHT/2);
 }
 
 void print_player_debug_messages (void) {
-  textprintf_ex (bufferbmp, font, 200, 0, makecol (0,0,0), -1,
+  textprintf_ex (bufferbmp, font, 200, 0, makecol (255,255,255), -1,
 		 "Player Position:");
-  textprintf_ex (bufferbmp, font, 200, 10, makecol (0,0,0), -1,
+  /*  textprintf_ex (bufferbmp, font, 200, 10, makecol (0,0,0), -1,
 		 "tl = (%d,%d)", player->x-16, player->y-16);
   textprintf_ex (bufferbmp, font, 200, 20, makecol (0,0,0), -1,
 		 "bl = (%d,%d)", player->x-16, player->y+16);
   textprintf_ex (bufferbmp, font, 200, 30, makecol (0,0,0), -1,
 		 "tr = (%d,%d)", player->x+16, player->y-16);
   textprintf_ex (bufferbmp, font, 200, 40, makecol (0,0,0), -1,
-		 "br = (%d,%d)", player->x+16, player->y+16);
-  textprintf_ex (bufferbmp, font, 200, 50, makecol (0,0,0), -1,
+  "br = (%d,%d)", player->x+16, player->y+16);*/
+  textprintf_ex (bufferbmp, font, 200, 10, makecol (255,255,255), -1,
 		 "center = (%d,%d)", player->x, player->y);
+  textprintf_ex (bufferbmp, font, 200, 20, makecol (255,255,255), -1,
+		 "speed = (%d,%d)", player->xspeed, player->yspeed);
 }
