@@ -161,7 +161,7 @@ void draw_player (void) {
 
 void animate_player (void) {
   /* prevent animation if the sprite is not moving. */
-  if (player->xspeed > 0 || player->yspeed > 0) {
+  if (player->xspeed != 0 || player->yspeed != 0) {
     
     /* animate the sprite */
     if (player->framecount++ > player->framedelay) {
