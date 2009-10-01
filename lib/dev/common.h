@@ -23,6 +23,10 @@
 #define RIGHT 2
 #define LEFT 3
 
+/* game constants */
+#define NORM_SPEED 1
+#define HALF_SPEED NORM_SPEED/2
+
 /* Tantagel castle courtyard */
 #define TCB_ACROSS 32
 #define TCB_DOWN 32

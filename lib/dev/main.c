@@ -38,7 +38,7 @@ int main (void) {
       player->yspeed = 0;
     }
     move_player();
-    /*scroll_window();*/
+    scroll_window();
     
     blit (scrollbmp, bufferbmp, scrollx, scrolly, 0, 0, WIDTH-1, HEIGHT-1);
     print_scroll_debug_messages();
@@ -175,7 +175,7 @@ void animate_player (void) {
 void move_player (void) {
   switch (player->direction) {
   case DOWN:
-    if (player->y+16 < scrolly+HEIGHT) player->y += player->yspeed;
+    if (player->y+16 < HEIGHT) player->y += player->yspeed;
     break;
 
   case UP:
@@ -187,7 +187,7 @@ void move_player (void) {
     break;
 
   case RIGHT:
-    if (player->x+16 < scrollx+WIDTH) player->x += player->xspeed;
+    if (player->x+16 < WIDTH) player->x += player->xspeed;
     break;
   }
 }
@@ -195,19 +195,27 @@ void move_player (void) {
 void scroll_window (void) {
   switch (player->direction) {
   case RIGHT:
-      if ((scrollx+=1) > scrollbmp->w-WIDTH) scrollx = scrollbmp->w - WIDTH;
+    /* limits the bounds of the scroll window to the current map. */
+    scrollx += player->xspeed;
+    if (scrollx > scrollbmp->w-WIDTH) scrollx = scrollbmp->w - WIDTH;
     break;
 
   case LEFT:
-    if ((scrollx-=1) < 0) scrollx = 0;
+    /* limits the bounds of the scroll window to the current map. */
+    scrollx += player->xspeed;
+    if (scrollx < 0) scrollx = 0;
     break;
 
   case UP:
-    if ((scrolly-=1) < 0) scrolly = 0;
+    scrolly += player->yspeed;
+    /* limits the bounds of the scroll window to the current map. */
+    if (scrolly < 0) scrolly = 0;
     break;
 
   case DOWN:
-    if ((scrolly+=1) > scrollbmp->h-HEIGHT) scrolly = scrollbmp->h - HEIGHT;
+    scrolly += player->yspeed;
+    /* limits the bounds of the scroll window to the current map. */
+    if (scrolly > scrollbmp->h-HEIGHT) scrolly = scrollbmp->h - HEIGHT;
     break;
   }
 }
