@@ -32,6 +32,7 @@ int main (void) {
     } else if (key[KEY_UP]) {
       player->direction = UP;
       player->yspeed = -1;
+
     } else {
       player->xspeed = 0;
       player->yspeed = 0;
@@ -43,6 +44,7 @@ int main (void) {
     print_scroll_debug_messages();
     print_player_debug_messages();
     draw_player();
+    animate_player();
 
     acquire_screen();
     blit (bufferbmp, screen, 0, 0, 0, 0, WIDTH-1, HEIGHT-1);
