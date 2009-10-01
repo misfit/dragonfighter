@@ -25,14 +25,12 @@ int main (void) {
     if (key[KEY_UP]) if ((scrolly-=1) < 0) scrolly = 0;
     /* end of test code. */
     blit (scrollbmp, bufferbmp, scrollx, scrolly, 0, 0, WIDTH-1, HEIGHT-1);
-    
+    print_scroll_debug_messages();
+
     acquire_screen();
     blit (bufferbmp, screen, 0, 0, 0, 0, WIDTH-1, HEIGHT-1);
     release_screen();
-    
-    /* Debug messages */
-    textprintf_ex (screen, font, 0, 0, makecol (0,0,0), -1,
-		   "Scroll Window Position = (%d,%d)", scrollx, scrolly);
+
     rest (20);
   }
   destroy_bmps();
@@ -105,4 +103,19 @@ void draw_TCBLALB (void) {
 
 void setup_player (void) {
   
+}
+
+void print_scroll_debug_messages (void) {
+  textprintf_ex (bufferbmp, font, 0, 0, makecol (0,0,0), -1,
+		 "Scroll Window Position:");
+  textprintf_ex (bufferbmp, font, 0, 10, makecol (0,0,0), -1,
+		 "tl = (%d,%d)", scrollx, scrolly);
+  textprintf_ex (bufferbmp, font, 0, 20, makecol (0,0,0), -1,
+		 "tr = (%d,%d)", scrollx+WIDTH, scrolly);
+  textprintf_ex (bufferbmp, font, 0, 30, makecol (0,0,0), -1,
+		 "bl = (%d,%d)", scrollx, scrolly+HEIGHT);
+  textprintf_ex (bufferbmp, font, 0, 40, makecol (0,0,0), -1,
+		 "br = (%d,%d)", scrollx+WIDTH, scrolly+HEIGHT);
+  textprintf_ex (bufferbmp, font, 0, 50, makecol (0,0,0), -1,
+		 "center = (%d,%d)", scrollx+WIDTH/2, scrolly+HEIGHT/2);
 }

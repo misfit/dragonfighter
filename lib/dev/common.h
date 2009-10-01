@@ -81,5 +81,6 @@ BITMAP *grab_frame (BITMAP *source, int width, int height, int startx,
  */
 void draw_TCBLALB (void);
 void setup_player (void);
+void print_scroll_debug_messages (void);
 
 #endif
