@@ -139,22 +139,22 @@ void draw_player (void) {
   switch (player->direction) {
   case DOWN:
     draw_sprite (bufferbmp, playerdnbmp[player->curframe],
-		 player->x, player->y);
+		 player->x-16, player->y-16);
     break;
 
   case UP:
     draw_sprite (bufferbmp, playerupbmp[player->curframe],
-		 player->x, player->y);
+		 player->x-16, player->y-16);
     break;
 
   case LEFT:
     draw_sprite (bufferbmp, playerltbmp[player->curframe],
-		 player->x, player->y);
+		 player->x-16, player->y-16);
     break;
 
   case RIGHT:
     draw_sprite (bufferbmp, playerrtbmp[player->curframe],
-		 player->x, player->y);
+		 player->x-16, player->y-16);
     break;
   }
 }
@@ -173,7 +173,23 @@ void animate_player (void) {
 }
 
 void move_player (void) {
-  
+  switch (player->direction) {
+  case DOWN:
+    player->y += player->yspeed;
+    break;
+
+  case UP:
+    player->y -= player->yspeed;
+    break;
+
+  case LEFT:
+    player->x += player->xspeed;
+    break;
+
+  case RIGHT:
+    player->x -= player->xspeed;
+    break;
+  }
 }
 
 void scroll_window (void) {
