@@ -179,7 +179,7 @@ void move_player (void) {
     break;
 
   case UP:
-    player->y += player->yspeed;
+    if (player->y-16 > scrolly) player->y += player->yspeed;
     break;
 
   case LEFT:
