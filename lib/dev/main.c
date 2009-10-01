@@ -30,6 +30,9 @@ int main (void) {
     blit (bufferbmp, screen, 0, 0, 0, 0, WIDTH-1, HEIGHT-1);
     release_screen();
     
+    /* Debug messages */
+    textprintf_ex (screen, font, 0, 0, makecol (0,0,0), -1,
+		   "Scroll Window Position = (%d,%d)", scrollx, scrolly);
     rest (20);
   }
   destroy_bmps();
@@ -56,7 +59,7 @@ void setup_bmps (void) {
   tilesbmp = load_bitmap ("maptiles.bmp", NULL);
 
   /* load bitmaps for the player animations */
-  tempbmp = load_bitmap ("characters.bmp", NULL);
+  tempbmp = load_bitmap ("chars.bmp", NULL);
   for (i = 0; i < 2; i++) {
     playerdnbmp[i] = grab_frame (tempbmp, 32, 32, 0, 0, 32, i);
     playerupbmp[i] = grab_frame (tempbmp, 32, 32, 0, 0, 32, i+2);
@@ -98,4 +101,8 @@ void draw_TCBLALB (void) {
                   COLS, TCBLALB[i++]);
     }
   }
+}
+
+void setup_player (void) {
+  
 }

@@ -80,5 +80,6 @@ BITMAP *grab_frame (BITMAP *source, int width, int height, int startx,
  * Taken from Game Programming All in One 3rd ed.
  */
 void draw_TCBLALB (void);
+void setup_player (void);
 
 #endif
