@@ -82,6 +82,7 @@ void setup_player (void);
 void draw_player (void);
 void animate_player (void);
 void move_player (void);
+void scroll_window (void);
 void print_scroll_debug_messages (void);
 void print_player_debug_messages (void);
 

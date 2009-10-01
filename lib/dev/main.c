@@ -17,14 +17,28 @@ int main (void) {
   draw_TCBLALB();
 
   while (!key[KEY_ESC]) {
-    /* Testing scrolling input */
-    if (key[KEY_RIGHT])
-      if ((scrollx+=1) > scrollbmp->w-WIDTH) scrollx = scrollbmp->w - WIDTH;
-    if (key[KEY_LEFT]) if ((scrollx-=1) < 0) scrollx = 0;
-    if (key[KEY_DOWN])
-      if ((scrolly+=1) > scrollbmp->h-HEIGHT) scrolly = scrollbmp->h - HEIGHT;
-    if (key[KEY_UP]) if ((scrolly-=1) < 0) scrolly = 0;
-    /* end of test code. */
+    if (key[KEY_RIGHT]) {
+      player->direction = RIGHT;
+      player->xspeed = 1;
+    
+    } else if (key[KEY_LEFT]) {
+      player->direction = LEFT;
+      player->xspeed = -1;
+
+    } else if (key[KEY_DOWN]) {
+      player->direction = DOWN;
+      player->yspeed = 1;
+
+    } else if (key[KEY_UP]) {
+      player->direction = UP;
+      player->yspeed = -1;
+    } else {
+      player->xspeed = 0;
+      player->yspeed = 0;
+    }
+
+    scroll_window();
+    
     blit (scrollbmp, bufferbmp, scrollx, scrolly, 0, 0, WIDTH-1, HEIGHT-1);
     print_scroll_debug_messages();
     print_player_debug_messages();
@@ -158,6 +172,28 @@ void animate_player (void) {
 
 void move_player (void) {
   
+}
+
+void scroll_window (void) {
+  switch (player->direction) {
+  case RIGHT:
+    if (player->xspeed != 0)
+      if ((scrollx+=1) > scrollbmp->w-WIDTH) scrollx = scrollbmp->w - WIDTH;
+    break;
+
+  case LEFT:
+    if (player->xspeed != 0) if ((scrollx-=1) < 0) scrollx = 0;
+    break;
+
+  case UP:
+    if (player->yspeed != 0) if ((scrolly-=1) < 0) scrolly = 0;
+    break;
+
+  case DOWN:
+    if (player->yspeed !=0)
+      if ((scrolly+=1) > scrollbmp->h-HEIGHT) scrolly = scrollbmp->h - HEIGHT;
+    break;
+  }
 }
 
 void print_scroll_debug_messages (void) {
