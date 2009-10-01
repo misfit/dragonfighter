@@ -27,6 +27,7 @@ int main (void) {
     /* end of test code. */
     blit (scrollbmp, bufferbmp, scrollx, scrolly, 0, 0, WIDTH-1, HEIGHT-1);
     print_scroll_debug_messages();
+    draw_player();
 
     acquire_screen();
     blit (bufferbmp, screen, 0, 0, 0, 0, WIDTH-1, HEIGHT-1);
@@ -117,6 +118,43 @@ void setup_player (void) {
   player->framedelay = 10;
 }
 
+void draw_player (void) {
+  switch (player->direction) {
+  case DOWN:
+    draw_sprite (bufferbmp, playerdnbmp[player->curframe],
+		 player->x, player->y);
+    break;
+
+  case UP:
+    draw_sprite (bufferbmp, playerupbmp[player->curframe],
+		 player->x, player->y);
+    break;
+
+  case LEFT:
+    draw_sprite (bufferbmp, playerltbmp[player->curframe],
+		 player->x, player->y);
+    break;
+
+  case RIGHT:
+    draw_sprite (bufferbmp, playerrtbmp[player->curframe],
+		 player->x, player->y);
+    break;
+  }
+}
+
+void animate_player (void) {
+  /* prevent animation if the sprite is not moving. */
+  if (player->xspeed > 0 || player->yspeed > 0) {
+    
+    /* animate the sprite */
+    if (player->framecount++ > player->framedelay) {
+      player->framecount = 0;
+      player->curframe++;
+      if (player->curframe > player->maxframe) player->curframe = 0;
+    }
+  }
+}
+
 void print_scroll_debug_messages (void) {
   textprintf_ex (bufferbmp, font, 0, 0, makecol (0,0,0), -1,
 		 "Scroll Window Position:");
@@ -130,4 +168,8 @@ void print_scroll_debug_messages (void) {
 		 "br = (%d,%d)", scrollx+WIDTH, scrolly+HEIGHT);
   textprintf_ex (bufferbmp, font, 0, 50, makecol (0,0,0), -1,
 		 "center = (%d,%d)", scrollx+WIDTH/2, scrolly+HEIGHT/2);
+}
+
+void print_player_debug_messages (void) {
+
 }
