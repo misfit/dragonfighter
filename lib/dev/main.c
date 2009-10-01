@@ -58,10 +58,10 @@ void setup_bmps (void) {
   /* load bitmaps for the player animations */
   tempbmp = load_bitmap ("characters.bmp", NULL);
   for (i = 0; i < 2; i++) {
-    playerdnbmp[i] = grab_frame (temp, 32, 32, 0, 0, 32, i);
-    playerupbmp[i] = grab_frame (temp, 32, 32, 0, 0, 32, i+2);
-    playerrtbmp[i] = grab_frame (temp, 32, 32, 0, 0, 32, i+4);
-    playerltbmp[i] = grab_frame (temp, 32, 32, 0, 0, 32, i+6);
+    playerdnbmp[i] = grab_frame (tempbmp, 32, 32, 0, 0, 32, i);
+    playerupbmp[i] = grab_frame (tempbmp, 32, 32, 0, 0, 32, i+2);
+    playerrtbmp[i] = grab_frame (tempbmp, 32, 32, 0, 0, 32, i+4);
+    playerltbmp[i] = grab_frame (tempbmp, 32, 32, 0, 0, 32, i+6);
   }
   destroy_bitmap (tempbmp);
 }
@@ -87,7 +87,7 @@ BITMAP *grab_frame (BITMAP *source, int width, int height, int startx,
   int x = startx + (frame%columns)*width;
   int y = starty + (frame/columns)*height;
   blit (source, tempbmp, x, y, 0, 0, width, height);
-  return;
+  return tempbmp;
 }
 
 void draw_TCBLALB (void) {
