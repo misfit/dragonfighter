@@ -43,8 +43,8 @@ int main (void) {
     blit (scrollbmp, bufferbmp, scrollx, scrolly, 0, 0, WIDTH-1, HEIGHT-1);
     print_scroll_debug_messages();
     print_player_debug_messages();
-    draw_player();
     animate_player();
+    draw_player();
 
     acquire_screen();
     blit (bufferbmp, screen, 0, 0, 0, 0, WIDTH-1, HEIGHT-1);
@@ -132,7 +132,7 @@ void setup_player (void) {
   player->curframe = 0;
   player->maxframe = 1;
   player->framecount = 0;
-  player->framedelay = 10;
+  player->framedelay = 8;
 }
 
 void draw_player (void) {
