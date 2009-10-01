@@ -183,7 +183,7 @@ void move_player (void) {
     break;
 
   case LEFT:
-    player->x += player->xspeed;
+    if (player->x-16 > scrollx) player->x += player->xspeed;
     break;
 
   case RIGHT:
@@ -231,13 +231,13 @@ void print_player_debug_messages (void) {
   textprintf_ex (bufferbmp, font, 200, 0, makecol (0,0,0), -1,
 		 "Player Position:");
   textprintf_ex (bufferbmp, font, 200, 10, makecol (0,0,0), -1,
-		 "tl = (%d,%d)", player->x, player->y);
+		 "tl = (%d,%d)", player->x-16, player->y-16);
   textprintf_ex (bufferbmp, font, 200, 20, makecol (0,0,0), -1,
-		 "bl = (%d,%d)", player->x, player->y+32);
+		 "bl = (%d,%d)", player->x-16, player->y+16);
   textprintf_ex (bufferbmp, font, 200, 30, makecol (0,0,0), -1,
-		 "tr = (%d,%d)", player->x+32, player->y);
+		 "tr = (%d,%d)", player->x+16, player->y-16);
   textprintf_ex (bufferbmp, font, 200, 40, makecol (0,0,0), -1,
-		 "br = (%d,%d)", player->x+32, player->y+32);
+		 "br = (%d,%d)", player->x+16, player->y+16);
   textprintf_ex (bufferbmp, font, 200, 50, makecol (0,0,0), -1,
-		 "center = (%d,%d)", player->x+16, player->y+16);
+		 "center = (%d,%d)", player->x, player->y);
 }
