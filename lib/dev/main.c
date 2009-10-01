@@ -175,7 +175,7 @@ void animate_player (void) {
 void move_player (void) {
   switch (player->direction) {
   case DOWN:
-    player->y += player->yspeed;
+    if (player->y+16 < scrolly+HEIGHT) player->y += player->yspeed;
     break;
 
   case UP:
