@@ -122,8 +122,8 @@ void draw_TCBLALB (void) {
 
 void setup_player (void) {
   player = (SPRITE*)malloc (sizeof (SPRITE));
-  player->x = 0; /* player center x */
-  player->y = 0; /* player center y */
+  player->x = 0+16; /* player center x */
+  player->y = 0+16; /* player center y */
   player->direction = DOWN;
   player->width = 32;
   player->height = 32;
