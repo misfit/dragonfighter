@@ -37,8 +37,8 @@ int main (void) {
       player->xspeed = 0;
       player->yspeed = 0;
     }
-
-    scroll_window();
+    move_player();
+    /*scroll_window();*/
     
     blit (scrollbmp, bufferbmp, scrollx, scrolly, 0, 0, WIDTH-1, HEIGHT-1);
     print_scroll_debug_messages();
@@ -179,7 +179,7 @@ void move_player (void) {
     break;
 
   case UP:
-    player->y -= player->yspeed;
+    player->y += player->yspeed;
     break;
 
   case LEFT:
@@ -187,7 +187,7 @@ void move_player (void) {
     break;
 
   case RIGHT:
-    player->x -= player->xspeed;
+    player->x += player->xspeed;
     break;
   }
 }
@@ -195,21 +195,19 @@ void move_player (void) {
 void scroll_window (void) {
   switch (player->direction) {
   case RIGHT:
-    if (player->xspeed != 0)
       if ((scrollx+=1) > scrollbmp->w-WIDTH) scrollx = scrollbmp->w - WIDTH;
     break;
 
   case LEFT:
-    if (player->xspeed != 0) if ((scrollx-=1) < 0) scrollx = 0;
+    if ((scrollx-=1) < 0) scrollx = 0;
     break;
 
   case UP:
-    if (player->yspeed != 0) if ((scrolly-=1) < 0) scrolly = 0;
+    if ((scrolly-=1) < 0) scrolly = 0;
     break;
 
   case DOWN:
-    if (player->yspeed !=0)
-      if ((scrolly+=1) > scrollbmp->h-HEIGHT) scrolly = scrollbmp->h - HEIGHT;
+    if ((scrolly+=1) > scrollbmp->h-HEIGHT) scrolly = scrollbmp->h - HEIGHT;
     break;
   }
 }
