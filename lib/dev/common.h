@@ -18,6 +18,10 @@
 #define TILEW 32
 #define TILEH 32
 #define COLS 10
+#define DOWN 0
+#define UP 1
+#define RIGHT 2
+#define LEFT 3
 
 /* Tantagel castle courtyard */
 #define TCB_ACROSS 32
@@ -40,18 +44,12 @@ typedef struct SPRITE {
   int x; /* x position of sprite's center */
   int y; /* y position of sprite's center */
   int direction;
-  int alive;
   int width;
   int height;
   int xspeed;
   int yspeed;
-  int xdelay;
-  int ydelay;
-  int xcount;
-  int ycount;
   int curframe; /* current animation frame */
   int maxframe; /* number of animation frames */
-  int animdir; /* direction of animation */
   int framecount;
   int framedelay;
 }SPRITE;

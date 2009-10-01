@@ -10,6 +10,7 @@ int main (void) {
   /* initialize the game. */
   setup_allegro (MODE, WIDTH, HEIGHT, 16);
   setup_bmps();
+  setup_player();
   scrollx = 0;
   scrolly = 0;
   
@@ -102,7 +103,18 @@ void draw_TCBLALB (void) {
 }
 
 void setup_player (void) {
-  
+  player = (SPRITE*)malloc (sizeof (SPRITE));
+  player->x = 0;
+  player->y = 0;
+  player->direction = DOWN;
+  player->width = 32;
+  player->height = 32;
+  player->xspeed = 0;
+  player->yspeed = 0;
+  player->curframe = 0;
+  player->maxframe = 1;
+  player->framecount = 0;
+  player->framedelay = 10;
 }
 
 void print_scroll_debug_messages (void) {
