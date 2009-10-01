@@ -27,6 +27,7 @@ int main (void) {
     /* end of test code. */
     blit (scrollbmp, bufferbmp, scrollx, scrolly, 0, 0, WIDTH-1, HEIGHT-1);
     print_scroll_debug_messages();
+    print_player_debug_messages();
     draw_player();
 
     acquire_screen();
@@ -105,8 +106,8 @@ void draw_TCBLALB (void) {
 
 void setup_player (void) {
   player = (SPRITE*)malloc (sizeof (SPRITE));
-  player->x = 0;
-  player->y = 0;
+  player->x = 0; /* player center x */
+  player->y = 0; /* player center y */
   player->direction = DOWN;
   player->width = 32;
   player->height = 32;
@@ -155,6 +156,10 @@ void animate_player (void) {
   }
 }
 
+void move_player (void) {
+  
+}
+
 void print_scroll_debug_messages (void) {
   textprintf_ex (bufferbmp, font, 0, 0, makecol (0,0,0), -1,
 		 "Scroll Window Position:");
@@ -171,5 +176,16 @@ void print_scroll_debug_messages (void) {
 }
 
 void print_player_debug_messages (void) {
-
+  textprintf_ex (bufferbmp, font, 200, 0, makecol (0,0,0), -1,
+		 "Player Position:");
+  textprintf_ex (bufferbmp, font, 200, 10, makecol (0,0,0), -1,
+		 "tl = (%d,%d)", player->x, player->y);
+  textprintf_ex (bufferbmp, font, 200, 20, makecol (0,0,0), -1,
+		 "bl = (%d,%d)", player->x, player->y+32);
+  textprintf_ex (bufferbmp, font, 200, 30, makecol (0,0,0), -1,
+		 "tr = (%d,%d)", player->x+32, player->y);
+  textprintf_ex (bufferbmp, font, 200, 40, makecol (0,0,0), -1,
+		 "br = (%d,%d)", player->x+32, player->y+32);
+  textprintf_ex (bufferbmp, font, 200, 50, makecol (0,0,0), -1,
+		 "center = (%d,%d)", player->x+16, player->y+16);
 }
