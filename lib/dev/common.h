@@ -30,6 +30,34 @@ extern int TCBLALB[];
 BITMAP *bufferbmp;
 BITMAP *scrollbmp;
 BITMAP *tilesbmp;
+BITMAP *playerupbmp[2];
+BITMAP *playerdnbmp[2];
+BITMAP *playerltbmp[2];
+BITMAP *playerrtbmp[2];
+
+/* typedefs */
+typedef struct SPRITE {
+  int x; /* x position of sprite's center */
+  int y; /* y position of sprite's center */
+  int direction;
+  int alive;
+  int width;
+  int height;
+  int xspeed;
+  int yspeed;
+  int xdelay;
+  int ydelay;
+  int xcount;
+  int ycount;
+  int curframe; /* current animation frame */
+  int maxframe; /* number of animation frames */
+  int animdir; /* direction of animation */
+  int framecount;
+  int framedelay;
+}SPRITE;
+
+/* sprites */
+SPRITE *player;
 
 /* position variables */
 int scrollx;
