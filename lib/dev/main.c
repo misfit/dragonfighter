@@ -187,7 +187,7 @@ void move_player (void) {
     break;
 
   case RIGHT:
-    player->x += player->xspeed;
+    if (player->x+16 < scrollx+WIDTH) player->x += player->xspeed;
     break;
   }
 }
