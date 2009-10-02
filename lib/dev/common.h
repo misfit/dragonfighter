@@ -115,7 +115,7 @@ void animate_player (void);
 void move_player (void);
 void scroll_window (void);
 void refresh_screen (int currentmap);
-void map_handler (int currentmap, int entrance, int unlocked);
+void map_handler (int currentmap, int entrance, int unlocked, int mapchange);
 void print_scroll_debug_messages (void);
 void print_player_debug_messages (void);
 

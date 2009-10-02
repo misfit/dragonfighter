@@ -16,7 +16,9 @@ int main (void) {
   int currentmap = TCB;
   int entering = 0;
   int unlocked = 0;
-  map_handler (currentmap, entering, unlocked);
+  int mapchange = 1;
+  map_handler (currentmap, entering, unlocked, mapchange);
+  mapchange = 0;
 
   while (!key[KEY_ESC]) {
     get_input();
@@ -24,15 +26,15 @@ int main (void) {
     scroll_window();
     animate_player();
     
-    refresh_screen (currentmap);
-
+    /*refresh_screen (currentmap);*/
+    map_handler (currentmap, entering, unlocked, 0);
     print_scroll_debug_messages();
     print_player_debug_messages();
 
     acquire_screen();
     blit (bufferbmp, screen, 0, 0, 0, 0, WIDTH-1, HEIGHT-1);
     release_screen();
-    
+
     rest (20);
   }
   destroy_bmps();
@@ -231,57 +233,40 @@ void scroll_window (void) {
   }
 }
 
-void refresh_screen (int currentmap) {
-  switch (currentmap) {
-  case 0:
-    draw_TCBLALB();
-    break;
-  }
-  draw_player();
-  blit (scrollbmp, bufferbmp, scrollx, scrolly, 0, 0, WIDTH-1, HEIGHT-1);
-}
-
-void map_handler (int currentmap, int entrance, int unlocked) {
+void map_handler (int currentmap, int entrance, int unlocked, int mapchange) {
   switch (currentmap) {
   case TCB:
     switch (unlocked) {
     case TCB_LALB:
       draw_TCBLALB();
+      draw_player();
+      blit (scrollbmp, bufferbmp, scrollx, scrolly, 0, 0, WIDTH-1, HEIGHT-1);
       break;
-
-    case TCB_LAUB:
-      draw_TCBLAUB();
-      break;
-
-    case TCB_UALB:
-      draw_TCBUALB();
-      break;
-
-    case TCB_UAUB:
-      draw_TCBUAUB();
     } /* ends unlocked switch */
-
-    switch (entrance) {
-    case 0:
-      /* from throneroom */
-      player->x = TCB1startx;
-      player->y = TCB1starty;
+    
+    if (mapchange == 1) {
+      switch (entrance) {
+      case 0:
+	/* from throneroom */
+	player->x = TCB1startx;
+	player->y = TCB1starty;
+	break;
+	
+      case 1:
+	/* right through the front gate */
+	player->x = TCB2startx;
+	player->y = TCB2starty;
+	break;
+	
+      case 2:
+	/* from the basement */
+	player->x = TCB3startx;
+	player->y = TCB3starty;
+      } /* ends entrance switch */
       break;
-
-    case 1:
-      /* right through the front gate */
-      player->x = TCB2startx;
-      player->y = TCB2starty;
-      break;
-
-    case 2:
-      /* from the basement */
-      player->x = TCB3startx;
-      player->y = TCB3starty;
-    } /* ends entrance switch */
-    break;
-
-  } /* ends currentmap switch */
+      
+    } /* ends currentmap switch */
+  }
 }
 
 void print_scroll_debug_messages (void) {
