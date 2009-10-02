@@ -64,8 +64,6 @@ SPRITE *player;
 /* position variables */
 int scrollx;
 int scrolly;
-int scrollbottom;
-int scrollright;
 int tilex, tiley;
 
 /* function prototypes */
