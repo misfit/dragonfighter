@@ -26,8 +26,9 @@ int main (void) {
     scroll_window();
     animate_player();
     
-    /*refresh_screen (currentmap);*/
     map_handler (currentmap, entering, unlocked, 0);
+    draw_player();
+    blit (scrollbmp, bufferbmp, scrollx, scrolly, 0, 0, WIDTH-1, HEIGHT-1);
     print_scroll_debug_messages();
     print_player_debug_messages();
 
@@ -239,8 +240,6 @@ void map_handler (int currentmap, int entrance, int unlocked, int mapchange) {
     switch (unlocked) {
     case TCB_LALB:
       draw_TCBLALB();
-      draw_player();
-      blit (scrollbmp, bufferbmp, scrollx, scrolly, 0, 0, WIDTH-1, HEIGHT-1);
       break;
     } /* ends unlocked switch */
     
