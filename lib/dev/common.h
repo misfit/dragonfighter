@@ -56,9 +56,6 @@ typedef struct SPRITE {
   int maxframe; /* number of animation frames */
   int framecount;
   int framedelay;
-  /* track distance from starting point. */
-  int distancex;
-  int distancey;
 }SPRITE;
 
 /* sprites */

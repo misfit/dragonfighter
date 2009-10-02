@@ -137,8 +137,6 @@ void setup_player (void) {
   player->maxframe = 1;
   player->framecount = 0;
   player->framedelay = 8;
-  player->distancex = 0;
-  player->distancey = 0;
 }
 
 void draw_player (void) {
