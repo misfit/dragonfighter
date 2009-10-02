@@ -184,8 +184,7 @@ void move_player (void) {
 
   case UP:
     /* Case where window does not scroll. */
-    if (player->y > scrolly) 
-      player->y += player->yspeed;
+    if (player->y > scrolly) player->y += player->yspeed;
     break;
 
   case LEFT:
