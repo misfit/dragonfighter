@@ -47,7 +47,20 @@ extern int TCB3starty;
 
 /* Tantagel Castle throneroom */
 #define TCA 1
-
+#define TCA_LA 0
+#define TCA_UA 1
+#define TCA_ACROSS 20
+#define TCA_DOWN 15
+#define TCAW TCA_ACROSS*TILEW
+#define TCAH TCA_DOWN*TILEH
+extern int TCALA[];
+extern int TCAUA[];
+extern int TCA1startx;
+extern int TCA1starty;
+extern int TCA2startx;
+extern int TCA2starty;
+extern int TCA3startx;
+extern int TCA3starty;
 
 /* bitmaps */
 BITMAP *bufferbmp;
@@ -78,10 +91,13 @@ SPRITE *player;
 
 typedef struct MAP {
   int unlocked;
-  
+  int entrance;
+  int mapchange;
+  int currentsubmap;
 }MAP;
 
 /* maps */
+MAP *currentmap;
 MAP *TantagelCastle;
 
 /* position variables */
@@ -105,17 +121,14 @@ BITMAP *grab_frame (BITMAP *source, int width, int height, int startx,
  * Taken from Game Programming All in One 3rd ed.
  */
 void get_input (void);
-void draw_TCBUAUB (void);
-void draw_TCBUALB (void);
-void draw_TCBLAUB (void);
-void draw_TCBLALB (void);
+void draw_map (int map[]);
 void setup_player (void);
 void draw_player (void);
 void animate_player (void);
 void move_player (void);
 void scroll_window (void);
 void refresh_screen (int currentmap);
-void map_handler (int currentmap, int entrance, int unlocked, int mapchange);
+void map_handler (void);
 void print_scroll_debug_messages (void);
 void print_player_debug_messages (void);
 

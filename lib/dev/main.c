@@ -13,12 +13,17 @@ int main (void) {
   setup_player();
   scrollx = 0;
   scrolly = 0;
-  int currentmap = TCB;
-  int entering = 0;
-  int unlocked = 0;
-  int mapchange = 1;
-  map_handler (currentmap, entering, unlocked, mapchange);
-  mapchange = 0;
+  
+  TantagelCastle = (MAP*)malloc (sizeof (MAP));
+  TantagelCastle->unlocked = 0;
+  TantagelCastle->entrance = 0;
+  TantagelCastle->mapchange = 1;
+  TantagelCastle->currentsubmap = TCA;
+  
+  /* point global currentmap variable at the current map. */
+  currentmap = TantagelCastle;
+  
+  map_handler();
 
   while (!key[KEY_ESC]) {
     get_input();
@@ -26,7 +31,7 @@ int main (void) {
     scroll_window();
     animate_player();
     
-    map_handler (currentmap, entering, unlocked, 0);
+    map_handler();
     draw_player();
     blit (scrollbmp, bufferbmp, scrollx, scrolly, 0, 0, WIDTH-1, HEIGHT-1);
     print_scroll_debug_messages();
@@ -58,7 +63,7 @@ void setup_bmps (void) {
   BITMAP *tempbmp;
 
   bufferbmp = create_bitmap (WIDTH, HEIGHT);
-  scrollbmp = create_bitmap (TCBW, TCBH);
+  scrollbmp = create_bitmap (TCAW, TCAH);
   tilesbmp = load_bitmap ("maptiles.bmp", NULL);
 
   /* load bitmaps for the player animations */
@@ -119,16 +124,13 @@ void get_input (void) {
   }
 }
 
-void draw_TCBUAUB (void) {}
-void draw_TCBUALB (void) {}
-void draw_TCBLAUB (void) {}
-
-void draw_TCBLALB (void) {
+void draw_map (int map[]) {
   int i = 0;
+
   for (tiley = 0; tiley < scrollbmp->h; tiley += TILEH) {
     for (tilex = 0; tilex < scrollbmp->w; tilex += TILEW) {
       draw_frame (tilesbmp, scrollbmp, tilex, tiley, TILEW, TILEH, 0, 0,
-                  COLS, TCBLALB[i++]);
+                  COLS, map[i++]);
     }
   }
 }
@@ -136,8 +138,8 @@ void draw_TCBLALB (void) {
 void setup_player (void) {
   player = (SPRITE*)malloc (sizeof (SPRITE));
   /* center the player in the scroll window facing down, unmoving */
-  player->x = TCB1startx;
-  player->y = TCB1starty;
+  player->x = TCA1startx;
+  player->y = TCA1starty;
   player->direction = DOWN;
   player->width = 32;
   player->height = 32;
@@ -234,37 +236,74 @@ void scroll_window (void) {
   }
 }
 
-void map_handler (int currentmap, int entrance, int unlocked, int mapchange) {
-  switch (currentmap) {
-  case TCB:
-    switch (unlocked) {
-    case TCB_LALB:
-      draw_TCBLALB();
+void map_handler (void) {
+  switch (currentmap->currentsubmap) {
+  case TCA:
+    switch (currentmap->unlocked) {
+    case TCA_LA:
+      draw_map (TCALA);
       break;
-    } /* ends unlocked switch */
+      
+    case TCA_UA:
+      draw_map (TCAUA);
+      break;
+    } /* end swich currentmap->unlocked */
     
-    if (mapchange == 1) {
-      switch (entrance) {
+    if (currentmap->mapchange == 1) {
+      switch (currentmap->entrance) {
       case 0:
-	/* from throneroom */
+	/* game start */
+	player->x = TCA1startx;
+	player->y = TCA1starty;
+	break;
+
+      case 1:
+	/* door opened */
+	player->x = TCA2startx;
+	player->y = TCA2starty;
+	break;
+
+      case 2:
+	/* entered from courtyard */
+	player->x = TCA3startx;
+	player->y = TCA3starty;
+	break;
+      }
+      currentmap->mapchange = 0;
+    }
+    /*
+  case TCB:
+    switch (currentmap->unlocked) {
+    case TCB_LALB:
+      draw_map (TCBLALB);
+      break;
+    } /* ends unlocked switch *
+    
+    if (currentmap->mapchange == 1) {
+      switch (currentmap->entrance) {
+      case 0:
+	/* from throneroom *
 	player->x = TCB1startx;
 	player->y = TCB1starty;
 	break;
 	
       case 1:
-	/* right through the front gate */
+	/* right through the front gate *
 	player->x = TCB2startx;
 	player->y = TCB2starty;
 	break;
 	
       case 2:
-	/* from the basement */
+	/* from the basement *
 	player->x = TCB3startx;
 	player->y = TCB3starty;
-      } /* ends entrance switch */
-      break;
+	break;
+      } /* ends entrance switch *
+
+      currentmap->mapchange = 0;
+      break; /* ends Tantagel Castle case *
       
-    } /* ends currentmap switch */
+      } /* ends currentsubmap switch */
   }
 }
 
