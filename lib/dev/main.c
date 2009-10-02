@@ -191,8 +191,7 @@ void move_player (void) {
     break;
 
   case RIGHT:
-    /* Case where window does not scroll. */
-    player->x += player->xspeed;
+    if (player->x < scrollbmp->w-32) player->x += player->xspeed;
     break;
   }
 }
