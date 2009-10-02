@@ -75,7 +75,7 @@ int TCAUA[] = {
 };
 int TCA1startx = 288;
 int TCA1starty = 256;
-int TCA2startx = 288;
-int TCA2starty = 288;
+int TCA2startx = 256;
+int TCA2starty = 224;
 int TCA3startx = 384;
 int TCA3starty = 352;

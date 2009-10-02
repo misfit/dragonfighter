@@ -239,6 +239,12 @@ void scroll_window (void) {
 void map_handler (void) {
   switch (currentmap->currentsubmap) {
   case TCA:
+    if (player->x == TCA2startx && player->y == TCA2starty) {
+      currentmap->unlocked = TCA_UA;
+      currentmap->mapchange = 1;
+      currentmap->currentsubmap = TCA;
+      currentmap->entrance = 1;
+    }
     switch (currentmap->unlocked) {
     case TCA_LA:
       draw_map (TCALA);
