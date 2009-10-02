@@ -183,13 +183,11 @@ void move_player (void) {
     break;
 
   case UP:
-    /* Case where window does not scroll. */
     if (player->y > scrolly) player->y += player->yspeed;
     break;
 
   case LEFT:
-    /* Case where window does not scroll. */
-    player->x += player->xspeed;
+    if (player->x > scrollx) player->x += player->xspeed;
     break;
 
   case RIGHT:
