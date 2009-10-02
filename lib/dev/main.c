@@ -230,7 +230,7 @@ void scroll_window (void) {
   }
 }
 
-void refresh_screen (void) {
+void refresh_screen (int currentmap) {
   draw_TCBLALB();
   draw_player();
   blit (scrollbmp, bufferbmp, scrollx, scrolly, 0, 0, WIDTH-1, HEIGHT-1);
