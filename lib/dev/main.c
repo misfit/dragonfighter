@@ -22,19 +22,19 @@ int main (void) {
   while (!key[KEY_ESC]) {
     if (key[KEY_RIGHT]) {
       player->direction = RIGHT;
-      player->xspeed = 1;
+      player->xspeed = NORM_SPEED;
     
     } else if (key[KEY_LEFT]) {
       player->direction = LEFT;
-      player->xspeed = -1;
+      player->xspeed = -NORM_SPEED;
 
     } else if (key[KEY_DOWN]) {
       player->direction = DOWN;
-      player->yspeed = 1;
+      player->yspeed = NORM_SPEED;
 
     } else if (key[KEY_UP]) {
       player->direction = UP;
-      player->yspeed = -1;
+      player->yspeed = -NORM_SPEED;
 
     } else {
       player->xspeed = 0;
@@ -179,8 +179,7 @@ void animate_player (void) {
 void move_player (void) {
   switch (player->direction) {
   case DOWN:
-    player->y += player->yspeed;
-    player->distancey += player->yspeed;
+    if (player->y < scrollbmp->h-32) player->y += player->yspeed;
     break;
 
   case UP:
@@ -255,8 +254,6 @@ void print_player_debug_messages (void) {
 		 "tl = (%d,%d)", player->x, player->y);
   textprintf_ex (bufferbmp, font, 200, 20, makecol (255,255,255), -1,
 		 "speed = (%d,%d)", player->xspeed, player->yspeed);
-  textprintf_ex (bufferbmp, font, 200, 30, makecol (255,255,255), -1,
-		 "distance = (%d,%d)", player->distancex, player->distancey);
   textprintf_ex (bufferbmp, font, 200, 40, makecol (255,255,255), -1,
 		 "start pt. = (%d,%d)", startx, starty);
 }
