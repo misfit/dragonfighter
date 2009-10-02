@@ -13,8 +13,6 @@ int main (void) {
   setup_player();
   scrollx = 0;
   scrolly = 0;
-  startx = player->x;
-  starty = player->y;
   int currentmap = 0;
   
   draw_TCBLALB();
@@ -126,8 +124,8 @@ void draw_TCBLALB (void) {
 void setup_player (void) {
   player = (SPRITE*)malloc (sizeof (SPRITE));
   /* center the player in the scroll window facing down, unmoving */
-  player->x = (scrollx+WIDTH)/2;
-  player->y = (scrolly+HEIGHT)/2;
+  player->x = TCBstartx;
+  player->y = TCBstarty;
   player->direction = DOWN;
   player->width = 32;
   player->height = 32;
@@ -250,6 +248,4 @@ void print_player_debug_messages (void) {
 		 "tl = (%d,%d)", player->x, player->y);
   textprintf_ex (bufferbmp, font, 200, 20, makecol (255,255,255), -1,
 		 "speed = (%d,%d)", player->xspeed, player->yspeed);
-  textprintf_ex (bufferbmp, font, 200, 40, makecol (255,255,255), -1,
-		 "start pt. = (%d,%d)", startx, starty);
 }

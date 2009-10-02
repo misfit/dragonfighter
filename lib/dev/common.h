@@ -33,6 +33,8 @@
 #define TCBW TCB_ACROSS*TILEW
 #define TCBH TCB_DOWN*TILEH
 extern int TCBLALB[];
+extern int TCBstartx;
+extern int TCBstarty;
 
 /* bitmaps */
 BITMAP *bufferbmp;
@@ -64,8 +66,6 @@ SPRITE *player;
 /* position variables */
 int scrollx;
 int scrolly;
-int startx; /* tracks the player's starting position considered point 0 */
-int starty;
 int tilex, tiley;
 
 /* function prototypes */
