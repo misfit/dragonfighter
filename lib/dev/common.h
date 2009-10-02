@@ -76,6 +76,14 @@ typedef struct SPRITE {
 /* sprites */
 SPRITE *player;
 
+typedef struct MAP {
+  int unlocked;
+  
+}MAP;
+
+/* maps */
+MAP *TantagelCastle;
+
 /* position variables */
 int scrollx;
 int scrolly;
@@ -96,6 +104,7 @@ BITMAP *grab_frame (BITMAP *source, int width, int height, int startx,
 /*
  * Taken from Game Programming All in One 3rd ed.
  */
+void get_input (void);
 void draw_TCBUAUB (void);
 void draw_TCBUALB (void);
 void draw_TCBLAUB (void);

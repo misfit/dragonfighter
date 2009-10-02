@@ -19,26 +19,7 @@ int main (void) {
   map_handler (currentmap, entering, unlocked);
 
   while (!key[KEY_ESC]) {
-    if (key[KEY_RIGHT]) {
-      player->direction = RIGHT;
-      player->xspeed = NORM_SPEED;
-    
-    } else if (key[KEY_LEFT]) {
-      player->direction = LEFT;
-      player->xspeed = -NORM_SPEED;
-
-    } else if (key[KEY_DOWN]) {
-      player->direction = DOWN;
-      player->yspeed = NORM_SPEED;
-
-    } else if (key[KEY_UP]) {
-      player->direction = UP;
-      player->yspeed = -NORM_SPEED;
-
-    } else {
-      player->xspeed = 0;
-      player->yspeed = 0;
-    }
+    get_input();
     move_player();
     scroll_window();
     animate_player();
@@ -51,7 +32,7 @@ int main (void) {
     acquire_screen();
     blit (bufferbmp, screen, 0, 0, 0, 0, WIDTH-1, HEIGHT-1);
     release_screen();
-
+    
     rest (20);
   }
   destroy_bmps();
@@ -110,6 +91,29 @@ BITMAP *grab_frame (BITMAP *source, int width, int height, int startx,
   int y = starty + (frame/columns)*height;
   blit (source, tempbmp, x, y, 0, 0, width, height);
   return tempbmp;
+}
+
+void get_input (void) {
+  if (key[KEY_RIGHT]) {
+    player->direction = RIGHT;
+    player->xspeed = NORM_SPEED;
+    
+  } else if (key[KEY_LEFT]) {
+    player->direction = LEFT;
+    player->xspeed = -NORM_SPEED;
+    
+  } else if (key[KEY_DOWN]) {
+    player->direction = DOWN;
+    player->yspeed = NORM_SPEED;
+    
+  } else if (key[KEY_UP]) {
+    player->direction = UP;
+    player->yspeed = -NORM_SPEED;
+    
+  } else {
+    player->xspeed = 0;
+    player->yspeed = 0;
+  }
 }
 
 void draw_TCBUAUB (void) {}
