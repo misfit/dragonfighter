@@ -13,9 +13,10 @@ int main (void) {
   setup_player();
   scrollx = 0;
   scrolly = 0;
-  int currentmap = 0;
-  
-  draw_TCBLALB();
+  int currentmap = TCB;
+  int entering = 0;
+  int unlocked = 0;
+  map_handler (currentmap, entering, unlocked);
 
   while (!key[KEY_ESC]) {
     if (key[KEY_RIGHT]) {
@@ -111,6 +112,10 @@ BITMAP *grab_frame (BITMAP *source, int width, int height, int startx,
   return tempbmp;
 }
 
+void draw_TCBUAUB (void) {}
+void draw_TCBUALB (void) {}
+void draw_TCBLAUB (void) {}
+
 void draw_TCBLALB (void) {
   int i = 0;
   for (tiley = 0; tiley < scrollbmp->h; tiley += TILEH) {
@@ -124,8 +129,8 @@ void draw_TCBLALB (void) {
 void setup_player (void) {
   player = (SPRITE*)malloc (sizeof (SPRITE));
   /* center the player in the scroll window facing down, unmoving */
-  player->x = TCBstartx;
-  player->y = TCBstarty;
+  player->x = TCB1startx;
+  player->y = TCB1starty;
   player->direction = DOWN;
   player->width = 32;
   player->height = 32;
@@ -230,6 +235,49 @@ void refresh_screen (int currentmap) {
   }
   draw_player();
   blit (scrollbmp, bufferbmp, scrollx, scrolly, 0, 0, WIDTH-1, HEIGHT-1);
+}
+
+void map_handler (int currentmap, int entrance, int unlocked) {
+  switch (currentmap) {
+  case TCB:
+    switch (unlocked) {
+    case TCB_LALB:
+      draw_TCBLALB();
+      break;
+
+    case TCB_LAUB:
+      draw_TCBLAUB();
+      break;
+
+    case TCB_UALB:
+      draw_TCBUALB();
+      break;
+
+    case TCB_UAUB:
+      draw_TCBUAUB();
+    } /* ends unlocked switch */
+
+    switch (entrance) {
+    case 0:
+      /* from throneroom */
+      player->x = TCB1startx;
+      player->y = TCB1starty;
+      break;
+
+    case 1:
+      /* right through the front gate */
+      player->x = TCB2startx;
+      player->y = TCB2starty;
+      break;
+
+    case 2:
+      /* from the basement */
+      player->x = TCB3startx;
+      player->y = TCB3starty;
+    } /* ends entrance switch */
+    break;
+
+  } /* ends currentmap switch */
 }
 
 void print_scroll_debug_messages (void) {

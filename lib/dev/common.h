@@ -27,14 +27,27 @@
 #define NORM_SPEED 2
 #define HALF_SPEED NORM_SPEED/2
 
-/* Tantagel castle courtyard */
+/* Tantagel Castle courtyard */
+#define TCB 0
+#define TCB_LALB 0
+#define TCB_LAUB 1
+#define TCB_UALB 2
+#define TCB_UAUB 3
 #define TCB_ACROSS 32
 #define TCB_DOWN 32
 #define TCBW TCB_ACROSS*TILEW
 #define TCBH TCB_DOWN*TILEH
 extern int TCBLALB[];
-extern int TCBstartx;
-extern int TCBstarty;
+extern int TCB1startx;
+extern int TCB1starty;
+extern int TCB2startx;
+extern int TCB2starty;
+extern int TCB3startx;
+extern int TCB3starty;
+
+/* Tantagel Castle throneroom */
+#define TCA 1
+
 
 /* bitmaps */
 BITMAP *bufferbmp;
@@ -83,6 +96,9 @@ BITMAP *grab_frame (BITMAP *source, int width, int height, int startx,
 /*
  * Taken from Game Programming All in One 3rd ed.
  */
+void draw_TCBUAUB (void);
+void draw_TCBUALB (void);
+void draw_TCBLAUB (void);
 void draw_TCBLALB (void);
 void setup_player (void);
 void draw_player (void);
@@ -90,6 +106,7 @@ void animate_player (void);
 void move_player (void);
 void scroll_window (void);
 void refresh_screen (int currentmap);
+void map_handler (int currentmap, int entrance, int unlocked);
 void print_scroll_debug_messages (void);
 void print_player_debug_messages (void);
 
