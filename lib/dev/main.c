@@ -15,6 +15,7 @@ int main (void) {
   scrolly = 0;
   startx = player->x;
   starty = player->y;
+  int currentmap = 0;
   
   draw_TCBLALB();
 
@@ -43,7 +44,7 @@ int main (void) {
     scroll_window();
     animate_player();
     
-    refresh_screen();
+    refresh_screen (currentmap);
 
     print_scroll_debug_messages();
     print_player_debug_messages();
@@ -231,10 +232,13 @@ void scroll_window (void) {
 }
 
 void refresh_screen (int currentmap) {
-  draw_TCBLALB();
+  switch (currentmap) {
+  case 0:
+    draw_TCBLALB();
+    break;
+  }
   draw_player();
   blit (scrollbmp, bufferbmp, scrollx, scrolly, 0, 0, WIDTH-1, HEIGHT-1);
-  
 }
 
 void print_scroll_debug_messages (void) {
