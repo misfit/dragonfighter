@@ -56,6 +56,9 @@ typedef struct SPRITE {
   int maxframe; /* number of animation frames */
   int framecount;
   int framedelay;
+  /* track distance from starting point. */
+  int distancex;
+  int distancey;
 }SPRITE;
 
 /* sprites */
@@ -64,6 +67,8 @@ SPRITE *player;
 /* position variables */
 int scrollx;
 int scrolly;
+int startx; /* tracks the player's starting position considered point 0 */
+int starty;
 int tilex, tiley;
 
 /* function prototypes */
@@ -87,6 +92,7 @@ void draw_player (void);
 void animate_player (void);
 void move_player (void);
 void scroll_window (void);
+void refresh_screen (void);
 void print_scroll_debug_messages (void);
 void print_player_debug_messages (void);
 

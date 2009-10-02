@@ -13,6 +13,8 @@ int main (void) {
   setup_player();
   scrollx = 0;
   scrolly = 0;
+  startx = player->x;
+  starty = player->y;
   
   draw_TCBLALB();
 
@@ -39,12 +41,12 @@ int main (void) {
     }
     move_player();
     scroll_window();
+    animate_player();
     
-    blit (scrollbmp, bufferbmp, scrollx, scrolly, 0, 0, WIDTH-1, HEIGHT-1);
+    refresh_screen();
+
     print_scroll_debug_messages();
     print_player_debug_messages();
-    animate_player();
-    draw_player();
 
     acquire_screen();
     blit (bufferbmp, screen, 0, 0, 0, 0, WIDTH-1, HEIGHT-1);
@@ -122,8 +124,9 @@ void draw_TCBLALB (void) {
 
 void setup_player (void) {
   player = (SPRITE*)malloc (sizeof (SPRITE));
-  player->x = 0; /* player center x */
-  player->y = 0; /* player center y */
+  /* center the player in the scroll window facing down, unmoving */
+  player->x = (scrollx+WIDTH)/2;
+  player->y = (scrolly+HEIGHT)/2;
   player->direction = DOWN;
   player->width = 32;
   player->height = 32;
@@ -133,27 +136,29 @@ void setup_player (void) {
   player->maxframe = 1;
   player->framecount = 0;
   player->framedelay = 8;
+  player->distancex = 0;
+  player->distancey = 0;
 }
 
 void draw_player (void) {
   switch (player->direction) {
   case DOWN:
-    draw_sprite (bufferbmp, playerdnbmp[player->curframe],
+    draw_sprite (scrollbmp, playerdnbmp[player->curframe],
 		 player->x, player->y);
     break;
 
   case UP:
-    draw_sprite (bufferbmp, playerupbmp[player->curframe],
+    draw_sprite (scrollbmp, playerupbmp[player->curframe],
 		 player->x, player->y);
     break;
 
   case LEFT:
-    draw_sprite (bufferbmp, playerltbmp[player->curframe],
+    draw_sprite (scrollbmp, playerltbmp[player->curframe],
 		 player->x, player->y);
     break;
 
   case RIGHT:
-    draw_sprite (bufferbmp, playerrtbmp[player->curframe],
+    draw_sprite (scrollbmp, playerrtbmp[player->curframe],
 		 player->x, player->y);
     break;
   }
@@ -175,13 +180,14 @@ void animate_player (void) {
 void move_player (void) {
   switch (player->direction) {
   case DOWN:
-    /* Case where window does not scroll. */
     player->y += player->yspeed;
+    player->distancey += player->yspeed;
     break;
 
   case UP:
     /* Case where window does not scroll. */
-    if (player->y > scrolly) player->y += player->yspeed;
+    if (player->y > scrolly) 
+      player->y += player->yspeed;
     break;
 
   case LEFT:
@@ -200,24 +206,35 @@ void scroll_window (void) {
   switch (player->direction) {
   case RIGHT:
     /* limits the bounds of the scroll window to the current map. */
+    scrollx += player->xspeed;
     if (scrollx > scrollbmp->w-WIDTH) scrollx = scrollbmp->w - WIDTH;
     break;
 
   case LEFT:
     /* limits the bounds of the scroll window to the current map. */
+    scrollx += player->xspeed;
     if (scrollx < 0) scrollx = 0;
     break;
 
   case UP:
     /* limits the bounds of the scroll window to the current map. */
+    scrolly += player->yspeed;
     if (scrolly < 0) scrolly = 0;
     break;
 
   case DOWN:
     /* limits the bounds of the scroll window to the current map. */
+    scrolly += player->yspeed;
     if (scrolly > scrollbmp->h-HEIGHT) scrolly = scrollbmp->h - HEIGHT;
     break;
   }
+}
+
+void refresh_screen (void) {
+  draw_TCBLALB();
+  draw_player();
+  blit (scrollbmp, bufferbmp, scrollx, scrolly, 0, 0, WIDTH-1, HEIGHT-1);
+  
 }
 
 void print_scroll_debug_messages (void) {
@@ -236,4 +253,8 @@ void print_player_debug_messages (void) {
 		 "tl = (%d,%d)", player->x, player->y);
   textprintf_ex (bufferbmp, font, 200, 20, makecol (255,255,255), -1,
 		 "speed = (%d,%d)", player->xspeed, player->yspeed);
+  textprintf_ex (bufferbmp, font, 200, 30, makecol (255,255,255), -1,
+		 "distance = (%d,%d)", player->distancex, player->distancey);
+  textprintf_ex (bufferbmp, font, 200, 40, makecol (255,255,255), -1,
+		 "start pt. = (%d,%d)", startx, starty);
 }
