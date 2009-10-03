@@ -240,19 +240,23 @@ void map_handler (void) {
   /* find out which map to draw */
   switch (currentmap->idnumber) {
   case TCA_LA:
-    /* player is in the locked throneroom, how did they get there? */
+    /* only one possible case */
+    if (currentmap->initflag == 1) {
+      scrollbmp = create_bitmap (TCAW, TCAH);
+      currentmap->initflag = 0;
+    }
+    draw_map (TCALA);
+    break;
+
+  case TCA_UA:
     switch (currentmap->pointofentry) {
     case 0:
-      if (currentmap->initflag == 1) {
-	scrollbmp = create_bitmap (TCAW, TCAH);
-	player->x = TCA1startx;
-	player->y = TCA1starty;
-	currentmap->initflag = 0;
-      }
-      draw_map (TCALA);
-      break;
+      /* door was just unlocked */
       
+      break;
+
     case 1:
+      /* has entered from the courtyard */
       if (currentmap->initflag == 1) {
 	scrollbmp = create_bitmap (TCAW, TCAH);
 	player->x = TCA3startx;
@@ -260,7 +264,7 @@ void map_handler (void) {
       }
       draw_map (TCALA);
       break;
-    } /* end of switch pointofentry */
+    }
     break;
   } /* end switch idnumber */
   
