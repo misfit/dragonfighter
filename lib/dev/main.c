@@ -14,14 +14,15 @@ int main (void) {
   scrollx = 0;
   scrolly = 0;
   
-  TantagelCastle = (MAP*)malloc (sizeof (MAP));
-  TantagelCastle->unlocked = 0;
-  TantagelCastle->entrance = 0;
-  TantagelCastle->mapchange = 1;
-  TantagelCastle->currentsubmap = TCA;
+  tcala = (MAP*)malloc (sizeof (MAP));
+  tcala->unlocked = 0;
+  tcala->pointofentry = 0;
+  tcala->pointofexit = 0;
+  tcala->initflag = 1;
+  tcala->idnumber = TCA_LA;
   
   /* point global currentmap variable at the current map. */
-  currentmap = TantagelCastle;
+  currentmap = tcala;
   
   map_handler();
 
@@ -63,7 +64,6 @@ void setup_bmps (void) {
   BITMAP *tempbmp;
 
   bufferbmp = create_bitmap (WIDTH, HEIGHT);
-  scrollbmp = create_bitmap (TCAW, TCAH);
   tilesbmp = load_bitmap ("maptiles.bmp", NULL);
 
   /* load bitmaps for the player animations */
@@ -237,6 +237,35 @@ void scroll_window (void) {
 }
 
 void map_handler (void) {
+  /* find out which map to draw */
+  switch (currentmap->idnumber) {
+  case TCA_LA:
+    /* player is in the locked throneroom, how did they get there? */
+    switch (currentmap->pointofentry) {
+    case 0:
+      if (currentmap->initflag == 1) {
+	scrollbmp = create_bitmap (TCAW, TCAH);
+	player->x = TCA1startx;
+	player->y = TCA1starty;
+	currentmap->initflag = 0;
+      }
+      draw_map (TCALA);
+      break;
+      
+    case 1:
+      if (currentmap->initflag == 1) {
+	scrollbmp = create_bitmap (TCAW, TCAH);
+	player->x = TCA3startx;
+	player->y = TCA3starty;
+      }
+      draw_map (TCALA);
+      break;
+    } /* end of switch pointofentry */
+    break;
+  } /* end switch idnumber */
+  
+
+  /*
   switch (currentmap->currentsubmap) {
   case TCA:
     if (player->x == TCA2startx && player->y == TCA2starty) {
@@ -244,6 +273,14 @@ void map_handler (void) {
       currentmap->mapchange = 1;
       currentmap->currentsubmap = TCA;
       currentmap->entrance = 1;
+    
+    } else if (player->x == 416 && player->y == 352) {
+      currentmap->unlocked = TCB_LALB;
+      currentmap->mapchange = 1;
+      currentmap->currentsubmap = TCB;
+      currentmap->entrance = 0;
+      scrollbmp = create_bitmap (TCBW, TCBH);
+      return;
     }
     switch (currentmap->unlocked) {
     case TCA_LA:
@@ -254,37 +291,38 @@ void map_handler (void) {
       draw_map (TCAUA);
       break;
     } /* end swich currentmap->unlocked */
-    
+  /*
     if (currentmap->mapchange == 1) {
       switch (currentmap->entrance) {
       case 0:
-	/* game start */
+	/* game start *
 	player->x = TCA1startx;
 	player->y = TCA1starty;
 	break;
-
+	
       case 1:
-	/* door opened */
+	/* door opened *
 	player->x = TCA2startx;
 	player->y = TCA2starty;
 	break;
-
+	
       case 2:
-	/* entered from courtyard */
+	/* entered from courtyard *
 	player->x = TCA3startx;
 	player->y = TCA3starty;
 	break;
       }
       currentmap->mapchange = 0;
+      break;
     }
-    /*
+    /*    
   case TCB:
     switch (currentmap->unlocked) {
     case TCB_LALB:
       draw_map (TCBLALB);
       break;
-    } /* ends unlocked switch *
-    
+    } /* ends unlocked switch */
+    /*
     if (currentmap->mapchange == 1) {
       switch (currentmap->entrance) {
       case 0:
@@ -305,12 +343,12 @@ void map_handler (void) {
 	player->y = TCB3starty;
 	break;
       } /* ends entrance switch *
-
+      
       currentmap->mapchange = 0;
       break; /* ends Tantagel Castle case *
       
-      } /* ends currentsubmap switch */
-  }
+      } /* ends currentsubmap switch *
+      }*/
 }
 
 void print_scroll_debug_messages (void) {

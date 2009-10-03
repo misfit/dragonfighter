@@ -28,11 +28,10 @@
 #define HALF_SPEED NORM_SPEED/2
 
 /* Tantagel Castle courtyard */
-#define TCB 0
-#define TCB_LALB 0
-#define TCB_LAUB 1
-#define TCB_UALB 2
-#define TCB_UAUB 3
+#define TCB_LALB 2
+#define TCB_LAUB 3
+#define TCB_UALB 4
+#define TCB_UAUB 5
 #define TCB_ACROSS 32
 #define TCB_DOWN 32
 #define TCBW TCB_ACROSS*TILEW
@@ -46,7 +45,6 @@ extern int TCB3startx;
 extern int TCB3starty;
 
 /* Tantagel Castle throneroom */
-#define TCA 1
 #define TCA_LA 0
 #define TCA_UA 1
 #define TCA_ACROSS 20
@@ -91,14 +89,20 @@ SPRITE *player;
 
 typedef struct MAP {
   int unlocked;
-  int entrance;
-  int mapchange;
-  int currentsubmap;
+  int pointofentry;
+  int pointofexit;
+  int initflag;
+  int idnumber;
 }MAP;
 
 /* maps */
 MAP *currentmap;
-MAP *TantagelCastle;
+MAP *tcala;
+MAP *tcaua;
+MAP *tcblalb;
+MAP *tcblaub;
+MAP *tcbualb;
+MAP *tcbuaub;
 
 /* position variables */
 int scrollx;
