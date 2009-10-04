@@ -297,7 +297,7 @@ void map_handler (void) {
 	player->y = TCA3starty;
 	currentmap->initflag = 0;
       }
-      draw_map (TCALA);
+      draw_map (TCAUA);
       break;
     }
     break;
