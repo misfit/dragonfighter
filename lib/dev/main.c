@@ -31,7 +31,7 @@ int main (void) {
     move_player();
     scroll_window();
     animate_player();
-    
+    map_event_handler();
     map_handler();
     draw_player();
     blit (scrollbmp, bufferbmp, scrollx, scrolly, 0, 0, WIDTH-1, HEIGHT-1);
@@ -236,11 +236,25 @@ void scroll_window (void) {
   }
 }
 
+void map_event_handler (void) {
+  switch (currentmap->idnumber) {
+  case TCA_LA:
+    /* unlock the door in the room */
+    if (player->x == TCA2startx && player->y == TCA2starty) {
+      currentmap->idnumber = TCA_UA;
+      currentmap->initflag = 0;
+      currentmap->unlocked = 1;
+      currentmap->pointofentry = 0;
+    }
+    break;
+  } /* end switch idnumber */
+}
+
 void map_handler (void) {
   /* find out which map to draw */
   switch (currentmap->idnumber) {
   case TCA_LA:
-    /* only one possible case */
+    /* only one possible case for entry */
     if (currentmap->initflag == 1) {
       scrollbmp = create_bitmap (TCAW, TCAH);
       currentmap->initflag = 0;
@@ -252,9 +266,12 @@ void map_handler (void) {
     switch (currentmap->pointofentry) {
     case 0:
       /* door was just unlocked */
-      
+      if (currentmap->initflag == 1) {
+	currentmap->initflag = 0;
+      }
+      draw_map (TCAUA);
       break;
-
+      
     case 1:
       /* has entered from the courtyard */
       if (currentmap->initflag == 1) {
@@ -272,11 +289,7 @@ void map_handler (void) {
   /*
   switch (currentmap->currentsubmap) {
   case TCA:
-    if (player->x == TCA2startx && player->y == TCA2starty) {
-      currentmap->unlocked = TCA_UA;
-      currentmap->mapchange = 1;
-      currentmap->currentsubmap = TCA;
-      currentmap->entrance = 1;
+    
     
     } else if (player->x == 416 && player->y == 352) {
       currentmap->unlocked = TCB_LALB;
