@@ -247,6 +247,16 @@ void map_event_handler (void) {
       currentmap->pointofentry = 0;
     }
     break;
+
+  case TCA_UA:
+    /* Send player to the courtyard when he goes to the stairs */
+    if (player->x == TCA3startx+32 && player->y == TCA3starty) {
+      currentmap->idnumber = TCB_LALB;
+      currentmap->initflag = 1;
+      currentmap->unlocked = 0;
+      currentmap->pointofentry = 0;
+    }
+    break;
   } /* end switch idnumber */
 }
 
@@ -281,6 +291,20 @@ void map_handler (void) {
       }
       draw_map (TCALA);
       break;
+    }
+    break;
+
+  case TCB_LALB:
+    switch (currentmap->pointofentry) {
+    case 0:
+      /* player has entered from the throneroom */
+      if (currentmap->initflag == 1) {
+	scrollbmp = create_bitmap (TCBW, TCBH);
+	player->x = TCB1startx;
+	player->y = TCB1starty;
+	currentmap->initflag = 0;
+      }
+      draw_map (TCBLALB);
     }
     break;
   } /* end switch idnumber */
