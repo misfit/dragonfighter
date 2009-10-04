@@ -243,7 +243,6 @@ void map_event_handler (void) {
     if (player->x == TCA2startx && player->y == TCA2starty) {
       currentmap->idnumber = TCA_UA;
       currentmap->initflag = 0;
-      currentmap->unlocked = 1;
       currentmap->pointofentry = 0;
     }
     break;
@@ -253,8 +252,16 @@ void map_event_handler (void) {
     if (player->x == TCA3startx+32 && player->y == TCA3starty) {
       currentmap->idnumber = TCB_LALB;
       currentmap->initflag = 1;
-      currentmap->unlocked = 0;
       currentmap->pointofentry = 0;
+    }
+    break;
+
+  case TCB_LALB:
+    /* send player back to the unlocked throneroom */
+    if (player->x == TCB1startx-32 && player->y == TCB1starty) {
+      currentmap->idnumber = TCA_UA;
+      currentmap->initflag = 1;
+      currentmap->pointofentry = 1;
     }
     break;
   } /* end switch idnumber */
@@ -288,6 +295,7 @@ void map_handler (void) {
 	scrollbmp = create_bitmap (TCAW, TCAH);
 	player->x = TCA3startx;
 	player->y = TCA3starty;
+	currentmap->initflag = 0;
       }
       draw_map (TCALA);
       break;
