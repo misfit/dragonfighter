@@ -18,8 +18,8 @@ int TCC_L1[] = {
 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0,
 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 };
-int TCCstartx = 224;
-int TCCstarty = 256;
+int TCCstartx = 192;
+int TCCstarty = 224;
 
 /**** Tantagel Courtyard ****/
 int TCBLALB[] = {
