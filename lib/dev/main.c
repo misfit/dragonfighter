@@ -335,6 +335,7 @@ void map_handler (void) {
     draw_map (TCC_L1);
     break;
   } /* end switch idnumber */
+
 }
 
 void print_scroll_debug_messages (void) {
