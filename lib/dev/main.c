@@ -262,6 +262,11 @@ void map_event_handler (void) {
       currentmap->idnumber = TCA_UA;
       currentmap->initflag = 1;
       currentmap->pointofentry = 1;
+
+    } else if (player->x == 960 && player->y == 960) {
+      currentmap->idnumber = TCC;
+      currentmap->initflag = 1;
+      currentmap->pointofentry = 0;
     }
     break;
   } /* end switch idnumber */
@@ -315,89 +320,21 @@ void map_handler (void) {
       draw_map (TCBLALB);
     }
     break;
-  } /* end switch idnumber */
-  
 
-  /*
-  switch (currentmap->currentsubmap) {
-  case TCA:
-    
-    
-    } else if (player->x == 416 && player->y == 352) {
-      currentmap->unlocked = TCB_LALB;
-      currentmap->mapchange = 1;
-      currentmap->currentsubmap = TCB;
-      currentmap->entrance = 0;
-      scrollbmp = create_bitmap (TCBW, TCBH);
-      return;
+  case TCC:
+    /* only one possible case for entry */
+    if (currentmap->initflag == 1) {
+      scrollbmp = create_bitmap (TCCW, TCCH);
+      clear (scrollbmp);
+      player->x = TCCstartx;
+      player->y = TCCstarty;
+      scrollx = 0;
+      scrolly = 0;
+      currentmap->initflag = 0;
     }
-    switch (currentmap->unlocked) {
-    case TCA_LA:
-      draw_map (TCALA);
-      break;
-      
-    case TCA_UA:
-      draw_map (TCAUA);
-      break;
-    } /* end swich currentmap->unlocked */
-  /*
-    if (currentmap->mapchange == 1) {
-      switch (currentmap->entrance) {
-      case 0:
-	/* game start *
-	player->x = TCA1startx;
-	player->y = TCA1starty;
-	break;
-	
-      case 1:
-	/* door opened *
-	player->x = TCA2startx;
-	player->y = TCA2starty;
-	break;
-	
-      case 2:
-	/* entered from courtyard *
-	player->x = TCA3startx;
-	player->y = TCA3starty;
-	break;
-      }
-      currentmap->mapchange = 0;
-      break;
-    }
-    /*    
-  case TCB:
-    switch (currentmap->unlocked) {
-    case TCB_LALB:
-      draw_map (TCBLALB);
-      break;
-    } /* ends unlocked switch */
-    /*
-    if (currentmap->mapchange == 1) {
-      switch (currentmap->entrance) {
-      case 0:
-	/* from throneroom *
-	player->x = TCB1startx;
-	player->y = TCB1starty;
-	break;
-	
-      case 1:
-	/* right through the front gate *
-	player->x = TCB2startx;
-	player->y = TCB2starty;
-	break;
-	
-      case 2:
-	/* from the basement *
-	player->x = TCB3startx;
-	player->y = TCB3starty;
-	break;
-      } /* ends entrance switch *
-      
-      currentmap->mapchange = 0;
-      break; /* ends Tantagel Castle case *
-      
-      } /* ends currentsubmap switch *
-      }*/
+    draw_map (TCC_L1);
+    break;
+  } /* end switch idnumber */
 }
 
 void print_scroll_debug_messages (void) {

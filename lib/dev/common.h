@@ -27,6 +27,16 @@
 #define NORM_SPEED 2
 #define HALF_SPEED NORM_SPEED/2
 
+/* Tantagel Castle basement */
+#define TCC_ACROSS 20
+#define TCC_DOWN 15
+#define TCCW TCC_ACROSS*TILEW
+#define TCCH TCC_DOWN*TILEH
+#define TCC 6
+extern int TCC_L1[];
+extern int TCCstartx;
+extern int TCCstarty;
+
 /* Tantagel Castle courtyard */
 #define TCB_LALB 2
 #define TCB_LAUB 3
