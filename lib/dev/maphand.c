@@ -115,6 +115,18 @@ void map_handler (void) {
 	currentmap->initflag = 0;
       }
       break;
+
+    case 1:
+      /* player coming from Breconary */
+      if (currentmap-> initflag == 1) {
+	scrollbmp = create_bitmap (ALEFGARDW, ALEFGARDH);
+	clear (scrollbmp);
+	player->x = ALEFGARDBYstartx;
+	player->y = ALEFGARDBYstarty;
+	scrollx = 1300;
+	scrolly = 1300;
+	currentmap->initflag = 0;
+      }
     }
     draw_map (ALEFGARD);
     break;

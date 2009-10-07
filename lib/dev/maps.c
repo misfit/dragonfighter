@@ -144,6 +144,8 @@ int BYA1starty = 480;
 
 int ALEFGARDTCstartx = 1408;
 int ALEFGARDTCstarty = 1440;
+int ALEFGARDBYstartx = 1568;
+int ALEFGARDBYstarty = 1376;
 int ALEFGARD[] = {
 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 
 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 

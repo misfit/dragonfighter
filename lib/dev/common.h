@@ -91,6 +91,8 @@ extern int BYA1starty;
 #define ALEFGARDH ALEFGARD_DOWN*TILEH
 extern int ALEFGARDTCstartx;
 extern int ALEFGARDTCstarty;
+extern int ALEFGARDBYstartx;
+extern int ALEFGARDBYstarty;
 extern int ALEFGARD[];
 #define ALEFGARD1 7 /* without landbridge */
 #define ALEFGARD2 8 /* with the land bridge */
