@@ -7,7 +7,7 @@ CC = gcc
 INCLUDE = .
 
 # Object files
-OBJ = main.o maps.o setup.o util.c input.c eventhand.c maphand.c
+OBJ = main.o maps.o setup.o util.o input.o eventhand.o maphand.o player.o
 
 # Allegro option
 # For Arch Linux:
@@ -44,6 +44,9 @@ eventhand.o: eventhand.c common.h
 
 maphand.o: maphand.c common.h
 	$(CC) $(CFLAGS) maphand.c $(ALLEG)
+
+player.o: player.c common.h
+	$(CC) $(CFLAGS) player.c $(ALLEG)
 
 clean:
 	-rm *.o
