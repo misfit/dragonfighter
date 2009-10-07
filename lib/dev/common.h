@@ -80,7 +80,7 @@ extern int TCA3starty;
 #define BYA_DOWN 32
 #define BYAW BYA_ACROSS*TILEW
 #define BYAH BYA_DOWN*TILEH
-extern int BRECONARYL3L4[];
+extern int BYAL3L4[];
 extern int BYA1startx;
 extern int BYA1starty;
 

@@ -149,7 +149,7 @@ void map_handler (void) {
       }
       break;
     }
-    draw_map (BRECONARYL3L4);
+    draw_map (BYAL3L4);
     break;
 
   case BYB:
