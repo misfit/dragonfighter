@@ -47,34 +47,6 @@ int main (void) {
 }
 END_OF_MAIN()
 
-void scroll_window (void) {
-  switch (player->direction) {
-  case RIGHT:
-    /* limits the bounds of the scroll window to the current map. */
-    scrollx += player->xspeed;
-    if (scrollx > scrollbmp->w-WIDTH) scrollx = scrollbmp->w - WIDTH;
-    break;
-
-  case LEFT:
-    /* limits the bounds of the scroll window to the current map. */
-    scrollx += player->xspeed;
-    if (scrollx < 0) scrollx = 0;
-    break;
-
-  case UP:
-    /* limits the bounds of the scroll window to the current map. */
-    scrolly += player->yspeed;
-    if (scrolly < 0) scrolly = 0;
-    break;
-
-  case DOWN:
-    /* limits the bounds of the scroll window to the current map. */
-    scrolly += player->yspeed;
-    if (scrolly > scrollbmp->h-HEIGHT) scrolly = scrollbmp->h - HEIGHT;
-    break;
-  }
-}
-
 void print_scroll_debug_messages (void) {
   textprintf_ex (bufferbmp, font, 0, 0, makecol (255,255,255), -1,
 		 "Scroll Window Position:");
