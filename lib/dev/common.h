@@ -26,6 +26,8 @@
 /* game constants */
 #define NORM_SPEED 2
 #define HALF_SPEED NORM_SPEED/2
+#define PLAINS_SPEED 4
+#define MTN_SPEED PLAINS_SPEED*2
 
 /* Tantagel Castle basement */
 #define TCC_ACROSS 20
@@ -69,6 +71,17 @@ extern int TCA2startx;
 extern int TCA2starty;
 extern int TCA3startx;
 extern int TCA3starty;
+
+/* Alefgard */
+#define ALEFGARD_ACROSS 124
+#define ALEFGARD_DOWN 124
+#define ALEFGARDW ALEFGARD_ACROSS*TILEW
+#define ALEFGARDH ALEFGARD_DOWN*TILEH
+extern int ALEFGARDTCstartx;
+extern int ALEFGARDTCstarty;
+extern int ALEFGARD[];
+#define ALEFGARD1 7 /* without landbridge */
+#define ALEFGARD2 8 /* with the land bridge */
 
 /* bitmaps */
 BITMAP *bufferbmp;

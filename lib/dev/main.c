@@ -104,19 +104,39 @@ BITMAP *grab_frame (BITMAP *source, int width, int height, int startx,
 void get_input (void) {
   if (key[KEY_RIGHT]) {
     player->direction = RIGHT;
-    player->xspeed = NORM_SPEED;
+    if (currentmap->idnumber == ALEFGARD1 || 
+	currentmap->idnumber == ALEFGARD2){
+      player->xspeed = PLAINS_SPEED;
+      player->framedelay = 5;
+    }
+    else player->xspeed = NORM_SPEED;
     
   } else if (key[KEY_LEFT]) {
     player->direction = LEFT;
-    player->xspeed = -NORM_SPEED;
+    if (currentmap->idnumber == ALEFGARD1 || 
+	currentmap->idnumber == ALEFGARD2) {
+      player->xspeed = -PLAINS_SPEED;
+      player->framedelay = 5;
+    }
+    else player->xspeed = -NORM_SPEED;
     
   } else if (key[KEY_DOWN]) {
     player->direction = DOWN;
-    player->yspeed = NORM_SPEED;
+    if (currentmap->idnumber == ALEFGARD1 || 
+	currentmap->idnumber == ALEFGARD2) {
+      player->yspeed = PLAINS_SPEED;
+      player->framedelay = 5;
+    }
+    else player->yspeed = NORM_SPEED;
     
   } else if (key[KEY_UP]) {
     player->direction = UP;
-    player->yspeed = -NORM_SPEED;
+    if (currentmap->idnumber == ALEFGARD1 || 
+	currentmap->idnumber == ALEFGARD2) {
+      player->yspeed = -PLAINS_SPEED;
+      player->framedelay = 5;
+    }
+    else player->yspeed = -NORM_SPEED;
     
   } else {
     player->xspeed = 0;
@@ -267,6 +287,12 @@ void map_event_handler (void) {
       currentmap->idnumber = TCC;
       currentmap->initflag = 1;
       currentmap->pointofentry = 0;
+    
+    } else if ((player->x == 352 || player->x == 384) && player->y == 992) {
+      currentmap->idnumber = ALEFGARD1;
+      currentmap->initflag = 1;
+      currentmap->pointofentry = 0;
+      
     }
     break;
 
@@ -357,8 +383,24 @@ void map_handler (void) {
     }
     draw_map (TCC_L1);
     break;
-  } /* end switch idnumber */
 
+  case ALEFGARD1:
+    /* player coming from Tantagel Castle */
+    if (currentmap->initflag == 1) {
+      scrollbmp = create_bitmap (ALEFGARDW, ALEFGARDH);
+      clear (scrollbmp);
+      player->x = ALEFGARDTCstartx;
+      player->y = ALEFGARDTCstarty;
+      scrollx = 1300;
+      scrolly = 1300;
+      currentmap->initflag = 0;
+    }
+    draw_map (ALEFGARD);
+    break;
+
+  case ALEFGARD2:
+    break;
+  } /* end switch idnumber */
 }
 
 void print_scroll_debug_messages (void) {
