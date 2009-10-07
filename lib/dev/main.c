@@ -14,16 +14,13 @@ int main (void) {
   scrollx = 0;
   scrolly = 0;
   
-  tcala = (MAP*)malloc (sizeof (MAP));
-  tcala->unlocked = 0;
-  tcala->pointofentry = 0;
-  tcala->pointofexit = 0;
-  tcala->initflag = 1;
-  tcala->idnumber = TCA_LA;
-  
-  /* point global currentmap variable at the current map. */
-  currentmap = tcala;
-  
+  currentmap = (MAP*)malloc (sizeof (MAP));
+  currentmap->unlocked = 0;
+  currentmap->pointofentry = 0;
+  currentmap->pointofexit = 0;
+  currentmap->initflag = 1;
+  currentmap->idnumber = TCA_LA;
+    
   map_handler();
 
   while (!key[KEY_ESC]) {
@@ -309,8 +306,15 @@ void map_event_handler (void) {
       currentmap->idnumber = TCB_LALB;
       currentmap->initflag = 1;
       currentmap->pointofentry = 1;
+      player->framedelay = 8;
+    
+    } else if (player->x == 1600 && player->y == 1376) {
+      currentmap->idnumber = BYA;
+      currentmap->initflag = 1;
+      currentmap->pointofentry = 0;
     }
     break;
+
   } /* end switch idnumber */
 }
 
@@ -419,6 +423,26 @@ void map_handler (void) {
     break;
 
   case ALEFGARD2:
+    break;
+
+  case BYA:
+    /* player entered through the gate */
+    if (currentmap->initflag == 1) {
+      scrollbmp = create_bitmap (BYAW, BYAH);
+      clear (scrollbmp);
+      player->x = BYA1startx;
+      player->y = BYA1starty;
+      scrollx = 0;
+      scrolly = 128;
+      currentmap->initflag = 0;
+    }
+    draw_map (BRECONARYL3L4);
+    break;
+
+  case BYB:
+    break;
+
+  case BYC:
     break;
   } /* end switch idnumber */
 }
