@@ -59,7 +59,7 @@ int TCBLALB[] = {
 int TCB1startx = 288;
 int TCB1starty = 256;
 int TCB2startx = 384;
-int TCB2starty = 992;
+int TCB2starty = 960;
 int TCB3startx = 992;
 int TCB3starty = 960;
 

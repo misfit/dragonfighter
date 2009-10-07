@@ -303,6 +303,14 @@ void map_event_handler (void) {
       currentmap->pointofentry = 2;
     }
     break;
+
+  case ALEFGARD1:
+    if (player->x == 1440 && player->y == 1440) {
+      currentmap->idnumber = TCB_LALB;
+      currentmap->initflag = 1;
+      currentmap->pointofentry = 1;
+    }
+    break;
   } /* end switch idnumber */
 }
 
@@ -354,10 +362,22 @@ void map_handler (void) {
       draw_map (TCBLALB);
       break;
 
+    case 1:
+      /* player entered through the front gate */
+      if (currentmap->initflag == 1) {
+	scrollbmp = create_bitmap (TCBW, TCBH);
+	player->x = TCB2startx;
+	player->y = TCB2starty;
+	scrollx = 64;
+	scrolly = 544;
+	currentmap->initflag = 0;
+      }
+      draw_map (TCBLALB);
+      break;
+
     case 2:
       /* player has entered from the basement */
       if (currentmap->initflag == 1) {
-
 	scrollbmp = create_bitmap (TCBW, TCBH);
 	player->x = TCB3startx;
 	player->y = TCB3starty;
