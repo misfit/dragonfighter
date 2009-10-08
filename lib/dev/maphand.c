@@ -14,17 +14,17 @@ void draw_map (int map[]) {
 void map_handler (void) {
   /* find out which map to draw */
   switch (currentmap->idnumber) {
-  case TCA_12:
+  case TCA_13:
     /* only one possible case for entry and player position already set */
     if (currentmap->initflag == 1) {
       scrollbmp = create_bitmap (TCAW, TCAH);
       clear (scrollbmp);
       currentmap->initflag = 0;
     }
-    draw_map (TCA12);
+    draw_map (TCA13);
     break;
-
-  case TCA_11:
+    
+  case TCA_12:
     switch (currentmap->pointofentry) {
     case 0:
       /* door was just unlocked */
@@ -38,8 +38,8 @@ void map_handler (void) {
       /* has entered from the courtyard */
       if (currentmap->initflag == 1) {
 	scrollbmp = create_bitmap (TCAW, TCAH);
-	player->x = TCA3startx;
-	player->y = TCA3starty;
+	hero->player->x = TCA13startx;
+	hero->player->y = TCA13starty;
 	currentmap->initflag = 0;
       }
       draw_map (TCA10);
@@ -47,14 +47,14 @@ void map_handler (void) {
     }
     break;
 
-  case TCB_LALB:
+  case 20:
     switch (currentmap->pointofentry) {
     case 0:
       /* player has entered from the throneroom */
       if (currentmap->initflag == 1) {
 	scrollbmp = create_bitmap (TCBW, TCBH);
-	player->x = TCB1startx;
-	player->y = TCB1starty;
+	hero->player->x = TCB1startx;
+	hero->player->y = TCB1starty;
 	currentmap->initflag = 0;
       }
       draw_map (TCBLALB);
@@ -64,8 +64,8 @@ void map_handler (void) {
       /* player entered through the front gate */
       if (currentmap->initflag == 1) {
 	scrollbmp = create_bitmap (TCBW, TCBH);
-	player->x = TCB2startx;
-	player->y = TCB2starty;
+	hero->player->x = TCB2startx;
+	hero->player->y = TCB2starty;
 	scrollx = 64;
 	scrolly = 544;
 	currentmap->initflag = 0;
@@ -77,8 +77,8 @@ void map_handler (void) {
       /* player has entered from the basement */
       if (currentmap->initflag == 1) {
 	scrollbmp = create_bitmap (TCBW, TCBH);
-	player->x = TCB3startx;
-	player->y = TCB3starty;
+	hero->player->x = TCB3startx;
+	hero->player->y = TCB3starty;
 	scrollx = 384;
 	scrolly = 544;
 	currentmap->initflag = 0;
@@ -93,8 +93,8 @@ void map_handler (void) {
     if (currentmap->initflag == 1) {
       scrollbmp = create_bitmap (TCCW, TCCH);
       clear (scrollbmp);
-      player->x = TCCstartx;
-      player->y = TCCstarty;
+      hero->player->x = TCCstartx;
+      hero->player->y = TCCstarty;
       scrollx = 0;
       scrolly = 0;
       currentmap->initflag = 0;
@@ -109,8 +109,8 @@ void map_handler (void) {
       if (currentmap->initflag == 1) {
 	scrollbmp = create_bitmap (ALEFGARDW, ALEFGARDH);
 	clear (scrollbmp);
-	player->x = ALEFGARDTCstartx;
-	player->y = ALEFGARDTCstarty;
+	hero->player->x = ALEFGARDTCstartx;
+	hero->player->y = ALEFGARDTCstarty;
 	scrollx = 1300;
 	scrolly = 1300;
 	currentmap->initflag = 0;
@@ -122,8 +122,8 @@ void map_handler (void) {
       if (currentmap-> initflag == 1) {
 	scrollbmp = create_bitmap (ALEFGARDW, ALEFGARDH);
 	clear (scrollbmp);
-	player->x = ALEFGARDBYstartx;
-	player->y = ALEFGARDBYstarty;
+	hero->player->x = ALEFGARDBYstartx;
+	hero->player->y = ALEFGARDBYstarty;
 	scrollx = 1300;
 	scrolly = 1300;
 	currentmap->initflag = 0;
@@ -142,8 +142,8 @@ void map_handler (void) {
       if (currentmap->initflag == 1) {
 	scrollbmp = create_bitmap (BYAW, BYAH);
 	clear (scrollbmp);
-	player->x = BYA1startx;
-	player->y = BYA1starty;
+	hero->player->x = BYA1startx;
+	hero->player->y = BYA1starty;
 	scrollx = 0;
 	scrolly = 128;
 	currentmap->initflag = 0;
@@ -154,8 +154,8 @@ void map_handler (void) {
       if (currentmap->initflag == 1) {
 	scrollbmp = create_bitmap (BYAW, BYAH);
 	clear (scrollbmp);
-	player->x = BYA2startx;
-	player->y = BYA2starty;
+	hero->player->x = BYA2startx;
+	hero->player->y = BYA2starty;
 	scrollx = 384;
 	scrolly = 412;
 	currentmap->initflag = 0;
@@ -173,8 +173,8 @@ void map_handler (void) {
     if (currentmap->initflag == 1) {
       scrollbmp = create_bitmap (BYBW, BYBH);
       clear (scrollbmp);
-      player->x = BYBstartx;
-      player->y = BYBstarty;
+      hero->player->x = BYBstartx;
+      hero->player->y = BYBstarty;
       scrollx = 0;
       scrolly = 0;
       currentmap->initflag = 0;
@@ -186,8 +186,8 @@ void map_handler (void) {
     if (currentmap->initflag == 1) {
       scrollbmp = create_bitmap (BYCW, BYCH);
       clear (scrollbmp);
-      player->x = BYCstartx;
-      player->y = BYCstarty;
+      hero->player->x = BYCstartx;
+      hero->player->y = BYCstarty;
       scrollx = 0;
       scrolly = 0;
       currentmap->initflag = 0;

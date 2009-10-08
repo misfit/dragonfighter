@@ -30,26 +30,32 @@
 #define MTN_SPEED PLAINS_SPEED*2
 
 /**** Tantagel Castle throneroom ****/
-#define TCA_12 0
-#define TCA_11 1
-#define TCA_10 2
-#define TCA_01 3
-#define TCA_00 4
+#define TCA_13 0
+#define TCA_12 1
+#define TCA_11 2
+#define TCA_10 3
+#define TCA_02 4
+#define TCA_00 5
 #define TCA_ACROSS 20
 #define TCA_DOWN 15
 #define TCAW TCA_ACROSS*TILEW
 #define TCAH TCA_DOWN*TILEH
+extern int TCA13[];
 extern int TCA12[];
 extern int TCA11[];
 extern int TCA10[];
-extern int TCA01[];
+extern int TCA02[];
 extern int TCA00[];
+extern int TCA13startx;
+extern int TCA13starty;
 extern int TCA12startx;
 extern int TCA12starty;
-extern int TCA2startx;
-extern int TCA2starty;
-extern int TCA3startx;
-extern int TCA3starty;
+extern int TCA11startx;
+extern int TCA11starty;
+extern int TCA02startx;
+extern int TCA02starty;
+extern int TCA00startx;
+extern int TCA00starty;
 
 /* Tantagel Castle basement */
 #define TCC_ACROSS 20
@@ -152,7 +158,16 @@ typedef struct SPRITE {
 }SPRITE;
 
 /* sprites */
-SPRITE *player;
+
+typedef struct HERO {
+  SPRITE *player;
+  int keys;
+  int gold;
+  int experience;
+}HERO;
+
+/* heros */
+HERO *hero;
 
 typedef struct MAP {
   int lockeddoors;

@@ -19,7 +19,7 @@ int main (void) {
   currentmap->pointofentry = 0;
   currentmap->pointofexit = 0;
   currentmap->initflag = 1;
-  currentmap->idnumber = TCA_12;
+  currentmap->idnumber = TCA_13;
   currentmap->chests = 0x2;
     
   map_handler();
@@ -61,7 +61,5 @@ void print_player_debug_messages (void) {
   textprintf_ex (bufferbmp, font, 200, 0, makecol (255,255,255), -1,
 		 "Player Position:");
   textprintf_ex (bufferbmp, font, 200, 10, makecol (255,255,255), -1,
-		 "tl = (%d,%d)", player->x, player->y);
-  textprintf_ex (bufferbmp, font, 200, 20, makecol (255,255,255), -1,
-		 "speed = (%d,%d)", player->xspeed, player->yspeed);
+		 "tl = (%d,%d)", hero->player->x, hero->player->y);
 }

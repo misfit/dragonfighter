@@ -2,7 +2,14 @@
 
 void map_event_handler (void) {
   switch (currentmap->idnumber) {
-  case TCA_12:
+  case TCA_13:
+    /* hero gets the left chest */
+    
+    /* hero gets the right chest */
+
+    /* hero unlocks the door */
+    
+    
     /* unlock the door in the room 
     if (player->x == TCA2startx && player->y == TCA2starty) {
       currentmap->idnumber = TCA_11;
@@ -20,7 +27,7 @@ void map_event_handler (void) {
       }*/
     break;
 
-  case TCB_LALB:
+  case 20:
     /* send player back to the unlocked throneroom 
     if (player->x == TCB1startx-32 && player->y == TCB1starty) {
       currentmap->idnumber = TCA_UA;
@@ -39,7 +46,7 @@ void map_event_handler (void) {
       
       }*/
     break;
-
+    /*
   case TCC:
     if (player->x == 160 && player->y == 224) {
       currentmap->idnumber = TCB_LALB;
@@ -47,7 +54,7 @@ void map_event_handler (void) {
       currentmap->pointofentry = 2;
     }
     break;
-
+    
   case ALEFGARD1:
     if (player->x == 1440 && player->y == 1440) {
       currentmap->idnumber = TCB_LALB;
@@ -64,20 +71,20 @@ void map_event_handler (void) {
 
   case ALEFGARD2:
     break;
-
+    */
   case BYA_L3L4:
     /* player has walked out the front gate */
-    if (player->x == 0) {
+    if (hero->player->x == 0) {
       currentmap->idnumber = ALEFGARD1;
       currentmap->initflag = 1;
       currentmap->pointofentry = 1;
 
-    } else if (player->x == 736 && player->y == 768) {
+    } else if (hero->player->x == 736 && hero->player->y == 768) {
       currentmap->idnumber = BYC_;
       currentmap->initflag = 1;
       currentmap->pointofentry = 0;
 
-    } else if (player->x == 704 && player->y == 224) {
+    } else if (hero->player->x == 704 && hero->player->y == 224) {
       currentmap->idnumber = BYB_;
       currentmap->initflag = 1;
       currentmap->pointofentry = 0;
