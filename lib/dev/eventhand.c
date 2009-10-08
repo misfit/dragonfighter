@@ -67,7 +67,7 @@ void map_event_handler (void) {
 
   case BYA_L3L4:
     /* player has walked out the front gate */
-    if (player->x == 0 && (player->y == 480 || player->y == 512)) {
+    if (player->x == 0) {
       currentmap->idnumber = ALEFGARD1;
       currentmap->initflag = 1;
       currentmap->pointofentry = 1;
