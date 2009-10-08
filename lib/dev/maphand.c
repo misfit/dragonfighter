@@ -134,7 +134,7 @@ void map_handler (void) {
   case ALEFGARD2:
     break;
 
-  case BYA:
+  case BYA_L3L4:
     switch (currentmap->pointofentry) {
     case 0:
       /* player entered through the gate */
@@ -152,10 +152,10 @@ void map_handler (void) {
     draw_map (BYAL3L4);
     break;
 
-  case BYB:
+  case BYB_:
     break;
 
-  case BYC:
+  case BYC_:
     break;
   } /* end switch idnumber */
 }

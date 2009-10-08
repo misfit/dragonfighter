@@ -73,16 +73,32 @@ extern int TCA3startx;
 extern int TCA3starty;
 
 /* Breconary */
-#define BYA 9
-#define BYB 10
-#define BYC 11
+#define BYA_L3L4 9
+#define BYA_L3U4 12
+#define BYA_U3L4 13
+#define BYA_U3U4 14
+#define BYB_ 10
+#define BYC_ 11
 #define BYA_ACROSS 32
 #define BYA_DOWN 32
 #define BYAW BYA_ACROSS*TILEW
 #define BYAH BYA_DOWN*TILEH
+#define BYB_ACROSS 20
+#define BYB_DOWN 15
+#define BYBW BYB_ACROSS*TILEW
+#define BYBH BYB_DOWN*TILEH
+#define BYC_ACROSS 20
+#define BYC_DOWN 15
+#define BYCW BYC_ACROSS*TILEW
+#define BYCH BYC_DOWN*TILEH
 extern int BYAL3L4[];
+extern int BYAL3U4[];
+extern int BYAU3L4[];
+extern int BYAU3U4[];
 extern int BYA1startx;
 extern int BYA1starty;
+extern int BYB[];
+extern int BYC[];
 
 /* Alefgard */
 #define ALEFGARD_ACROSS 124

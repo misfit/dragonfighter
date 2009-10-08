@@ -56,7 +56,7 @@ void map_event_handler (void) {
       player->framedelay = 8;
     
     } else if (player->x == 1600 && player->y == 1376) {
-      currentmap->idnumber = BYA;
+      currentmap->idnumber = BYA_L3L4;
       currentmap->initflag = 1;
       currentmap->pointofentry = 0;
     }
@@ -65,13 +65,12 @@ void map_event_handler (void) {
   case ALEFGARD2:
     break;
 
-  case BYA:
+  case BYA_L3L4:
     /* player has walked out the front gate */
     if (player->x == 0 && (player->y == 480 || player->y == 512)) {
       currentmap->idnumber = ALEFGARD1;
       currentmap->initflag = 1;
       currentmap->pointofentry = 1;
-      
     }
     break;
   } /* end switch idnumber */
