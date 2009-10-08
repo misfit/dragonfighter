@@ -4,9 +4,9 @@
 void setup_player (void) {
   player = (SPRITE*)malloc (sizeof (SPRITE));
   /* center the player in the scroll window facing down, unmoving */
-  player->x = TCA1startx;
-  player->y = TCA1starty;
-  player->direction = DOWN;
+  player->x = TCA12startx;
+  player->y = TCA12starty;
+  player->direction = LEFT;
   player->width = 32;
   player->height = 32;
   player->xspeed = 0;

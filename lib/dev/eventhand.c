@@ -2,26 +2,26 @@
 
 void map_event_handler (void) {
   switch (currentmap->idnumber) {
-  case TCA_LA:
-    /* unlock the door in the room */
+  case TCA_12:
+    /* unlock the door in the room 
     if (player->x == TCA2startx && player->y == TCA2starty) {
-      currentmap->idnumber = TCA_UA;
+      currentmap->idnumber = TCA_11;
       currentmap->initflag = 0;
       currentmap->pointofentry = 0;
-    }
+      }*/
     break;
 
-  case TCA_UA:
-    /* Send player to the courtyard when he goes to the stairs */
+  case TCA_11:
+    /* Send player to the courtyard when he goes to the stairs 
     if (player->x == TCA3startx+32 && player->y == TCA3starty) {
       currentmap->idnumber = TCB_LALB;
       currentmap->initflag = 1;
       currentmap->pointofentry = 0;
-    }
+      }*/
     break;
 
   case TCB_LALB:
-    /* send player back to the unlocked throneroom */
+    /* send player back to the unlocked throneroom 
     if (player->x == TCB1startx-32 && player->y == TCB1starty) {
       currentmap->idnumber = TCA_UA;
       currentmap->initflag = 1;
@@ -37,7 +37,7 @@ void map_event_handler (void) {
       currentmap->initflag = 1;
       currentmap->pointofentry = 0;
       
-    }
+      }*/
     break;
 
   case TCC:

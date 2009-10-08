@@ -29,6 +29,28 @@
 #define PLAINS_SPEED 4
 #define MTN_SPEED PLAINS_SPEED*2
 
+/**** Tantagel Castle throneroom ****/
+#define TCA_12 0
+#define TCA_11 1
+#define TCA_10 2
+#define TCA_01 3
+#define TCA_00 4
+#define TCA_ACROSS 20
+#define TCA_DOWN 15
+#define TCAW TCA_ACROSS*TILEW
+#define TCAH TCA_DOWN*TILEH
+extern int TCA12[];
+extern int TCA11[];
+extern int TCA10[];
+extern int TCA01[];
+extern int TCA00[];
+extern int TCA12startx;
+extern int TCA12starty;
+extern int TCA2startx;
+extern int TCA2starty;
+extern int TCA3startx;
+extern int TCA3starty;
+
 /* Tantagel Castle basement */
 #define TCC_ACROSS 20
 #define TCC_DOWN 15
@@ -55,22 +77,6 @@ extern int TCB2startx;
 extern int TCB2starty;
 extern int TCB3startx;
 extern int TCB3starty;
-
-/* Tantagel Castle throneroom */
-#define TCA_LA 0
-#define TCA_UA 1
-#define TCA_ACROSS 20
-#define TCA_DOWN 15
-#define TCAW TCA_ACROSS*TILEW
-#define TCAH TCA_DOWN*TILEH
-extern int TCALA[];
-extern int TCAUA[];
-extern int TCA1startx;
-extern int TCA1starty;
-extern int TCA2startx;
-extern int TCA2starty;
-extern int TCA3startx;
-extern int TCA3starty;
 
 /* Breconary */
 #define BYA_L3L4 9
@@ -149,21 +155,16 @@ typedef struct SPRITE {
 SPRITE *player;
 
 typedef struct MAP {
-  int unlocked;
+  int lockeddoors;
   int pointofentry;
   int pointofexit;
   int initflag;
   int idnumber;
+  int chests;
 }MAP;
 
 /* maps */
 MAP *currentmap;
-MAP *tcala;
-MAP *tcaua;
-MAP *tcblalb;
-MAP *tcblaub;
-MAP *tcbualb;
-MAP *tcbuaub;
 
 /* position variables */
 int scrollx;

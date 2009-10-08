@@ -14,23 +14,24 @@ void draw_map (int map[]) {
 void map_handler (void) {
   /* find out which map to draw */
   switch (currentmap->idnumber) {
-  case TCA_LA:
-    /* only one possible case for entry */
+  case TCA_12:
+    /* only one possible case for entry and player position already set */
     if (currentmap->initflag == 1) {
       scrollbmp = create_bitmap (TCAW, TCAH);
+      clear (scrollbmp);
       currentmap->initflag = 0;
     }
-    draw_map (TCALA);
+    draw_map (TCA12);
     break;
 
-  case TCA_UA:
+  case TCA_11:
     switch (currentmap->pointofentry) {
     case 0:
       /* door was just unlocked */
       if (currentmap->initflag == 1) {
 	currentmap->initflag = 0;
       }
-      draw_map (TCAUA);
+      draw_map (TCA10);
       break;
       
     case 1:
@@ -41,7 +42,7 @@ void map_handler (void) {
 	player->y = TCA3starty;
 	currentmap->initflag = 0;
       }
-      draw_map (TCAUA);
+      draw_map (TCA10);
       break;
     }
     break;
