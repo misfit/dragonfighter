@@ -148,6 +148,22 @@ void map_handler (void) {
 	currentmap->initflag = 0;
       }
       break;
+    case 1:
+      /* player has come out of the items shop */
+      if (currentmap->initflag == 1) {
+	scrollbmp = create_bitmap (BYAW, BYAH);
+	clear (scrollbmp);
+	player->x = BYA2startx;
+	player->y = BYA2starty;
+	scrollx = 384;
+	scrolly = 412;
+	currentmap->initflag = 0;
+      }
+      break;
+
+    case 2:
+      /* player has come out of the locked building */
+      break;
     }
     draw_map (BYAL3L4);
     break;

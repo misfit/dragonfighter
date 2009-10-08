@@ -141,6 +141,9 @@ int BYAL3L4[] = {
 };
 int BYA1startx = 32;
 int BYA1starty = 480;
+int BYA2startx = 736;
+int BYA2starty = 736;
+int BYA3startx = 768;
 
 int BYB[] = {
 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
