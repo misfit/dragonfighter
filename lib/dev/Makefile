@@ -8,7 +8,7 @@ INCLUDE = .
 
 # Object files
 OBJ = main.o maps.o setup.o util.o input.o eventhand.o maphand.o player.o \
-scroller.o mappyal.o
+scroller.o 
 
 # Allegro option
 # For Arch Linux:
@@ -51,9 +51,6 @@ player.o: player.c common.h
 
 scroller.o: scroller.c common.h
 	$(CC) $(CFLAGS) scroller.c $(ALLEG)
-
-mappyal.o: mappyal.c mappyal.h
-	$(CC) mappyal.c -02 -Wall -c -o mappyal.o
 
 clean:
 	-rm *.o
