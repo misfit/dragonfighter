@@ -201,6 +201,7 @@ BITMAP *grab_frame (BITMAP *source, int width, int height, int startx,
 /*
  * Taken from Game Programming All in One 3rd ed.
  */
+int inside (int x, int y, int left, int top, int right, int bottom);
 void get_input (void);
 void draw_map (int map[]);
 void setup_player (void);

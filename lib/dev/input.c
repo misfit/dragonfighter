@@ -1,6 +1,7 @@
 #include "common.h"
 
 void get_input (void) {
+  /**** regular motion key handling ****/
   if (key[KEY_RIGHT]) {
     hero->player->direction = RIGHT;
     hero->player->xspeed = NORM_SPEED;
@@ -20,5 +21,15 @@ void get_input (void) {
   } else {
     hero->player->xspeed = 0;
     hero->player->yspeed = 0;
+  }
+
+  /**** action button pressed ****/
+  if (key[KEY_X]) {
+    switch (currentmap->idnumber) {
+    case TCA_13:
+      /* hero is in position to open chest */
+      
+      break;
+    }
   }
 }
