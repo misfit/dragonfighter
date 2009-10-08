@@ -71,6 +71,16 @@ void map_event_handler (void) {
       currentmap->idnumber = ALEFGARD1;
       currentmap->initflag = 1;
       currentmap->pointofentry = 1;
+
+    } else if (player->x == 736 && player->y == 768) {
+      currentmap->idnumber = BYC_;
+      currentmap->initflag = 1;
+      currentmap->pointofentry = 0;
+
+    } else if (player->x == 704 && player->y == 224) {
+      currentmap->idnumber = BYB_;
+      currentmap->initflag = 1;
+      currentmap->pointofentry = 0;
     }
     break;
   } /* end switch idnumber */

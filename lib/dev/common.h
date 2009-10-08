@@ -99,6 +99,10 @@ extern int BYA1startx;
 extern int BYA1starty;
 extern int BYB[];
 extern int BYC[];
+extern int BYBstartx;
+extern int BYBstarty;
+extern int BYCstartx;
+extern int BYCstarty;
 
 /* Alefgard */
 #define ALEFGARD_ACROSS 124

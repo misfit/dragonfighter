@@ -153,9 +153,29 @@ void map_handler (void) {
     break;
 
   case BYB_:
+    if (currentmap->initflag == 1) {
+      scrollbmp = create_bitmap (BYBW, BYBH);
+      clear (scrollbmp);
+      player->x = BYBstartx;
+      player->y = BYBstarty;
+      scrollx = 0;
+      scrolly = 0;
+      currentmap->initflag = 0;
+    }
+    draw_map (BYB);
     break;
 
   case BYC_:
+    if (currentmap->initflag == 1) {
+      scrollbmp = create_bitmap (BYCW, BYCH);
+      clear (scrollbmp);
+      player->x = BYCstartx;
+      player->y = BYCstarty;
+      scrollx = 0;
+      scrolly = 0;
+      currentmap->initflag = 0;
+    }
+    draw_map (BYC);
     break;
   } /* end switch idnumber */
 }
