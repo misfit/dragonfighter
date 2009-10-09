@@ -25,10 +25,14 @@ void map_handler (void) {
   /* find out which map to draw */
   switch (currentmap->idnumber) {
   case TCA_13:
-    /* only one possible case for entry and player position already set */
+    /* Initial game map. */
     if (currentmap->initflag == 1) {
       scrollbmp = create_bitmap (TCAW, TCAH);
       clear (scrollbmp);
+      currentmap->lockeddoors = 0x1;
+      currentmap->pointofentry = 0;
+      currentmap->chests = 0x2;
+      currentmap->width = TCA_ACROSS;
       currentmap->initflag = 0;
     }
     draw_map (TCA13);

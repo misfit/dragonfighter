@@ -172,14 +172,10 @@ HERO *hero;
 typedef struct MAP {
   int lockeddoors;
   int pointofentry;
-  int pointofexit;
   int initflag;
   int idnumber;
   int chests;
-  int maplen;
   int width;
-  int height;
-  int playerindex;
 }MAP;
 
 /* maps */

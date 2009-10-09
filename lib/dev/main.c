@@ -15,12 +15,8 @@ int main (void) {
   scrolly = 0;
   
   currentmap = (MAP*)malloc (sizeof (MAP));
-  currentmap->lockeddoors = 0x1;
-  currentmap->pointofentry = 0;
-  currentmap->pointofexit = 0;
   currentmap->initflag = 1;
   currentmap->idnumber = TCA_13;
-  currentmap->chests = 0x2;
     
   map_handler();
 

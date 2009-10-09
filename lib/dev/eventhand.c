@@ -3,6 +3,7 @@
 void map_event_handler (void) {
   switch (currentmap->idnumber) {
   case TCA_13:
+    
     /* hero gets the left chest */
     
     /* hero gets the right chest */
