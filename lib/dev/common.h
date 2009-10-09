@@ -176,6 +176,10 @@ typedef struct MAP {
   int initflag;
   int idnumber;
   int chests;
+  int maplen;
+  int width;
+  int height;
+  int playerindex;
 }MAP;
 
 /* maps */
@@ -201,16 +205,17 @@ BITMAP *grab_frame (BITMAP *source, int width, int height, int startx,
 /*
  * Taken from Game Programming All in One 3rd ed.
  */
-int inside (int x, int y, int left, int top, int right, int bottom);
 void get_input (void);
-void draw_map (int map[]);
 void setup_player (void);
 void draw_player (void);
 void animate_player (void);
 void move_player (void);
 void scroll_window (void);
 void map_event_handler (void);
+void draw_map (int map[]);
+int hash_position (void);
 void map_handler (void);
+int main (void);
 void print_scroll_debug_messages (void);
 void print_player_debug_messages (void);
 

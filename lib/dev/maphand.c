@@ -11,6 +11,16 @@ void draw_map (int map[]) {
   }
 }
 
+int hash_position (void) {
+  int rowmultiplier = 0;
+  int column = 0;
+  int index = 0;
+
+  if (hero->player->y != 0) rowmultiplier = hero->player->y/TILEH;  
+  if (hero->player->x != 0) column = hero->player->x/TILEW;
+  return index = rowmultiplier*currentmap->width + column;
+}
+
 void map_handler (void) {
   /* find out which map to draw */
   switch (currentmap->idnumber) {

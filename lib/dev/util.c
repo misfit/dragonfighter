@@ -18,7 +18,3 @@ BITMAP *grab_frame (BITMAP *source, int width, int height, int startx,
   return tempbmp;
 }
 
-int inside (int x, int y, int left, int top, int right, int bottom) {
-  if (x > left && x < right && y > top && y < bottom) return 1;
-  else return 0;
-}
