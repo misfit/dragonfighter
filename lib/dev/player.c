@@ -62,25 +62,21 @@ void animate_player (void) {
 void move_player (void) {
   switch (hero->player->direction) {
   case DOWN:
-    if (can_move(currentmap->idnumber) != 0)
-      if (hero->player->y < scrollbmp->h-32) hero->player->y += 
-					       hero->player->yspeed;
+    if (hero->player->y < scrollbmp->h-32) hero->player->y += 
+					     hero->player->yspeed;
     break;
-
+    
   case UP:
-    if (can_move(currentmap->idnumber) != 0)
-      if (hero->player->y > scrolly) hero->player->y += hero->player->yspeed;
+    if (hero->player->y > scrolly) hero->player->y += hero->player->yspeed;
     break;
-
+    
   case LEFT:
-    if (can_move(currentmap->idnumber) != 0)
-      if (hero->player->x > scrollx) hero->player->x += hero->player->xspeed;
+    if (hero->player->x > scrollx) hero->player->x += hero->player->xspeed;
     break;
-
+    
   case RIGHT:
-    if (can_move(currentmap->idnumber) != 0)
-      if (hero->player->x < scrollbmp->w-32) hero->player->x += 
-					       hero->player->xspeed;
+    if (hero->player->x < scrollbmp->w-32) hero->player->x += 
+					     hero->player->xspeed;
     break;
   }
 }
