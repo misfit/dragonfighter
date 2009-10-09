@@ -80,26 +80,3 @@ void move_player (void) {
     break;
   }
 }
-
-int can_move (int mapid) {
-  switch (currentmap->idnumber) {
-  case TCA_13:
-    switch (is_collision (TCA13)) {
-    case 1:
-      return 0;
-      break;
-
-    case 3:
-      return 0;
-      break;
-
-    case 10:
-      return 0;
-      break;
-
-    default:
-      break;
-    }
-  }
-  return 1;
-}

@@ -207,7 +207,6 @@ void setup_player (void);
 void draw_player (void);
 void animate_player (void);
 void move_player (void);
-int can_move (int mapid);
 void scroll_window (void);
 int is_collision (int map[]);
 void map_event_handler (void);
