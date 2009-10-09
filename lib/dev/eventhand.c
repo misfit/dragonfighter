@@ -1,9 +1,42 @@
 #include "common.h"
 
+int is_collision (int map[]) {
+  int playerpos;
+  int tiletocheck;
+  int tiletype;
+
+  /* check adjacent tile to the player in the direction he's facing */
+  playerpos = hash_position();
+  switch (hero->player->direction) {
+  case UP:
+    if (playerpos > (currentmap->width-1))
+      tiletocheck = playerpos - currentmap->width;
+    else return 0;
+    break;
+
+  case DOWN:
+    if (playerpos < (currentmap->maplen-(currentmap->width-1)))
+      tiletocheck = playerpos + currentmap->width;
+    else return 0;
+    break;
+
+  case LEFT:
+    if (hero->player->x > 0) tiletocheck = playerpos;
+    else return 0;
+    break;
+
+  case RIGHT:
+    if (hero->player->x < scrollbmp->w) tiletocheck = playerpos + 1;
+    else return 0;
+    break;
+  }
+  return tiletype = map[tiletocheck];
+}
+
 void map_event_handler (void) {
+  /* detect collisions */
   switch (currentmap->idnumber) {
   case TCA_13:
-    
     /* hero gets the left chest */
     
     /* hero gets the right chest */

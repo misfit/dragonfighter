@@ -33,6 +33,7 @@ void map_handler (void) {
       currentmap->pointofentry = 0;
       currentmap->chests = 0x2;
       currentmap->width = TCA_ACROSS;
+      currentmap->maplen = TCA_ACROSS*TCA_DOWN;
       currentmap->initflag = 0;
     }
     draw_map (TCA13);

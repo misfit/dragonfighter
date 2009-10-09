@@ -71,12 +71,37 @@ void move_player (void) {
     break;
 
   case LEFT:
-    if (hero->player->x > scrollx) hero->player->x += hero->player->xspeed;
+    if (can_move(currentmap->idnumber) != 0)
+      if (hero->player->x > scrollx) hero->player->x += hero->player->xspeed;
     break;
 
   case RIGHT:
-    if (hero->player->x < scrollbmp->w-32) hero->player->x += 
-					     hero->player->xspeed;
+    if (can_move(currentmap->idnumber) != 0)
+      if (hero->player->x < scrollbmp->w-32) hero->player->x += 
+					       hero->player->xspeed;
     break;
   }
+}
+
+int can_move (int mapid) {
+  switch (currentmap->idnumber) {
+  case TCA_13:
+    switch (is_collision (TCA13)) {
+    case 1:
+      return 0;
+      break;
+
+    case 3:
+      return 0;
+      break;
+
+    case 10:
+      return 0;
+      break;
+
+    default:
+      break;
+    }
+  }
+  return 1;
 }
