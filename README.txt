@@ -15,11 +15,8 @@ Arch linux just comment out the one you want, or add one using my examples
 and the output of the above command as a guideline.
 
 Required software: make, gcc, and the allegro libraries installed. Allegro
-is available in the AUR if you use Arch. If you don't, you should switch.
-http://archlinux.org
-(Update: I'm too old to worry about config files anymore. I've put in my geek
-time, now it's time to get productive, I am now using xubuntu 9.04 and actually
-am impressed, but most of all productive.)
+is available by way of pacman if you use Arch. If you don't, you should 
+switch immediately: http://archlinux.org.
 
 How to play
 ~~~~~~~~~~~
